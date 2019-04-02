@@ -9,6 +9,11 @@ namespace myClubDriveMaster
 {
     public partial class MainPage : ContentPage
     {
+        void Handle_Clicked_1(object sender, System.EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         void Handle_Clicked(object sender, System.EventArgs e)
         {
             throw new NotImplementedException();

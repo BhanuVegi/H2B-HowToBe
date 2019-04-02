@@ -143,6 +143,8 @@
     <ImageAsset Include="Assets.xcassets\Image.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Image.imageset\ClubDrive.pdf" />
     <ImageAsset Include="Assets.xcassets\Image.imageset\ClubDrive.png" />
+    <ImageAsset Include="Assets.xcassets\Image.imageset\ClubDriveLogo.png" />
+    <ImageAsset Include="Assets.xcassets\Image.imageset\ClubDriveLogo.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -163,5 +165,10 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ClubDrive.png" />
+    <BundleResource Include="Resources\ClubDriveLogo.png" />
+    <BundleResource Include="Resources\gflogo.png" />
+    <BundleResource Include="Resources\ClubDriveLogo1.png" />
+    <BundleResource Include="Resources\ClubDriveLogo2.png" />
+    <BundleResource Include="Resources\ClubDriveLogoFinal.png" />
   </ItemGroup>
 </Project>
