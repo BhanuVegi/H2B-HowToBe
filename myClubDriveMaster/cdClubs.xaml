@@ -1,5 +1,30 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdClubs">
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdClubs" BackgroundImage="ClubDrive.png">
     <ContentPage.Content>
+    <Grid BackgroundColor="Transparent">
+          <StackLayout Orientation="Vertical" HorizontalOptions="Center"  Grid.Row="0">
+               <Label Text="       " Font="32" />
+                <Label Text="Club Information" BackgroundColor="#bababa" FontSize="24" />
+                <Entry x:Name="ClubName" Placeholder="Club Name" PlaceholderColor="#bababa" FontSize="16" />  
+                <Entry x:Name="ClubRegNum" Placeholder="Club Regiatration Number" PlaceholderColor="#bababa" FontSize="16" />  
+                <Entry x:Name="ClubAddress" Placeholder="Club Address Line" PlaceholderColor="#bababa" FontSize="16" /> 
+                <Entry x:Name="ClubCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16" />  
+                <Entry x:Name="ClubState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16" />  
+                <Entry x:Name="ClubPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16" /> 
+                <Label Text="       " Font="32" />
+            </StackLayout>  
+        <Grid Grid.Row="1">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />     
+        </Grid.RowDefinitions>
+        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
+        <Button Clicked="cdSubmit" Text="Submit" x:Name="DriveButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="5"/>
+        </Grid>        
+            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <Button Text="Home" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+    </Grid>        
     </ContentPage.Content>
 </ContentPage>

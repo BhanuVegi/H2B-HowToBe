@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdHome" BackgroundImage="ClubDrive.png">
+    <ContentPage.Content>    
+         <Grid BackgroundColor="Transparent">
+          <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,30,0,0" Grid.Row="0">
+               <Label Text="       " Font="32" />
+                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+            </StackLayout>    
+        <Grid Grid.Row="1">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />        
+        </Grid.RowDefinitions>
+        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->        
+        <StackLayout Orientation="Vertical">  
+        <Label Text="Roles" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />               
+        <Button Clicked="cdParentPage" Text="Parent Page" x:Name="ParentPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start"  Grid.Row="2"/>
+        <Button Clicked="cdDriverPage" Text="Driver Page" x:Name="DriverPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="3"/>
+        <Button Clicked="cdAdminPage" Text="Admin Page" x:Name="AdminPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="4"/>
+        <Button Clicked="cdRiderPage" Text="Rider Page" x:Name="RiderPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="5"/>        
+         </StackLayout>
+        </Grid>        
+        <Grid Grid.Row="2">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />     
+        </Grid.RowDefinitions>    
+        <StackLayout>   
+        <Label Text="       " Font="24" />               
+        <Label Text="My Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/> 
+        <Button Clicked="cdmyClubs" Text="My Clubs" x:Name="MyClubs" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="6"/>
+        <Button Clicked="cdmyAccount" Text="My Account" x:Name="MyAccount" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="7"/>
+        <Button Clicked="cdmyRiders" Text="My Riders" x:Name="MyRiders" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>
+         </StackLayout>
+        </Grid>         
+        <Grid Grid.Row="3">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />     
+        </Grid.RowDefinitions>        
+        <StackLayout>   
+         <Label Text="       " Font="24" />           
+         <Label Text="Create Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/>            
+        <Button Clicked="cdCreateclub" Text="Create New Club" x:Name="CreateClub" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="9"/>
+        <Button Clicked="cdCreateStudents" Text="Register Students" x:Name="RegisterStudents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="10"/>
+        <Button Clicked="cdCreateEvents" Text="Create Events" x:Name="CreateEvents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="11"/>
+        </StackLayout>
+        </Grid>
+        <StackLayout Grid.Row="4" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <Button Text="Logout" Clicked="cdLogout" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>

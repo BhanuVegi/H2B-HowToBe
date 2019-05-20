@@ -1,15 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Newtonsoft.Json;
+using System.Net.Mail;
 using Xamarin.Forms;
+using Plugin.Geolocator;
 
 namespace myClubDriveMaster
 {
     public partial class cdRiderDrive : ContentPage
     {
-        public cdRiderDrive()
+        public Account plogaccount = new Account();
+
+        public cdRiderDrive(Account logAccount)
         {
             InitializeComponent();
+            System.Diagnostics.Debug.WriteLine(" In Rider Drive Page");
+
+            StudentName.Text = "Student Name: "+ logAccount.FirstName + " " + logAccount.LastName;
+
+            plogaccount = logAccount;
+
+            callGetDriver(logAccount);
+
         }
+
+        async void callGetDriver(Account logAccount)
+        {
+            cdQueryAttr qryAcct = new cdQueryAttr();
+            qryAcct.ColIndex = "IndexName";
+            qryAcct.IndexName = "StudentIDindex";
+            qryAcct.ColName = "StudentID";
+            qryAcct.ColValue = logAccount.UserName;
+
+            getDriver myDriverArray = new getDriver();
+            DriverAlloc pubDriverInfo = new DriverAlloc();
+            cdCallAPI mycallAPI = new cdCallAPI();
+
+            var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
+            myDriverArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
+
+            pubDriverInfo = myDriverArray.DriverAlloc[0];
+
+            DriverName.Text = "Driver Name: "+ pubDriverInfo.Attr1 + " " + pubDriverInfo.Attr2;
+            CarType.Text = "Car Type: "+ pubDriverInfo.Attr3;
+            LicensePlate.Text = "License Plate: "+ pubDriverInfo.Attr5;
+            DestinationAddress.Text = "Address: "+ pubDriverInfo.AddressLine1 + " " + pubDriverInfo.AddressLine2;
+            City.Text = "City: "+ pubDriverInfo.City;
+            State.Text = "State: "+ pubDriverInfo.State;
+            PostalCode.Text = "Postal Code: "+ pubDriverInfo.PostalCode;
+
+        }
+
+        async void cdDrive(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked send location Button");
+
+            try
+            {
+                cdCallAPI mycallAPI = new cdCallAPI();
+                Plugin.Geolocator.Abstractions.Position mypos = await mycallAPI.GetCurrentPosition();
+                string cPosLat = mypos.Latitude.ToString();
+                string cPosLong = mypos.Longitude.ToString();
+
+                String mailSubject = "Student "+plogaccount.FirstName+" "+plogaccount.LastName+" location details";
+                String mailBody = "Location of student " + plogaccount.FirstName + " " + plogaccount.LastName + " "+ cPosLat+" "+cPosLong;
+
+                var myresult = mycallAPI.cdSendEmail(mailSubject, plogaccount.Attr1, mailBody);
+
+                System.Diagnostics.Debug.WriteLine(" Result is " + myresult.ToString());
+
+                Status.Text = "Sent location " + cPosLat +" "+ cPosLong +" to "+ plogaccount.Attr1 + " Successfully";
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(" Result is " + ex);
+
+                await DisplayAlert("Failed", ex.Message, "OK");
+            }
+        }
+
+        async void cdLogout(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Logout Button");
+            var tpage = new MainPage();
+            await Navigation.PushModalAsync(tpage);
+        }
+
+
     }
 }

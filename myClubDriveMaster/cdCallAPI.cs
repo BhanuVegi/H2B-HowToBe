@@ -5,14 +5,19 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using Plugin.Geolocator;
+using System.Net.Mail;
 
 namespace myClubDriveMaster
 {
+
+    // These set of APIs are used to call the rest end points
+
     public class cdCallAPI
     {
         public String sdAccountAPIURL = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AccountID}";
         public String sdAccountAPIURLPOST = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-        public String sdDriverAllocURL = "https://fjziwkczek.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/:AllocationID";
+        public String sdDriverAllocURL = "https://fjziwkczek.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AllocationID}";
         public String sdAuthAPIURL = "https://olx0fy0k5k.execute-api.us-west-2.amazonaws.com/Stage/apigateway";
 
         public async Task<JToken> cdcallAccountsGET(cdQueryAttr QueryObject)
@@ -20,6 +25,13 @@ namespace myClubDriveMaster
             cdCallAPI mycallAPI = new cdCallAPI();
             var getAccounts = await mycallAPI.cdCallGetAPI(sdAccountAPIURL, QueryObject);
             return getAccounts;
+
+        }
+        public async Task<JToken> cdcallDriverAllocGET(cdQueryAttr QueryObject)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var getDriverAlloc = await mycallAPI.cdCallGetAPI(sdDriverAllocURL, QueryObject);
+            return getDriverAlloc;
 
         }
         public async Task<JToken> cdcallAccountsPUT(Account regacccount)
@@ -33,25 +45,33 @@ namespace myClubDriveMaster
         public async Task<JToken> cdcallAccountsPOST(Account regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(sdAccountAPIURLPOST, regacccount);
+            var response = await mycallAPI.cdCallPostAPI(sdAccountAPIURLPOST, regacccount);
             return response;
 
         }
 
+        public async Task<JToken> cdLoginAccount(String username, String password)
+        {
+            loginObject myLoginObject = new loginObject();
+            myLoginObject.username = username;
+            myLoginObject.password = password;
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPostAPI(sdAuthAPIURL, myLoginObject);
+            return response;
+        }
 
         public async Task<JToken> cdCallGetAPI(string callingapiurl, cdQueryAttr qobj)
         {
             var uri = new Uri(callingapiurl);
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            client.DefaultRequestHeaders.Add("Content-Type", "application/json");
-            client.DefaultRequestHeaders.Add("IndexName", qobj.IndexName);
-            client.DefaultRequestHeaders.Add("ColIndex", qobj.ColIndex);
-            client.DefaultRequestHeaders.Add("ColName", qobj.ColName);
-            client.DefaultRequestHeaders.Add(qobj.ColName, qobj.ColValue);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type","application/json");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("IndexName", qobj.ColIndex);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("ColIndex", qobj.IndexName);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("ColName",qobj.ColName);
+            client.DefaultRequestHeaders.TryAddWithoutValidation(qobj.ColName,qobj.ColValue);
 
             var response = await client.GetAsync(uri);
+
             var responseJSON = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
@@ -94,7 +114,7 @@ namespace myClubDriveMaster
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Content-Type", "application/json");
+
             var inputJson = JsonConvert.SerializeObject(callingapiobject);
             var inputContent = new StringContent(inputJson, System.Text.Encoding.UTF8, "application/json");
 
@@ -103,15 +123,98 @@ namespace myClubDriveMaster
 
             if (response.IsSuccessStatusCode)
             {
-                System.Diagnostics.Debug.WriteLine(" Put API Call Successful");
+                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
 
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine(" Put API Call failed " + response.ReasonPhrase);
+                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + response.ReasonPhrase);
             }
 
             return responseJSON;
         }
+
+    // This API returns the current location allways
+
+        public async Task<Plugin.Geolocator.Abstractions.Position> GetCurrentPosition()
+        {
+
+            Plugin.Geolocator.Abstractions.Position mypos = null;
+
+            try
+            {
+                var locator = Plugin.Geolocator.CrossGeolocator.Current;
+                locator.DesiredAccuracy = 100;
+
+                var position = await locator.GetLastKnownLocationAsync();
+
+                if (position != null)
+                {
+                    //got a cahched position, so let's use it.
+                    return position;
+                }
+
+                if (!locator.IsGeolocationAvailable || !locator.IsGeolocationEnabled)
+                {
+                    //not available or enabled
+                    return null;
+                }
+
+                position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+
+                if (position == null)
+                    return null;
+
+                var output = string.Format("Time: {0} \nLat: {1} \nLong: {2} \nAltitude: {3} \nAltitude Accuracy: {4} \nAccuracy: {5} \nHeading: {6} \nSpeed: {7}",
+                        position.Timestamp, position.Latitude, position.Longitude,
+                        position.Altitude, position.AltitudeAccuracy, position.Accuracy, position.Heading, position.Speed);
+
+                Debug.WriteLine(output);
+
+                mypos = position;
+
+                return position;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Unable to get location: " + ex);
+            }
+             return mypos;
+        }
+
+        // This API Sends email
+
+        public String cdSendEmail(String mailSubject, String toAddress, String mailBody)
+        {
+            try
+            {
+
+                Debug.WriteLine("In Send mail procedure");
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("myclubdrive@gmail.com");
+                mail.To.Add(toAddress);
+                mail.Subject = mailSubject;
+                mail.Body = mailBody; //"Location of student " + plogaccount.FirstName + " " + plogaccount.LastName + " " + cPosLat + " " + cPosLong;
+                SmtpServer.Port = 587;
+                SmtpServer.Host = "smtp.gmail.com";
+                SmtpServer.EnableSsl = true;
+                SmtpServer.UseDefaultCredentials = false;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("myclubdrive@gmail.com", "MyfirstBusiness4us$");
+
+                SmtpServer.Send(mail);
+
+                Debug.WriteLine("Sent email successfully");
+
+                return "sucess";
+            }
+            catch (Exception ex)
+            {
+                 return "Failed "+ ex;
+            }
+        }
+
     }
 }

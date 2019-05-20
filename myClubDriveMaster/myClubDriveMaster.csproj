@@ -13,6 +13,8 @@
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="3.3.0.967583" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="xamstore-xamarin.mobile" Version="0.7.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

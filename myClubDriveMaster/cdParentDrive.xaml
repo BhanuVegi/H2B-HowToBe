@@ -1,5 +1,32 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdParentDrive">
-    <ContentPage.Content>
-    </ContentPage.Content>
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdParentDrive" BackgroundImage="ClubDrive.png" >
+    <ContentPage.Content>  
+    <Grid BackgroundColor="Transparent">
+          <StackLayout Orientation="Vertical" HorizontalOptions="Center"  Grid.Row="0">
+               <Label Text="       " Font="32" />
+                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+                <Label x:Name="StudentFirstName" Text="Student Name:" BackgroundColor="#bababa" FontSize="24" />
+                <Entry x:Name="DestinationAddress1" Placeholder="Destination Address" PlaceholderColor="#bababa" FontSize="16" />  
+                <Entry x:Name="City" Placeholder="City" PlaceholderColor="#bababa" FontSize="16" />  
+                <Entry x:Name="State" Placeholder="State" PlaceholderColor="#bababa" FontSize="16" />  
+                <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16" /> 
+                <Label Text="       " Font="32" />
+            </StackLayout>  
+        <Grid Grid.Row="1">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />     
+        </Grid.RowDefinitions>
+        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
+        <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="3"/>
+        <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="4"/>
+        <Button Clicked="cdSubmit" Text="Submit" x:Name="DriveButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="5"/>
+        <Button Clicked="cdTrack" Text="Track" x:Name="TrackButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="6"/>            
+        </Grid>        
+            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <Button Text="Home" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+    </Grid>
+    </ContentPage.Content>   
 </ContentPage>

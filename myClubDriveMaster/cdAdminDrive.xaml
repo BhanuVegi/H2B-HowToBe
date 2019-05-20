@@ -1,5 +1,38 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdAdminDrive">
-    <ContentPage.Content>
-    </ContentPage.Content>
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdAdminDrive" BackgroundImage="ClubDrive.png">
+    <ContentPage.Content>  
+    <Grid BackgroundColor="Transparent">
+          <StackLayout Orientation="Vertical" HorizontalOptions="Center"  Grid.Row="0">
+               <Label Text="       " Font="32" />
+                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+                <Entry x:Name="EmailAddress" Placeholder="EmailAddress" PlaceholderColor="#bababa" FontSize="16" /> 
+                <Button x:Name="FindButton" Text="Find" Clicked="cdFind" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" />
+                <Label x:Name="ApplicantName" Text="Applicant Name:" BackgroundColor="Transparent" FontSize="16" />
+                <Label x:Name="ApplicantType" Text="Applicant Type:" BackgroundColor="Transparent" FontSize="16" />
+            </StackLayout>  
+        <Grid Grid.Row="1">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />     
+        </Grid.RowDefinitions>
+        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
+               <Label x:Name="ApprovalStatus" Text="Approval Status:" BackgroundColor="Transparent" FontSize="16" Grid.Row="3" /> 
+               <Picker x:Name="picker" Title="Approval Status" TextColor="Blue" Grid.Row="4"> 
+                     <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                          <x:String>Approved</x:String>
+                          <x:String>Rejected</x:String>
+                        </x:Array>
+                     </Picker.ItemsSource>
+                </Picker>    
+        <Button Clicked="cdSubmit" Text="Submit" x:Name="DriveButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="5"/>
+        <Button Clicked="cdTrack" Text="Track" x:Name="TrackButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="6"/>            
+        <Button Clicked="cdPledge" Text="Donations" x:Name="DonationsButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="7"/>
+        </Grid>        
+            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <Button Text="Home" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+    </Grid>
+    </ContentPage.Content>  
 </ContentPage>

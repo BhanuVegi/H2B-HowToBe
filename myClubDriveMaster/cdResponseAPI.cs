@@ -52,4 +52,45 @@ namespace myClubDriveMaster
             public List<Account> Account { get; set; }
         }
 
+        public class loginObject
+        {
+            public string username { get; set; }
+            public string password { get; set; }
+        }
+
+        public class loginResponse
+        {
+            public string status { get; set; }
+            public string id_token { get; set; }
+            public string user_id { get; set; }
+            public string is_new { get; set; }
+        }
+
+        public class DriverAlloc
+        {
+            public string AllocationID { get; set; }
+            public string StudentID { get; set; }
+            public string DriverID { get; set; }
+            public string AddressLine1 { get; set; }
+            public string AddressLine2 { get; set; }
+            public string AddressLine3 { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string PostalCode { get; set; }
+            public string Attr1 { get; set; }
+            public string Attr2 { get; set; }
+            public string Attr3 { get; set; }
+            public string Attr4 { get; set; }
+            public string Attr5 { get; set; }
+            public string Attr6 { get; set; }
+            public string Attr7 { get; set; }
+            public string Attr8 { get; set; }
+            public string Attr9 { get; set; }
+            public string Attr10 { get; set; }
+        }
+
+    public class getDriver
+    {
+        public List<DriverAlloc> DriverAlloc { get; set; }
+    }
 }
