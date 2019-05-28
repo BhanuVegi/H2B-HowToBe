@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace myClubDriveMaster
 {
 
-        public class cdQueryAttr
+    public class cdQueryAttr
         {
             public string IndexName { get; set; }
             public string ColIndex { get; set; }
@@ -12,7 +12,42 @@ namespace myClubDriveMaster
             public string ColValue { get; set; }
         }
 
-        public class Account
+    public class cdUpdateAccount
+    {
+        public string AccountID { get; set; }
+        public string ColumnName { get; set; }
+        public string ColumnValue { get; set; }
+        public string ColumnName1 { get; set; }
+        public string ColumnValue1 { get; set; }
+        public string ColumnName2 { get; set; }
+        public string ColumnValue2 { get; set; }
+        public string ColumnName3 { get; set; }
+        public string ColumnValue3 { get; set; }
+        public string ColumnName4 { get; set; }
+        public string ColumnValue4 { get; set; }
+    }
+
+    public class cdLocation
+       {
+           public string TripID { get; set; }
+           public int seqNumber { get; set; }
+           public string driverID { get; set; }
+           public string cddatetime { get; set; }
+           public string cdLatitude { get; set; }
+           public string cdLongitude { get; set; }
+           public string Attr1 { get; set; }
+           public string Attr2 { get; set; }
+           public string Attr3 { get; set; }
+           public string Attr4 { get; set; }
+           public string Attr5 { get; set; }
+           public string Attr6 { get; set; }
+           public string Attr7 { get; set; }
+           public string Attr8 { get; set; }
+           public string Attr9 { get; set; }
+           public string Attr10 { get; set; }
+    }
+
+    public class Account
         {
             public string AccountID { get; set; }
             public string AccountStatus { get; set; }
@@ -21,7 +56,7 @@ namespace myClubDriveMaster
             public string AddressLine2 { get; set; }
             public string AddressLine3 { get; set; }
             public string City { get; set; }
-            public string State { get; set; }
+            public string cdState { get; set; }
             public string PostalCode { get; set; }
             public string County { get; set; }
             public string Destination { get; set; }
@@ -93,4 +128,36 @@ namespace myClubDriveMaster
     {
         public List<DriverAlloc> DriverAlloc { get; set; }
     }
+
+    public class Trip
+    {
+        public string TripID { get; set; }
+        public string seqNumber { get; set; }
+        public string driverID { get; set; }
+        public string cddatetime { get; set; }
+        public string cdLatitude { get; set; }
+        public string cdLongitude { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
+    }
+
+    public class getTrips
+    {
+        public List<Trip> Trips { get; set; }
+    }
+
+    public class cdReadError
+    {
+        public String __type { get; set; }
+        public String message { get; set; }
+    }
+
 }

@@ -7,17 +7,25 @@ namespace myClubDriveMaster
 {
     public partial class cdHome : ContentPage
     {
-        void cdParentPage(object sender, System.EventArgs e)
+        Account loginAccount = new Account();
+
+        async void cdParentPage(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Parent Page Button");
+            var tpage = new cdParentDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
-        void cdDriverPage(object sender, System.EventArgs e)
+        async void cdDriverPage(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Driver Page Button");
+            var tpage = new cdDriverDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
-        void cdAdminPage(object sender, System.EventArgs e)
+        async void cdAdminPage(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Admin Page Button");
+            var tpage = new cdAdminDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
         void cdRiderPage(object sender, System.EventArgs e)
         {
@@ -58,6 +66,7 @@ namespace myClubDriveMaster
         public cdHome(Account logAccount)
         {
             InitializeComponent();
+            loginAccount = logAccount;
 
             System.Diagnostics.Debug.WriteLine("Length of role is " +logAccount.Role+" "+ logAccount.Role.Length);
 

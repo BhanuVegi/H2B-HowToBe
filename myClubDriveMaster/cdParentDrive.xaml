@@ -5,12 +5,13 @@
           <StackLayout Orientation="Vertical" HorizontalOptions="Center"  Grid.Row="0">
                <Label Text="       " Font="32" />
                 <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-                <Label x:Name="StudentFirstName" Text="Student Name:" BackgroundColor="#bababa" FontSize="24" />
-                <Entry x:Name="DestinationAddress1" Placeholder="Destination Address" PlaceholderColor="#bababa" FontSize="16" />  
-                <Entry x:Name="City" Placeholder="City" PlaceholderColor="#bababa" FontSize="16" />  
-                <Entry x:Name="State" Placeholder="State" PlaceholderColor="#bababa" FontSize="16" />  
-                <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16" /> 
-                <Label Text="       " Font="32" />
+                <Label x:Name="StudentName" Text="Student Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <Entry x:Name="DestinationAddress1" Placeholder="Destination Address 1" PlaceholderColor="#bababa" FontSize="12" /> 
+                <Entry x:Name="DestinationAddress2" Placeholder="Destination Address 2" PlaceholderColor="#bababa" FontSize="12" /> 
+                <Entry x:Name="City" Placeholder="City" PlaceholderColor="#bababa" FontSize="12" />  
+                <Entry x:Name="State" Placeholder="State" PlaceholderColor="#bababa" FontSize="12" />  
+                <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="12" /> 
+                <Label x:Name="updateStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
             </StackLayout>  
         <Grid Grid.Row="1">        
         <Grid.RowDefinitions>

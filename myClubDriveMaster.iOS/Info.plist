@@ -42,5 +42,9 @@
 	<string>Please allow location usage when app is in use</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow location usage when app is in use</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 </dict>
 </plist>

@@ -19,14 +19,35 @@ namespace myClubDriveMaster
         public String sdAccountAPIURLPOST = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
         public String sdDriverAllocURL = "https://fjziwkczek.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AllocationID}";
         public String sdAuthAPIURL = "https://olx0fy0k5k.execute-api.us-west-2.amazonaws.com/Stage/apigateway";
+        public String sdTrackLoc = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+        public String sdTrackLocGet = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage//schooldrive/TripID";
+
 
         public async Task<JToken> cdcallAccountsGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var getAccounts = await mycallAPI.cdCallGetAPI(sdAccountAPIURL, QueryObject);
+            var getLocations = await mycallAPI.cdCallGetAPI(sdAccountAPIURL, QueryObject);
+            return getLocations;
+
+        }
+
+        public async Task<JToken> cdcallTrackLocGET(cdQueryAttr QueryObject)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var getAccounts = await mycallAPI.cdCallGetAPI(sdTrackLocGet, QueryObject);
             return getAccounts;
 
         }
+
+        public async Task<JToken> cdSendLocation(cdLocation dloc)
+        {
+            System.Diagnostics.Debug.WriteLine("  Location is "+dloc.cdLongitude+" "+dloc.cdLatitude);
+            System.Diagnostics.Debug.WriteLine("  Trip ID is " + dloc.TripID);
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPutAPI(sdTrackLoc, dloc);
+            return response;
+        }
+
         public async Task<JToken> cdcallDriverAllocGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -42,7 +63,7 @@ namespace myClubDriveMaster
 
         }
 
-        public async Task<JToken> cdcallAccountsPOST(Account regacccount)
+        public async Task<JToken> cdcallAccountsPOST(cdUpdateAccount regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
             var response = await mycallAPI.cdCallPostAPI(sdAccountAPIURLPOST, regacccount);
@@ -87,14 +108,15 @@ namespace myClubDriveMaster
             return responseJSON;
 
         }
+
         public async Task<JToken> cdCallPutAPI(string callingapiurl, Object callingapiobject)
         {
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Content-Type", "application/json");
+
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             var inputJson = JsonConvert.SerializeObject(callingapiobject);
             var inputContent = new StringContent(inputJson, System.Text.Encoding.UTF8, "application/json");
-
+            System.Diagnostics.Debug.WriteLine(" Input JSON " + inputJson);
             var response = await client.PutAsync(callingapiurl, inputContent);
             var responseJSON = await response.Content.ReadAsStringAsync();
 
@@ -110,25 +132,27 @@ namespace myClubDriveMaster
 
             return responseJSON;
         }
+
         public async Task<JToken> cdCallPostAPI(string callingapiurl, Object callingapiobject)
         {
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
 
             var inputJson = JsonConvert.SerializeObject(callingapiobject);
             var inputContent = new StringContent(inputJson, System.Text.Encoding.UTF8, "application/json");
 
+            System.Diagnostics.Debug.WriteLine(" Input JSON is "+ inputJson);
+
             var response = await client.PostAsync(callingapiurl, inputContent);
             var responseJSON = await response.Content.ReadAsStringAsync();
 
-            if (response.IsSuccessStatusCode)
+           if (responseJSON.Contains("ValidationException"))
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-
+                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + responseJSON);
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + response.ReasonPhrase);
+                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
             }
 
             return responseJSON;
