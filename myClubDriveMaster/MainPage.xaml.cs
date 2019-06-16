@@ -6,9 +6,14 @@ namespace myClubDriveMaster
 {
     public partial class MainPage : ContentPage
     {
-        void cdRegistration(object sender, System.EventArgs e)
+        async void cdRegistration(object sender, System.EventArgs e)
         {
+            Account pAccount = new Account();
+            Club pClub = new Club();
+            String pPassword = "";
             System.Diagnostics.Debug.WriteLine(" Clicked Registraion Button");
+            var tpage = new cdAccounts(pAccount, pClub, pPassword);
+            await Navigation.PushModalAsync(tpage);
         }
 
         async void cdLogin(object sender, System.EventArgs e)
@@ -21,6 +26,8 @@ namespace myClubDriveMaster
 
             //Authenticating user
             System.Diagnostics.Debug.WriteLine(" Authenticating user");
+            System.Diagnostics.Debug.WriteLine(" Long string " + Math.Abs(DateTime.Now.ToBinary()).ToString());
+            System.Diagnostics.Debug.WriteLine(" Hash Code " + Math.Abs(DateTime.Now.GetHashCode()));
 
             var jsreponse = await mycallAPI.cdLoginAccount(myusername, mypassword);
             lresp = JsonConvert.DeserializeObject<loginResponse>((string)jsreponse);

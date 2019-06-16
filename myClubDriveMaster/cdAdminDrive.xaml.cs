@@ -109,14 +109,47 @@ namespace myClubDriveMaster
             }
         }
 
-        void cdSubmit(object sender, System.EventArgs e)
+        async void cdSubmit(object sender, System.EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(" Clicked Drive Button");
+            System.Diagnostics.Debug.WriteLine(" Clicked Submit Button");
+            cdReadError myerror = new cdReadError();
+            cdUpdateAccount updatemyAccount = new cdUpdateAccount();
+            updatemyAccount.AccountID = mystudArray.Account[counter].AccountID;
+            updatemyAccount.ColumnName = "AccountStatus";
+            updatemyAccount.ColumnValue = picker.SelectedItem.ToString();
+            updatemyAccount.ColumnName1 = "Attr6";
+            updatemyAccount.ColumnValue1 = mystudArray.Account[counter].Attr6;
+            updatemyAccount.ColumnName2 = "Attr7";
+            updatemyAccount.ColumnValue2 = mystudArray.Account[counter].Attr7;
+            updatemyAccount.ColumnName3 = "Attr8";
+            updatemyAccount.ColumnValue3 = mystudArray.Account[counter].Attr8;
+            updatemyAccount.ColumnName4 = "Attr9";
+            updatemyAccount.ColumnValue4 = mystudArray.Account[counter].Attr9;
+
+            System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var jsresponse = await mycallAPI.cdcallAccountsPOST(updatemyAccount);
+
+            System.Diagnostics.Debug.WriteLine(" After calling Post API ");
+            if (jsresponse.ToString().Contains("ValidationException"))
+            {
+                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                updateStatus.Text = "Update Failed. " + myerror.message;
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                updateStatus.Text = "Update Successful";
+            }
         }
 
-        void cdHome(object sender, System.EventArgs e)
+        async void cdHome(object sender, System.EventArgs e)
         {
+
             System.Diagnostics.Debug.WriteLine(" Clicked Home Button");
+            var tpage = new cdHome(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
 
         async void cdqueryAll()
@@ -176,7 +209,6 @@ namespace myClubDriveMaster
             }
 
         }
-
 
         async void cdFind(object sender, System.EventArgs e)
         {

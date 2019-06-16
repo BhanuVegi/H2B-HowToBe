@@ -9,6 +9,7 @@
                 <Button x:Name="FindButton" Text="Find" Clicked="cdFind" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" />
                 <Label x:Name="ApplicantName" Text="Applicant Name:" BackgroundColor="Transparent" FontSize="16" />
                 <Label x:Name="ApplicantType" Text="Applicant Type:" BackgroundColor="Transparent" FontSize="16" />
+                <Label x:Name="updateStatus" Text="  " BackgroundColor="Transparent" FontSize="16" />
             </StackLayout>  
         <Grid Grid.Row="1">        
         <Grid.RowDefinitions>

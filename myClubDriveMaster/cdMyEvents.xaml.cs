@@ -5,13 +5,11 @@ using Xamarin.Forms;
 
 namespace myClubDriveMaster
 {
-    public partial class cdClubs : ContentPage
+    public partial class cdMyEvents : ContentPage
     {
-
         Account myAccount = new Account();
-        getClubs myClubs = new getClubs();
-
-        List<Club> assignedClubs = new List<Club>();
+        getEvents myEvents = new getEvents();
+        List<cdEvents> assignedEvents = new List<cdEvents>();
 
         int maxarray = -1;
         int counter = 0;
@@ -22,13 +20,19 @@ namespace myClubDriveMaster
             await Navigation.PushModalAsync(tpage);
         }
 
+        async void cdRiders(object sender, System.EventArgs e)
+        {
+            var tpage = new cdHome(myAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+
         async void cdSubmit(object sender, System.EventArgs e)
         {
             cdReadError myerror = new cdReadError();
-            cdUpdateClub updateAddress = new cdUpdateClub();
-            updateAddress.ClubID = assignedClubs[counter].ClubID;
+            cdUpdateEvent updateAddress = new cdUpdateEvent();
+            updateAddress.EventID = assignedEvents[counter].EventID;
             updateAddress.ColumnName = "AddressLine1";
-            updateAddress.ColumnValue = CubAddress.Text;
+            updateAddress.ColumnValue = EventAddress.Text;
             updateAddress.ColumnName2 = "City";
             updateAddress.ColumnValue2 = City.Text;
             updateAddress.ColumnName3 = "cdState";
@@ -38,7 +42,7 @@ namespace myClubDriveMaster
 
             System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
             cdCallAPI mycallAPI = new cdCallAPI();
-            var jsresponse = await mycallAPI.cdcallClubsPOST(updateAddress);
+            var jsresponse = await mycallAPI.cdcallEventsPOST(updateAddress);
 
             System.Diagnostics.Debug.WriteLine(" After calling Post API ");
             if (jsresponse.ToString().Contains("ValidationException"))
@@ -60,12 +64,12 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Previous Button");
             counter = counter - 1;
 
-            ClubName.Text = "Club Name: " + assignedClubs[counter].ClubName;
-            ClubID.Text = "Clud ID: " + assignedClubs[counter].ClubID;
-            CubAddress.Text = assignedClubs[counter].AddressLine1 + " " + assignedClubs[counter].AddressLine2;
-            City.Text = assignedClubs[counter].City;
-            myState.Text = assignedClubs[counter].cdState;
-            PostalCode.Text = assignedClubs[counter].PostalCode;
+            EventName.Text = "Event Name: " + assignedEvents[counter].EventName;
+            EventID.Text = "Clud ID: " + assignedEvents[counter].EventID;
+            EventAddress.Text = assignedEvents[counter].AddressLine1 + " " + assignedEvents[counter].AddressLine2;
+            City.Text = assignedEvents[counter].City;
+            myState.Text = assignedEvents[counter].cdState;
+            PostalCode.Text = assignedEvents[counter].PostalCode;
 
             if (counter == 0)
             {
@@ -98,12 +102,12 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
             counter = counter + 1;
 
-            ClubName.Text = "Club Name: " + assignedClubs[counter].ClubName;
-            ClubID.Text = "Clud ID: " + assignedClubs[counter].ClubID;
-            CubAddress.Text = assignedClubs[counter].AddressLine1 + " " + assignedClubs[counter].AddressLine2;
-            City.Text = assignedClubs[counter].City;
-            myState.Text = assignedClubs[counter].cdState;
-            PostalCode.Text = assignedClubs[counter].PostalCode;
+            EventName.Text = "Event Name: " + assignedEvents[counter].EventName;
+            EventID.Text = "Clud ID: " + assignedEvents[counter].EventID;
+            EventAddress.Text = assignedEvents[counter].AddressLine1 + " " + assignedEvents[counter].AddressLine2;
+            City.Text = assignedEvents[counter].City;
+            myState.Text = assignedEvents[counter].cdState;
+            PostalCode.Text = assignedEvents[counter].PostalCode;
 
             if (counter >= maxarray)
             {
@@ -131,7 +135,7 @@ namespace myClubDriveMaster
             }
         }
 
-        async void getClubs()
+        async void getEvents()
         {
             cdQueryAttr qryAcct = new cdQueryAttr();
             qryAcct.ColIndex = "IndexName";
@@ -139,41 +143,21 @@ namespace myClubDriveMaster
             qryAcct.ColName = "MemberAccountID";
             qryAcct.ColValue = myAccount.UserName;
 
-            System.Diagnostics.Debug.WriteLine(" Getting clubs from club members");
+            System.Diagnostics.Debug.WriteLine(" Getting Events from Event members");
 
-            getClubMembers myClubMembers = new getClubMembers();
+            getEventMembers myEventMembers = new getEventMembers();
             cdCallAPI mycallAPI = new cdCallAPI();
 
-            var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
-            myClubMembers = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
+            var jsreponse = await mycallAPI.cdcallEventMembersGET(qryAcct);
+            myEventMembers = JsonConvert.DeserializeObject<getEventMembers>((string)jsreponse);
 
-            System.Diagnostics.Debug.WriteLine(" Club Member payload is " + jsreponse);
+            System.Diagnostics.Debug.WriteLine(" Event Member payload is " + jsreponse);
 
             try
             {
-                foreach (var stacc in myClubMembers.ClubMember)
+                foreach (var stacc in myEventMembers.EventMember)
                 {
                     maxarray = maxarray + 1;
-                    qryAcct = new cdQueryAttr();
-                    qryAcct.ColIndex = "None";
-                    qryAcct.IndexName = "None";
-                    qryAcct.ColName = "ClubID";
-                    qryAcct.ColValue = myClubMembers.ClubMember[maxarray].ClubID;
-
-                    System.Diagnostics.Debug.WriteLine(" Populating Club for " + myClubMembers.ClubMember[maxarray].ClubID);
-
-                    getClubs tempClubs = new getClubs();
-                    var jsclubs = await mycallAPI.cdcallClubsGET(qryAcct);
-                    tempClubs = JsonConvert.DeserializeObject<getClubs>((string)jsclubs);
-
-                    System.Diagnostics.Debug.WriteLine(" Club is retrived " + jsclubs);
-
-                    System.Diagnostics.Debug.WriteLine(" Before Initializing club "+ tempClubs.Club[0].ClubID +"  "+ tempClubs.Club[0].ClubName);
-                    assignedClubs.Add(tempClubs.Club[0]);
-                    System.Diagnostics.Debug.WriteLine(" After Initializing club ");
-
-                    System.Diagnostics.Debug.WriteLine(" Added to assigned clubs ");
-
                 }
             }
             catch (Exception ex)
@@ -181,12 +165,12 @@ namespace myClubDriveMaster
                 System.Diagnostics.Debug.WriteLine("End of Array " + ex);
             }
 
-            ClubName.Text = "Club Name: " + assignedClubs[0].ClubName;
-            ClubID.Text = "Clud ID: " + assignedClubs[0].ClubID;
-            CubAddress.Text = assignedClubs[0].AddressLine1+" "+ assignedClubs[0].AddressLine2;
-            City.Text = assignedClubs[0].City;
-            myState.Text = assignedClubs[0].cdState;
-            PostalCode.Text = assignedClubs[0].PostalCode;
+            EventName.Text = "Event Name: " + assignedEvents[0].EventName;
+            EventID.Text = "Event ID: " + assignedEvents[0].EventID;
+            EventAddress.Text = assignedEvents[0].AddressLine1 + " " + assignedEvents[0].AddressLine2;
+            City.Text = assignedEvents[0].City;
+            myState.Text = assignedEvents[0].cdState;
+            PostalCode.Text = assignedEvents[0].PostalCode;
 
             System.Diagnostics.Debug.WriteLine(" Max Array is " + maxarray);
 
@@ -202,13 +186,10 @@ namespace myClubDriveMaster
             }
         }
 
-        public cdClubs(Account loginAccount)
+        public cdMyEvents(Account loginAccount)
         {
-
             InitializeComponent();
             myAccount = loginAccount;
-            getClubs();
-
         }
     }
 }

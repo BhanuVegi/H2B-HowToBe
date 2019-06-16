@@ -31,29 +31,47 @@ namespace myClubDriveMaster
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Rider Page Button");
         }
-        void cdmyClubs(object sender, System.EventArgs e)
+        async void cdmyClubs(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked My Clubs Button");
+            var tpage = new cdClubs(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
-        void cdmyAccount(object sender, System.EventArgs e)
+        async void cdmyAccount(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked My Account Button");
+            var tpage = new cdMyAccount(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
-        void cdmyRiders(object sender, System.EventArgs e)
+        async void cdmyRiders(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked My Riders Button");
+            var tpage = new cdMyRiders(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
-        void cdCreateclub(object sender, System.EventArgs e)
+        async void cdmyEvents(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked My Events Button");
+            var tpage = new cdMyEvents(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+        async  void cdCreateclub(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Create Club Button");
+            var tpage = new cdCreateClub(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
-        void cdCreateStudents(object sender, System.EventArgs e)
+        async void cdCreateStudents(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Create Students Button");
+            var tpage = new cdRiderAccount(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
-        void cdCreateEvents(object sender, System.EventArgs e)
+        async void cdCreateEvents(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Create Events Button");
+            var tpage = new cdCreateEvents(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
 
         async void cdLogout(object sender, System.EventArgs e)

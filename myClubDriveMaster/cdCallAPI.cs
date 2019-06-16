@@ -21,13 +21,42 @@ namespace myClubDriveMaster
         public String sdAuthAPIURL = "https://olx0fy0k5k.execute-api.us-west-2.amazonaws.com/Stage/apigateway";
         public String sdTrackLoc = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
         public String sdTrackLocGet = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage//schooldrive/TripID";
-
+        public String cdClubAPIGet = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
+        public String cdClubAPI = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage";
+        public String cdClubMemberAPIGet = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
+        public String cdClubMemberAPI = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage";
+        public String cdEventAPIGet = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/{ClubID}";
+        public String cdEventAPI = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage";
+        public String cdEventRegAPIGet = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/{ClubID}";
+        public String cdEventRegAPI = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage";
 
         public async Task<JToken> cdcallAccountsGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
             var getLocations = await mycallAPI.cdCallGetAPI(sdAccountAPIURL, QueryObject);
             return getLocations;
+
+        }
+
+        public async Task<JToken> cdcallClubMembersGET(cdQueryAttr QueryObject)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var getClubMembers = await mycallAPI.cdCallGetAPI(cdClubMemberAPIGet, QueryObject);
+            return getClubMembers;
+
+        }
+        public async Task<JToken> cdcallEventMembersGET(cdQueryAttr QueryObject)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var getClubMembers = await mycallAPI.cdCallGetAPI(cdEventAPIGet, QueryObject);
+            return getClubMembers;
+
+        }
+        public async Task<JToken> cdcallClubsGET(cdQueryAttr QueryObject)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var getClubMembers = await mycallAPI.cdCallGetAPI(cdClubAPIGet, QueryObject);
+            return getClubMembers;
 
         }
 
@@ -62,7 +91,34 @@ namespace myClubDriveMaster
             return response;
 
         }
+        public async Task<JToken> cdcallClubsPUT(Club regClub)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPutAPI(cdClubAPI, regClub);
+            return response;
 
+        }
+        public async Task<JToken> cdcallEventsPUT(cdEvents regEvent)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPutAPI(cdEventAPI, regEvent);
+            return response;
+
+        }
+        public async Task<JToken> cdcallClubMemberPUT(ClubMembers regacccount)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPutAPI(cdClubMemberAPI, regacccount);
+            return response;
+
+        }
+        public async Task<JToken> cdcallEventRegPUT(Account regacccount)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPutAPI(cdEventRegAPI, regacccount);
+            return response;
+
+        }
         public async Task<JToken> cdcallAccountsPOST(cdUpdateAccount regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -70,7 +126,20 @@ namespace myClubDriveMaster
             return response;
 
         }
+        public async Task<JToken> cdcallEventsPOST(cdUpdateEvent regEvent)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPostAPI(sdAccountAPIURLPOST, regEvent);
+            return response;
 
+        }
+        public async Task<JToken> cdcallClubsPOST(cdUpdateClub regacccount)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPostAPI(cdClubAPI, regacccount);
+            return response;
+
+        }
         public async Task<JToken> cdLoginAccount(String username, String password)
         {
             loginObject myLoginObject = new loginObject();

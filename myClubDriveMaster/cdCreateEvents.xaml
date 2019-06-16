@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdCreateEvents" BackgroundImage="ClubDrive.png">
+    <ContentPage.Content>
+      <Grid BackgroundColor="Transparent">
+      <Grid.RowDefinitions>
+            <RowDefinition Height="500" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />     
+      </Grid.RowDefinitions>  
+          <Grid Grid.Row="0"> 
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+               <Label Text="       " Font="32" />
+                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+                <Entry x:Name="EventName"  Placeholder="Event Name" PlaceholderColor="#bababa" FontSize="12" />
+                <Label x:Name="EventID" Text="Event ID:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <Entry x:Name="EventAddress" Placeholder="Address Line" PlaceholderColor="#bababa" FontSize="12" /> 
+                <Entry x:Name="EventAddress2" Placeholder="Address Line2" PlaceholderColor="#bababa" FontSize="12" /> 
+                <Entry x:Name="City" Placeholder="City" PlaceholderColor="#bababa" FontSize="12" />  
+                <Entry x:Name="myState" Placeholder="State" PlaceholderColor="#bababa" FontSize="12" />  
+                <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="12" />
+                <Picker x:Name="picker" Title="Club Name" TextColor="Blue" Grid.Row="4"> 
+                </Picker>
+                <Entry x:Name="cdNotes" Placeholder="Enter any notes for participants" PlaceholderColor="#bababa" FontSize="12" /> 
+                <Label x:Name="createStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+            </StackLayout>  
+        </Grid>         
+        <Grid Grid.Row="1">        
+           <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+            <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
+            <Button Clicked="cdSubmit" Text="Submit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>            
+        </Grid>
+        <Grid Grid.Row="2">     
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <Button Text="Home" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </Grid>
+     </Grid>
+    </ContentPage.Content>
+</ContentPage>

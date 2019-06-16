@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdAccounts" BackgroundImage="ClubDrive.png">
-  <ContentPage.Content>
-    <Grid BackgroundColor="Transparent"> 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdRiderAccount" BackgroundImage="ClubDrive.png">
+    <ContentPage.Content>
+      <Grid BackgroundColor="Transparent"> 
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
@@ -19,7 +19,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
            <StackLayout> 
-            <Label Text="       " Font="32" />         
+            <Label x:Name="createStatus" Text="       " Font="32" />         
             <Entry Grid.Row="1" x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#bababa" FontSize="16" />
             <Entry Grid.Row="2" x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true" />
             <Entry Grid.Row="3" x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true"/>
@@ -36,12 +36,12 @@
           </StackLayout>
           <Grid Grid.Row="2">       
           <StackLayout> 
-            <Button Grid.Row="14" Text="Club N Role" Clicked="cdSecond" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" /> 
+            <Button Grid.Row="14" Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" /> 
             <Label Text="       " Font="16" />             
-            <Button Grid.Row="15" Text="Main Menu" Clicked="cdMainPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
+            <Button Grid.Row="15" Text="Home Page" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
           </StackLayout>  
           </Grid>          
      </Grid>
     </Grid>    
-  </ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>

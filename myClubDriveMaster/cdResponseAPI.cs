@@ -5,12 +5,12 @@ namespace myClubDriveMaster
 {
 
     public class cdQueryAttr
-        {
+    {
             public string IndexName { get; set; }
             public string ColIndex { get; set; }
             public string ColName { get; set; }
             public string ColValue { get; set; }
-        }
+    }
 
     public class cdUpdateAccount
     {
@@ -26,7 +26,34 @@ namespace myClubDriveMaster
         public string ColumnName4 { get; set; }
         public string ColumnValue4 { get; set; }
     }
-
+    public class cdUpdateClub
+    {
+        public string ClubID { get; set; }
+        public string ColumnName { get; set; }
+        public string ColumnValue { get; set; }
+        public string ColumnName1 { get; set; }
+        public string ColumnValue1 { get; set; }
+        public string ColumnName2 { get; set; }
+        public string ColumnValue2 { get; set; }
+        public string ColumnName3 { get; set; }
+        public string ColumnValue3 { get; set; }
+        public string ColumnName4 { get; set; }
+        public string ColumnValue4 { get; set; }
+    }
+    public class cdUpdateEvent
+    {
+        public string EventID { get; set; }
+        public string ColumnName { get; set; }
+        public string ColumnValue { get; set; }
+        public string ColumnName1 { get; set; }
+        public string ColumnValue1 { get; set; }
+        public string ColumnName2 { get; set; }
+        public string ColumnValue2 { get; set; }
+        public string ColumnName3 { get; set; }
+        public string ColumnValue3 { get; set; }
+        public string ColumnName4 { get; set; }
+        public string ColumnValue4 { get; set; }
+    }
     public class cdLocation
        {
            public string TripID { get; set; }
@@ -159,5 +186,93 @@ namespace myClubDriveMaster
         public String __type { get; set; }
         public String message { get; set; }
     }
+
+    public class Club
+    {
+        public string ClubID { get; set; }
+        public string ClubName { get; set; }
+        public string ClubReg { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string AddressLine3 { get; set; }
+        public string City { get; set; }
+        public string cdState { get; set; }
+        public string PostalCode { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
+    }
+
+    public class getClubs
+    {
+        public List<Club> Club { get; set; }
+    }
+
+    public class ClubMembers
+    {
+        public string ClubMemberID { get; set; }
+        public string ClubID { get; set; }
+        public string MemberAccountID { get; set; }
+        public string ClubName { get; set; }
+        public string MemberName { get; set; }
+        public string MemberRole { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
+    }
+
+
+    public class getClubMembers
+    {
+        public List<ClubMembers> ClubMember { get; set; }
+    }
+
+    public class cdEvents
+    {
+        public string EventID { get; set; }
+        public string EventName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string AddressLine3 { get; set; }
+        public string City { get; set; }
+        public string cdState { get; set; }
+        public string PostalCode { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
+    }
+
+    public class getEvents
+    {
+        public List<cdEvents> cdEvents { get; set; }
+    }
+
+    public class getEventMembers
+    {
+        public List<cdEvents> EventMember { get; set; }
+    }
+
 
 }
