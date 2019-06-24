@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdAssignEventMembers" xmlns:local="clr-namespace:Sample.InputKit"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             BackgroundImage="ClubDrive.png">
+    <ContentPage.Content>
+          <Grid BackgroundColor="Transparent">
+          <Grid.RowDefinitions>
+                <RowDefinition Height="500" />
+                <RowDefinition Height="70" />     
+          </Grid.RowDefinitions>  
+              <Grid Grid.Row="0">
+                <StackLayout x:Name="signupStack" Orientation="Vertical"> 
+                    <Label x:Name="insertMessage" HorizontalOptions="Center" TextColor="#485992" FontSize="16"/>
+                    <input:CheckBox x:Name="cdCheckStd1" Grid.Row="0" Text="Std1" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd2" Grid.Row="1" Text="std2" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd3" Grid.Row="2" Text="std3" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd4" Grid.Row="3" Text="std4" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd5" Grid.Row="0" Text="Std1" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd6" Grid.Row="1" Text="std2" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd7" Grid.Row="2" Text="std3" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd8" Grid.Row="3" Text="std4" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd9" Grid.Row="0" Text="Std1" Type="Check"/>
+                    <input:CheckBox x:Name="cdCheckStd10" Grid.Row="1" Text="std2" Type="Check"/>
+                </StackLayout>
+               </Grid>
+              <Grid Grid.Row="0">
+                <StackLayout x:Name="buttonStack" Orientation="Vertical"> 
+                <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Text="Home" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />                    
+                </StackLayout>
+               </Grid>               
+          </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -9,11 +9,19 @@ namespace myClubDriveMaster
     {
         Account myAccount = new Account();
         int maxarray = -1;
+        String myEventDate = "";
 
         async void cdHome(object sender, System.EventArgs e)
         {
             var tpage = new cdHome(myAccount);
             await Navigation.PushModalAsync(tpage);
+        }
+
+        void OnDateSelected(object sender, System.EventArgs e)
+        {
+            myEventDate = eventDatePicker.Date.ToString();
+            System.Diagnostics.Debug.WriteLine(" Event date is "+ myEventDate);
+
         }
 
         async void cdSubmit(object sender, System.EventArgs e)
@@ -39,12 +47,17 @@ namespace myClubDriveMaster
                     thisEvent.AddressLine2 = "None";
                 }
                 thisEvent.AddressLine3 = "NA";
-                thisEvent.Attr1 = cdNotes.Text;
-                thisEvent.Attr2 = myAccount.UserName;
-                if (picker.SelectedItem.ToString() != null)
-                {
-                    thisEvent.Attr3 = picker.SelectedItem.ToString();
-                }
+                thisEvent.Notes = cdNotes.Text;
+                thisEvent.ClubAdmin = myAccount.UserName;
+                String[] mysa = new string[2];
+                char[] mysep = "|".ToCharArray();
+                mysa = picker.SelectedItem.ToString().Split(mysep);
+                thisEvent.ClubName = mysa[0];
+                thisEvent.ClubID = mysa[1];
+                thisEvent.EventDate = myEventDate;
+                thisEvent.Attr1 = "NA";
+                thisEvent.Attr2 = "NA";
+                thisEvent.Attr3 = "NA";
                 thisEvent.Attr4 = "NA";
                 thisEvent.Attr5 = "NA";
                 thisEvent.Attr6 = "NA";
@@ -90,7 +103,7 @@ namespace myClubDriveMaster
                     maxarray = maxarray + 1;
                     if (myClubMembers.ClubMember[maxarray].MemberRole.Contains("A") == true)
                     { 
-                        picker.Items.Add(myClubMembers.ClubMember[maxarray].ClubName);
+                        picker.Items.Add(myClubMembers.ClubMember[maxarray].ClubName + " ***"+ myClubMembers.ClubMember[maxarray].ClubID);
                     }
                 }
             }
@@ -104,6 +117,7 @@ namespace myClubDriveMaster
         {
             InitializeComponent();
             myAccount = loginAccount;
+            eventDatePicker.MinimumDate = DateTime.Today.Date;
             getPickerClubInfo();
 
         }

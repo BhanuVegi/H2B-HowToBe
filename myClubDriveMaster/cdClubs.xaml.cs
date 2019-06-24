@@ -21,7 +21,32 @@ namespace myClubDriveMaster
             var tpage = new cdHome(myAccount);
             await Navigation.PushModalAsync(tpage);
         }
+        async void cdAssign(object sender, System.EventArgs e)
+        {
+            if (myAccount.Role.Contains("R") & myAccount.ParentID != "None")
+            {
+                Account paccount = new Account();
+                cdCallAPI mycallAPI = new cdCallAPI();
+                cdQueryAttr qryAcct = new cdQueryAttr();
+                qryAcct.ColIndex = "IndexName";
+                qryAcct.IndexName = "UserNameindex";
+                qryAcct.ColName = "UserName";
+                qryAcct.ColValue = myAccount.ParentID;
 
+                getAccounts myAccountsArray = new getAccounts();
+
+                var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
+                myAccountsArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
+                paccount = myAccountsArray.Account[0]; 
+                var tpage = new cdAssignClubs(paccount,myAccount);
+                await Navigation.PushModalAsync(tpage);
+            }
+            else
+            {
+                var tpage = new cdAssignClubs(myAccount, myAccount);
+                await Navigation.PushModalAsync(tpage);
+            }
+        }
         async void cdSubmit(object sender, System.EventArgs e)
         {
             cdReadError myerror = new cdReadError();
@@ -138,6 +163,7 @@ namespace myClubDriveMaster
             qryAcct.IndexName = "MemberAccountIDIndex";
             qryAcct.ColName = "MemberAccountID";
             qryAcct.ColValue = myAccount.UserName;
+            String clubRetrived = "";
 
             System.Diagnostics.Debug.WriteLine(" Getting clubs from club members");
 
@@ -165,6 +191,7 @@ namespace myClubDriveMaster
                     getClubs tempClubs = new getClubs();
                     var jsclubs = await mycallAPI.cdcallClubsGET(qryAcct);
                     tempClubs = JsonConvert.DeserializeObject<getClubs>((string)jsclubs);
+                    clubRetrived = (string)jsclubs;
 
                     System.Diagnostics.Debug.WriteLine(" Club is retrived " + jsclubs);
 
@@ -180,13 +207,21 @@ namespace myClubDriveMaster
             {
                 System.Diagnostics.Debug.WriteLine("End of Array " + ex);
             }
-
-            ClubName.Text = "Club Name: " + assignedClubs[0].ClubName;
-            ClubID.Text = "Clud ID: " + assignedClubs[0].ClubID;
-            CubAddress.Text = assignedClubs[0].AddressLine1+" "+ assignedClubs[0].AddressLine2;
-            City.Text = assignedClubs[0].City;
-            myState.Text = assignedClubs[0].cdState;
-            PostalCode.Text = assignedClubs[0].PostalCode;
+            if (clubRetrived.Contains("ClubName"))
+            { 
+                ClubName.Text = "Club Name: " + assignedClubs[0].ClubName;
+                ClubID.Text = "Clud ID: " + assignedClubs[0].ClubID;
+                CubAddress.Text = assignedClubs[0].AddressLine1+" "+ assignedClubs[0].AddressLine2;
+                City.Text = assignedClubs[0].City;
+                myState.Text = assignedClubs[0].cdState;
+                PostalCode.Text = assignedClubs[0].PostalCode;
+            }
+            else
+            {
+                PreviousButton.IsEnabled = false;
+                NextButton.IsEnabled = false;
+                SubmitButton.IsEnabled = false;
+            }
 
             System.Diagnostics.Debug.WriteLine(" Max Array is " + maxarray);
 

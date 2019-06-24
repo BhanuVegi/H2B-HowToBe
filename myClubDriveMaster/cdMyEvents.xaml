@@ -4,15 +4,14 @@
     <ContentPage.Content>
       <Grid BackgroundColor="Transparent">
       <Grid.RowDefinitions>
-            <RowDefinition Height="380" />
+            <RowDefinition Height="410" />
             <RowDefinition Height="80" />
             <RowDefinition Height="80" />    
             <RowDefinition Height="180" />
         </Grid.RowDefinitions> 
            <Grid Grid.Row="0">
              <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
-               <Label Text="       " Font="32" />
-                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="FillAndExpand" />
+               <Label x:Name="updateStatus" Text="       " Font="32" />
                 <Label x:Name="EventName" Text="Club Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 <Label x:Name="EventID" Text="Event ID:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 <Entry x:Name="EventAddress" Placeholder="Address Line1" PlaceholderColor="#bababa" FontSize="12" /> 
@@ -21,7 +20,8 @@
                 <Entry x:Name="myState" Placeholder="State" PlaceholderColor="#bababa" FontSize="12" />  
                 <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="12" />
                 <Entry x:Name="cdNotes" Placeholder="Notes " PlaceholderColor="#bababa" FontSize="12" />
-                <Label x:Name="updateStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <Label x:Name="ClubName" Text="Club Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <DatePicker x:Name="eventDatePicker" TextColor="Black" Format="D" Margin="30, 0, 0, 30" DateSelected="OnDateSelected" />
               </StackLayout>  
             </Grid>
             <Grid Grid.Row="1">

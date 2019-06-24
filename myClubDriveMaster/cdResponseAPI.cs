@@ -252,6 +252,11 @@ namespace myClubDriveMaster
         public string City { get; set; }
         public string cdState { get; set; }
         public string PostalCode { get; set; }
+        public string ClubName { get; set; }
+        public string ClubID { get; set; }
+        public string ClubAdmin { get; set; }
+        public string Notes { get; set; }
+        public string EventDate { get; set; }
         public string Attr1 { get; set; }
         public string Attr2 { get; set; }
         public string Attr3 { get; set; }
@@ -269,9 +274,32 @@ namespace myClubDriveMaster
         public List<cdEvents> cdEvents { get; set; }
     }
 
+    public class cdEventSignups
+    {
+        public string EventMemberID { get; set; }
+        public string EventID { get; set; }
+        public string ClubID { get; set; }
+        public string MemberAccountID { get; set; }
+        public string MemberRole { get; set; }
+        public string EventName { get; set; }
+        public string ClubName { get; set; }
+        public string MemberName { get; set; }
+        public string PickupLocation { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
+    }
+
     public class getEventMembers
     {
-        public List<cdEvents> EventMember { get; set; }
+        public List<cdEventSignups> EventMember { get; set; }
     }
 
 

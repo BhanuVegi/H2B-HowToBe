@@ -59,6 +59,38 @@ namespace myClubDriveMaster
                     var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
                     createStatus.Text = "Club Creation Failed. " + myerror.message;
                 }
+                else
+                {
+                    ClubMembers myclubmembership = new ClubMembers();
+                    myclubmembership.ClubMemberID = myAccount.UserName + ClubName.Text.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                    myclubmembership.ClubID = ClubName.Text.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                    myclubmembership.MemberAccountID = myAccount.UserName;
+                    myclubmembership.ClubName = ClubName.Text;
+                    myclubmembership.MemberName = myAccount.FirstName + " " + myAccount.LastName;
+                    myclubmembership.MemberRole = "A"+myAccount.Role;
+                    myclubmembership.Attr1 = "NA";
+                    myclubmembership.Attr2 = "NA";
+                    myclubmembership.Attr3 = "NA";
+                    myclubmembership.Attr4 = "NA";
+                    myclubmembership.Attr5 = "NA";
+                    myclubmembership.Attr6 = "NA";
+                    myclubmembership.Attr7 = "NA";
+                    myclubmembership.Attr8 = "NA";
+                    myclubmembership.Attr9 = "NA";
+                    myclubmembership.Attr10 = "NA";
+
+                    jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);
+                    if (jsresponse.ToString().Contains("ValidationException"))
+                    {
+                        System.Diagnostics.Debug.WriteLine(" Club Membership creation call failed " + jsresponse);
+                        var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                        createStatus.Text = "Club Member Creation Failed. " + myerror.message;
+                    }
+                    else
+                    {
+                        createStatus.Text = "Registration Successful ";
+                    }
+                }
             }
 
         }

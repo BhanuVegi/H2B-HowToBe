@@ -58,17 +58,20 @@ namespace myClubDriveMaster
 
                 System.Diagnostics.Debug.WriteLine("Role for " + myaccount.FirstName + " " + myaccount.LastName + " is " + myaccount.Role);
 
-                if (myaccount.Role.Substring(0,1) == "D" || myaccount.Role.Substring(0, 1) == "P" || myaccount.Role.Substring(0, 1) == "A")
-                {
+  /*              if (myaccount.Role.Substring(0,1) == "D" || myaccount.Role.Substring(0, 1) == "P" || myaccount.Role.Substring(0, 1) == "A")
+                { */
+
                     var tpage = new cdHome(myaccount);
                     await Navigation.PushModalAsync(tpage);
-                }
+
+  /*              }
                 else
                 {
                     System.Diagnostics.Debug.WriteLine(" Navigating to Rider Page ");
                     var tpage = new cdRiderDrive(myaccount);
                     await Navigation.PushModalAsync(tpage);
                 }
+                    */
 
             }
             else

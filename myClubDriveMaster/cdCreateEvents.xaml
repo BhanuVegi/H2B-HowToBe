@@ -3,12 +3,12 @@
     <ContentPage.Content>
       <Grid BackgroundColor="Transparent">
       <Grid.RowDefinitions>
-            <RowDefinition Height="500" />
+            <RowDefinition Height="600" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />     
       </Grid.RowDefinitions>  
           <Grid Grid.Row="0"> 
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
                <Label Text="       " Font="32" />
                 <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
                 <Entry x:Name="EventName"  Placeholder="Event Name" PlaceholderColor="#bababa" FontSize="12" />
@@ -20,6 +20,7 @@
                 <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="12" />
                 <Picker x:Name="picker" Title="Club Name" TextColor="Blue" Grid.Row="4"> 
                 </Picker>
+                <DatePicker x:Name="eventDatePicker" TextColor="Black" Format="D" Margin="30, 0, 0, 30" DateSelected="OnDateSelected" />
                 <Entry x:Name="cdNotes" Placeholder="Enter any notes for participants" PlaceholderColor="#bababa" FontSize="12" /> 
                 <Label x:Name="createStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
             </StackLayout>  

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 
 namespace myClubDriveMaster
@@ -8,6 +10,8 @@ namespace myClubDriveMaster
     public partial class cdRiderAccount : ContentPage
     {
         Account myAccount = new Account();
+        Account regAccount = new Account();
+        int accCreated = 0;
 
         async void cdHome(object sender, System.EventArgs e)
         {
@@ -15,13 +19,48 @@ namespace myClubDriveMaster
             await Navigation.PushModalAsync(tpage);
         }
 
-        async void cdSubmit(object sender, System.EventArgs e)
+        async void cdAClub(object sender, System.EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(" Submit button clicked");
+            if (accCreated == 0)
+            {
+                var response = await createStudAccount();
+                await DisplayAlert("Action", "Account creation " + response, "Ok");
 
-            Account regAccount = new Account();
+                if ( response.ToString() == "success" )
+                {
+                    var tpage = new cdAssignClubs(myAccount, regAccount);
+                    await Navigation.PushModalAsync(tpage);
+                }
 
+            }
+            else
+            { 
+                var tpage = new cdAssignClubs(myAccount, regAccount);
+                await Navigation.PushModalAsync(tpage);
+            }
+        }
+        public async Task<JToken> createStudAccount()
+        {
             //Populate regiatration data
+            System.Diagnostics.Debug.WriteLine(" In create student account "+ regAccount.UserName);
+            regAccount.AccountID = cdUserName.Text;
+            System.Diagnostics.Debug.WriteLine(" In create student account " + regAccount.AccountID);
+            regAccount.UserName = cdUserName.Text;
+            regAccount.EmailAddress = cdEmail.Text;
+            regAccount.FirstName = cdFirstName.Text;
+            regAccount.LastName = cdLastName.Text;
+            regAccount.AddressLine1 = cdAddress1.Text;
+            regAccount.AddressLine2 = "None";
+            regAccount.City = cdCity.Text;
+            regAccount.cdState = cdState.Text;
+            regAccount.PostalCode = cdPostalCode.Text;
+            regAccount.Phone = cdPhone.Text;
+            regAccount.MiddleName = "None";
+            if (cdPhone.Text == null)
+            {
+                regAccount.Phone = "None";
+            }
+
             if (regAccount.UserName == null ||
                 regAccount.FirstName == null ||
                 regAccount.AddressLine1 == null ||
@@ -32,49 +71,19 @@ namespace myClubDriveMaster
                 regAccount.LastName == null)
             {
                 await DisplayAlert("Action", "Key attributes cannot be null. Please go to personal information and enter the same", "Ok");
+                return "failed";
             }
             else
             {
-                regAccount.AccountID = regAccount.UserName;
-                regAccount.UserName = cdUserName.Text;
-                regAccount.EmailAddress = cdEmail.Text;
-                regAccount.FirstName = cdFirstName.Text;
-                regAccount.MiddleName = cdMiddleName.Text;
-                regAccount.LastName = cdLastName.Text;
-                regAccount.AddressLine1 = cdAddress1.Text;
-                regAccount.AddressLine2 = cdAddress2.Text;
-                regAccount.City = cdCity.Text;
-                regAccount.cdState = cdState.Text;
-                regAccount.PostalCode = cdPostalCode.Text;
-                regAccount.Phone = cdPhone.Text;
-
-                if (regAccount.MiddleName == null)
-                {
-                    regAccount.MiddleName = "None";
-                }
                 regAccount.AccountStatus = "Approved";
                 regAccount.AddressLine3 = "None";
                 regAccount.County = "NA";
                 regAccount.Destination = "NA";
                 regAccount.ParentID = myAccount.UserName;
                 regAccount.Role = regAccount.Role + "R";
-
-                if (regAccount.Phone == null)
-                {
-                    regAccount.Phone = "None";
-                }
-                if (regAccount.School == null)
-                {
-                    regAccount.School = "None";
-                }
-                if (regAccount.SchoolID == null)
-                {
-                    regAccount.SchoolID = "None";
-                }
-                if (regAccount.Teacher == null)
-                {
-                    regAccount.Teacher = "None";
-                }
+                regAccount.School = "None";
+                regAccount.SchoolID = "None";
+                regAccount.Teacher = "None";
                 regAccount.Attr1 = "NA";
                 regAccount.Attr2 = "NA";
                 regAccount.Attr3 = "NA";
@@ -94,8 +103,23 @@ namespace myClubDriveMaster
                     System.Diagnostics.Debug.WriteLine(" Account creation call failed " + jsresponse);
                     var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
                     createStatus.Text = "Account Creation Failed. " + myerror.message;
+                    return "failed";
+                }
+                else
+                {
+                    accCreated = 1;
+                    return "success";
                 }
             }
+
+        }
+
+        async void cdSubmit(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Submit button clicked");
+            var response = await createStudAccount();
+            await DisplayAlert("Action", "Account creation "+response, "Ok");
+
         }
 
         public cdRiderAccount(Account loginAccount)

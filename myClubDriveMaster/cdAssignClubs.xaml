@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdAssignClubs" BackgroundImage="ClubDrive.png">
+    <ContentPage.Content>
+       <Grid BackgroundColor="Transparent"> 
+       <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="350" />
+                <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Label Text="Enter ClubID Or Club Name" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" HorizontalOptions="FillAndExpand" />  
+                <Entry x:Name="CubID" Placeholder="Enter Club ID" PlaceholderColor="#bababa" FontSize="12" HorizontalOptions="FillAndExpand" />           
+                <Entry x:Name="getClubName" Placeholder="Enter Club Name" PlaceholderColor="#bababa" FontSize="12" HorizontalOptions="FillAndExpand" />
+                </StackLayout>    
+             </Grid>
+             <Grid Grid.Row="1">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                   <Button Clicked="cdFind" Text="Find Club" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>    
+             </Grid> 
+             <Grid Grid.Row="2">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Label x:Name="ClubName" Text=" " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <Label x:Name="CubAddress" Text=" " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" /> 
+                <Label x:Name="City" Text=" " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <Label x:Name="myState" Text=" " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />  
+                <Label x:Name="PostalCode" Text=" " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" /> 
+                </StackLayout>     
+             </Grid>
+             <Grid Grid.Row="3">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                 <Button Clicked="cdSubmit" Text="Submit" x:Name="submitButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="Start" />
+                 <Button Clicked="cdAssign" Text="Assign New Club" x:Name="assignButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="Start" />
+                 <Button Clicked="cdHome" Text="Home" x:Name="homeButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="Start" />
+                </StackLayout>      
+             </Grid>
+        </Grid>    
+    </ContentPage.Content>
+</ContentPage>

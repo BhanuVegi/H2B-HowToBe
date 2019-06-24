@@ -27,8 +27,8 @@
         <Grid Grid.Row="2">          
             <StackLayout Orientation="Vertical">   
                 <Label Text="       " Font="24" />               
-                <Label Text="My Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/> 
-                <Button Clicked="cdmyClubs" Text="My Clubs" x:Name="MyClubs" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="6"/>
+                <Label x:Name="cdMyData" Text="My Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/> 
+                <Button Clicked="cdmyClubs" Text="My Clubs N Signup" x:Name="MyClubs" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="6"/>
                 <Button Clicked="cdmyAccount" Text="My Account" x:Name="MyAccount" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="7"/>
                 <Button Clicked="cdmyRiders" Text="My Riders" x:Name="MyRiders" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>
                 <Button Clicked="cdmyEvents" Text="My Events N Signup" x:Name="MyEvents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>            
@@ -37,7 +37,7 @@
         <Grid Grid.Row="3">               
             <StackLayout Orientation="Vertical">   
                  <Label Text="       " Font="24" />           
-                 <Label Text="Create Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/>            
+                 <Label x:Name="cdCreateData" Text="Create Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/>            
                  <Button Clicked="cdCreateclub" Text="Create New Club" x:Name="CreateClub" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="9"/>
                  <Button Clicked="cdCreateStudents" Text="Register Students" x:Name="RegisterStudents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="10"/>
                  <Button Clicked="cdCreateEvents" Text="Create Events" x:Name="CreateEvents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="11"/>

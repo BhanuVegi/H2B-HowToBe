@@ -118,7 +118,7 @@ namespace myClubDriveMaster
             }
             if (logAccount.Role.Contains("P"))
             {
-                System.Diagnostics.Debug.WriteLine("Enable Driver..");
+                System.Diagnostics.Debug.WriteLine("Enable Parent..");
                 ParentPage.IsEnabled = true;
                 RegisterStudents.IsEnabled = true;
             }
@@ -129,8 +129,17 @@ namespace myClubDriveMaster
             }
             if (logAccount.Role.Contains("R"))
             {
-                System.Diagnostics.Debug.WriteLine("Enable Driver..");
+                System.Diagnostics.Debug.WriteLine("Enable Rider..");
                 RiderPage.IsEnabled = true;
+                RegisterStudents.IsVisible = false;
+                CreateClub.IsVisible = false;
+                CreateEvents.IsVisible = false;
+                cdCreateData.Text = " ";
+                cdMyData.Text = " ";
+                ParentPage.IsVisible = false;
+                DriverPage.IsVisible = false;
+                AdminPage.IsVisible = false;
+
             }
             else
             {

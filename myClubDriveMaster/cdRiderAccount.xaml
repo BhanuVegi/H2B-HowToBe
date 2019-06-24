@@ -3,45 +3,34 @@
     <ContentPage.Content>
       <Grid BackgroundColor="Transparent"> 
         <Grid.RowDefinitions>
+            <RowDefinition Height="600" />
             <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">   
-               <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                  <Label Text="       " Font="32" />  
-                  <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-               </StackLayout>   
-        </Grid>
-       <Grid Grid.Row="1">   
-        <Grid.RowDefinitions>
-            <RowDefinition Height="500" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-           <StackLayout> 
-            <Label x:Name="createStatus" Text="       " Font="32" />         
-            <Entry Grid.Row="1" x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#bababa" FontSize="16" />
-            <Entry Grid.Row="2" x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true" />
-            <Entry Grid.Row="3" x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true"/>
-            <Entry Grid.Row="4" x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="5" x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="6" x:Name="cdMiddleName" Placeholder="Middle Name" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="7" x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="8" x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="9" x:Name="cdAddress2" Placeholder="Home Address Line 2" PlaceholderColor="#bababa" FontSize="16"/>   
-            <Entry Grid.Row="10" x:Name="cdCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="11" x:Name="cdState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="12" x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="13" x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#bababa" FontSize="16"/>
-          </StackLayout>
-          <Grid Grid.Row="2">       
-          <StackLayout> 
-            <Button Grid.Row="14" Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" /> 
-            <Label Text="       " Font="16" />             
-            <Button Grid.Row="15" Text="Home Page" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
-          </StackLayout>  
-          </Grid>          
-     </Grid>
+           <Grid Grid.Row="0">
+               <StackLayout Orientation="Vertical"> 
+                <Label x:Name="createStatus" Text="       " Font="32" />         
+                <Entry x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#bababa" FontSize="16" />
+                <Entry x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true" />
+                <Entry x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true"/>
+                <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#bababa" FontSize="16"/>
+                <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#bababa" FontSize="16"/>
+                <Entry x:Name="cdMiddleName" Placeholder="Middle Name" PlaceholderColor="#bababa" FontSize="16"/>
+                <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#bababa" FontSize="16"/>
+                <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#bababa" FontSize="16"/> 
+                <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16"/>
+                <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16"/>
+                <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16"/>
+                <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#bababa" FontSize="16"/>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1">
+              <StackLayout Orientation="Vertical"> 
+                <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Text="Associate Clubs" Clicked="cdAClub" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>              
+                <Button Text="Home Page" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/> 
+              </StackLayout>  
+            </Grid>          
+
     </Grid>    
     </ContentPage.Content>
 </ContentPage>
