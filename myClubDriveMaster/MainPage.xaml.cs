@@ -85,6 +85,9 @@ namespace myClubDriveMaster
         public MainPage()
         {
             InitializeComponent();
+            App.getAPIURLs = "NewTestValue";
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var myParamResp = mycallAPI.cdSetParameters("Stage");
         }
     }
 }

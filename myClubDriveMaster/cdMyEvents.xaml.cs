@@ -13,6 +13,8 @@ namespace myClubDriveMaster
         String myClubName = " ";
         String myEventID = " ";
         String myEventName = " ";
+        String myEventAddress = " ";
+        String myClubID = "";
         int maxarray = -1;
         int counter = 0;
         int eventcounter = 0;
@@ -21,14 +23,14 @@ namespace myClubDriveMaster
 
         async void cdHome(object sender, System.EventArgs e)
         {
-            var tpage = new cdAssignEventMembers(myAccount,myClubName,myEventID,myEventName);
+            var tpage = new cdHome(myAccount);
             await Navigation.PushModalAsync(tpage);
         }
 
         async void cdRiders(object sender, System.EventArgs e)
         {
 
-            var tpage = new cdHome(myAccount);
+            var tpage = new cdAssignEventMembers(myAccount,myClubID ,myClubName, myEventID, myEventName,myEventAddress);
             await Navigation.PushModalAsync(tpage);
         }
 
@@ -77,8 +79,10 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Previous Button");
             counter = counter - 1;
             myClubName = assignedEvents[counter].Attr3;
+            myClubID = assignedEvents[counter].ClubID;
             myEventID = assignedEvents[counter].EventID;
             myEventName = assignedEvents[counter].EventName;
+            myEventAddress = assignedEvents[counter].AddressLine1 + " " + assignedEvents[counter].AddressLine2 + " ," + assignedEvents[counter].City + " ," + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
             EventName.Text = "Event Name: " + assignedEvents[counter].EventName;
             EventID.Text = "Clud ID: " + assignedEvents[counter].EventID;
             EventAddress.Text = assignedEvents[counter].AddressLine1;
@@ -127,8 +131,10 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
             counter = counter + 1;
             myClubName = assignedEvents[counter].Attr3;
+            myClubID = assignedEvents[counter].ClubID;
             myEventID = assignedEvents[counter].EventID;
             myEventName = assignedEvents[counter].EventName;
+            myEventAddress = assignedEvents[counter].AddressLine1 + " " + assignedEvents[counter].AddressLine2 + " ," + assignedEvents[counter].City + " ," + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
             EventName.Text = "Event Name: " + assignedEvents[counter].EventName;
             EventID.Text = "Clud ID: " + assignedEvents[counter].EventID;
             EventAddress.Text = assignedEvents[counter].AddressLine1;
@@ -242,8 +248,10 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine("Populating global strings ");
 
             myClubName = assignedEvents[0].ClubName;
+            myClubID = assignedEvents[0].ClubID;
             myEventID = assignedEvents[0].EventID;
             myEventName = assignedEvents[0].EventName;
+            myEventAddress = assignedEvents[0].AddressLine1 + " " + assignedEvents[0].AddressLine2+" ,"+ assignedEvents[0].City+" ,"+ assignedEvents[0].cdState+" "+ assignedEvents[0].PostalCode;
 
             System.Diagnostics.Debug.WriteLine("Populating event fields ");
 

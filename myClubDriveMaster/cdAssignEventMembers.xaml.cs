@@ -15,14 +15,88 @@ namespace myClubDriveMaster
         String pClubID = "";
         String pEventAddress = "";
         int maxarray = -1;
-        string[,] stmap = new string[10, 10];
+        int counter = 0;
+        getAccounts myStudentArray = new getAccounts();
 
         async void cdHome(object sender, System.EventArgs e)
         {
             var tpage = new cdHome(myAccount);
             await Navigation.PushModalAsync(tpage);
         }
+        void cdNext(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
+            counter = counter + 1;
+            cdSignupRider.IsChecked = true;
+            UserName.Text = "User Name: " + myStudentArray.Account[counter].FirstName + " " + myStudentArray.Account[counter].LastName;
+            cdEmail.Text = "Email Address: " + myStudentArray.Account[counter].EmailAddress;
+            cdFirstName.Text = "First Name: " + myStudentArray.Account[counter].FirstName;
+            cdMiddleName.Text = "Middle Name: " + myStudentArray.Account[counter].MiddleName;
+            cdLastName.Text = "Last Name: " + myStudentArray.Account[counter].LastName;
 
+            if (counter >= maxarray)
+            {
+                NextButton.IsEnabled = false;
+                if (counter != 0)
+                {
+                    PreviousButton.IsEnabled = true;
+                }
+                else
+                {
+                    PreviousButton.IsEnabled = false;
+                }
+            }
+            else
+            {
+                NextButton.IsEnabled = true;
+                if (counter != 0)
+                {
+                    PreviousButton.IsEnabled = true;
+                }
+                else
+                {
+                    PreviousButton.IsEnabled = false;
+                }
+            }
+        }
+
+        void cdPervious(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Previous Button");
+            counter = counter - 1;
+            cdSignupRider.IsChecked = true;
+            UserName.Text = "User Name: " + myStudentArray.Account[counter].FirstName + " " + myStudentArray.Account[counter].LastName;
+            cdEmail.Text = "Email Address: " + myStudentArray.Account[counter].EmailAddress;
+            cdFirstName.Text = "First Name: " + myStudentArray.Account[counter].FirstName;
+            cdMiddleName.Text = "Middle Name: " + myStudentArray.Account[counter].MiddleName;
+            cdLastName.Text = "Last Name: " + myStudentArray.Account[counter].LastName;
+
+            if (counter == 0)
+            {
+                PreviousButton.IsEnabled = false;
+                if (counter < maxarray)
+                {
+                    NextButton.IsEnabled = true;
+                }
+                else
+                {
+                    NextButton.IsEnabled = false;
+                }
+            }
+            else
+            {
+                PreviousButton.IsEnabled = true;
+                if (counter < maxarray)
+                {
+                    NextButton.IsEnabled = true;
+                }
+                else
+                {
+                    NextButton.IsEnabled = false;
+                }
+            }
+
+        }
         async void ieventmem(cdEventSignups iEveSign)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -30,121 +104,45 @@ namespace myClubDriveMaster
             var jsresponse = await mycallAPI.cdcallEventsMemberPUT(iEveSign);
             if (jsresponse.ToString().Contains("ValidationException"))
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                System.Diagnostics.Debug.WriteLine(" Put API Call failed " + jsresponse);
                 myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                insertMessage.Text = "Update Failed. " + myerror.message;
+                await DisplayAlert("Event Signup Failed", jsresponse.ToString(), "ok");
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                insertMessage.Text = "Update Successful";
+                System.Diagnostics.Debug.WriteLine(" Put API Call Successful");
+                await DisplayAlert("Event Signup Successful", "Event Signup Successful", "ok");
             }
         }
 
         void cdSubmit(object sender, System.EventArgs e)
         {
         
-            cdEventSignups insertEventMembers = new cdEventSignups();
-            insertEventMembers.EventID = pEventID;
-            insertEventMembers.EventName = pEventName;
-            insertEventMembers.ClubName = pClubName;
-            insertEventMembers.ClubID = pClubID;
-            insertEventMembers.PickupLocation = pEventAddress;
-            insertEventMembers.Attr1 = "None";
-            insertEventMembers.Attr2 = "None";
-            insertEventMembers.Attr3 = "None";
-            insertEventMembers.Attr4 = "None";
-            insertEventMembers.Attr5 = "None";
-            insertEventMembers.Attr6 = "None";
-            insertEventMembers.Attr7 = "None";
-            insertEventMembers.Attr8 = "None";
-            insertEventMembers.Attr9 = "None";
-            insertEventMembers.Attr10 = "None";
-
-
-            for (int li=0; li <= maxarray; li++)
+            if (cdSignupRider.IsChecked == true) 
             { 
-                if ( li == 0  & cdCheckStd1.IsChecked == true) 
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd1.Key,1]+ pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd1.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd1.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 1 & cdCheckStd2.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd2.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd2.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd2.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 2 & cdCheckStd3.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd3.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd3.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd3.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 3 & cdCheckStd4.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd4.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd4.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd4.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 4 & cdCheckStd5.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd5.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd5.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd5.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 5 & cdCheckStd6.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd6.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd6.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd6.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 6 & cdCheckStd7.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd7.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd7.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd7.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 7 & cdCheckStd8.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd8.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd8.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd8.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 8 & cdCheckStd9.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd9.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd9.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd9.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
-                if (li == 9 & cdCheckStd10.IsChecked == true)
-                {
-                    insertEventMembers.EventMemberID = stmap[cdCheckStd10.Key, 1] + pClubName.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    insertEventMembers.MemberName = stmap[cdCheckStd10.Key, 0];
-                    insertEventMembers.MemberAccountID = stmap[cdCheckStd10.Key, 1];
-                    insertEventMembers.MemberRole = "R";
-                    ieventmem(insertEventMembers);
-                }
+                cdEventSignups insertEventMembers = new cdEventSignups();
+                insertEventMembers.EventID = pEventID;
+                insertEventMembers.EventName = pEventName;
+                insertEventMembers.ClubName = pClubName;
+                insertEventMembers.ClubID = pClubID;
+                insertEventMembers.PickupLocation = pEventAddress;
+                insertEventMembers.Attr1 = "None";
+                insertEventMembers.Attr2 = "None";
+                insertEventMembers.Attr3 = "None";
+                insertEventMembers.Attr4 = "None";
+                insertEventMembers.Attr5 = "None";
+                insertEventMembers.Attr6 = "None";
+                insertEventMembers.Attr7 = "None";
+                insertEventMembers.Attr8 = "None";
+                insertEventMembers.Attr9 = "None";
+                insertEventMembers.Attr10 = "None";
+                insertEventMembers.EventMemberID = myStudentArray.Account[counter].UserName+ pClubName.Substring(0, 3)+ pEventName.Substring(0,3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                insertEventMembers.MemberName = myStudentArray.Account[counter].FirstName + " " + myStudentArray.Account[counter].LastName;
+                insertEventMembers.MemberAccountID = myStudentArray.Account[counter].UserName;
+                insertEventMembers.MemberRole = "R";
+                ieventmem(insertEventMembers);
             }
+
         }
 
         async void getStudentInfo(Account logAccount)
@@ -155,7 +153,6 @@ namespace myClubDriveMaster
             qryAcct.ColName = "ParentID";
             qryAcct.ColValue = logAccount.UserName;
 
-            getAccounts myStudentArray = new getAccounts();
             cdCallAPI mycallAPI = new cdCallAPI();
 
             var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
@@ -166,117 +163,13 @@ namespace myClubDriveMaster
                 foreach (var stacc in myStudentArray.Account)
                 {
                     maxarray = maxarray + 1;
-                    if (maxarray == 0 )
-                    {
-                        cdCheckStd1.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[0,0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[0, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 0;
-                    }
-                    else if ( maxarray == 1)
-                    {
-                        cdCheckStd2.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[1, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[1, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 1;
-                    }
-                    else if (maxarray == 2)
-                    {
-                        cdCheckStd3.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[2, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[2, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 2;
-                    }
-                    else if (maxarray == 3)
-                    {
-                        cdCheckStd4.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[3, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[3, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 3;
-                    }
-                    else if (maxarray == 4)
-                    {
-                        cdCheckStd5.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[4, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[4, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 4;
-                    }
-                    else if (maxarray == 5)
-                    {
-                        cdCheckStd6.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[5, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[5, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 5;
-                    }
-                    else if (maxarray == 6)
-                    {
-                        cdCheckStd7.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[6, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[6, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 6;
-                    }
-                    else if (maxarray == 7)
-                    {
-                        cdCheckStd8.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[7, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[7, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 7;
-                    }
-                    else if (maxarray == 8)
-                    {
-                        cdCheckStd9.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[8, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[8, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 8;
-                    }
-                    else if (maxarray == 9)
-                    {
-                        cdCheckStd10.Text = stacc.FirstName + " " + stacc.LastName;
-                        stmap[9, 0] = stacc.FirstName + " " + stacc.LastName;
-                        stmap[9, 1] = stacc.UserName;
-                        cdCheckStd1.Key = 9;
-                    }
                 }
-                
-                for (int tic=10; tic > maxarray; tic--)
-                {
-                    if(tic == 10)
-                    {
-                        cdCheckStd10.IsVisible = false;
-                    }
-                    if (tic == 9)
-                    {
-                        cdCheckStd9.IsVisible = false;
-                    }
-                    if (tic == 8)
-                    {
-                        cdCheckStd8.IsVisible = false;
-                    }
-                    if (tic == 7)
-                    {
-                        cdCheckStd7.IsVisible = false;
-                    }
-                    if (tic == 6)
-                    {
-                        cdCheckStd6.IsVisible = false;
-                    }
-                    if (tic == 5)
-                    {
-                        cdCheckStd5.IsVisible = false;
-                    }
-                    if (tic == 4)
-                    {
-                        cdCheckStd4.IsVisible = false;
-                    }
-                    if (tic == 3)
-                    {
-                        cdCheckStd3.IsVisible = false;
-                    }
-                    if (tic == 2)
-                    {
-                        cdCheckStd2.IsVisible = false;
-                    }
-                }
+                UserName.Text = "User Name: " + myStudentArray.Account[0].FirstName + " " + myStudentArray.Account[0].LastName;
+                cdEmail.Text = "Email Address: " + myStudentArray.Account[0].EmailAddress;
+                cdFirstName.Text = "First Name: " + myStudentArray.Account[0].FirstName;
+                cdMiddleName.Text = "Middle Name: " + myStudentArray.Account[0].MiddleName;
+                cdLastName.Text = "Last Name: " + myStudentArray.Account[0].LastName;
+                cdSignupRider.IsChecked = true;
 
             }
             catch (Exception ex)
@@ -286,16 +179,29 @@ namespace myClubDriveMaster
 
             System.Diagnostics.Debug.WriteLine(" Max Array is " + maxarray);
 
+            if (counter == maxarray)
+            {
+                PreviousButton.IsEnabled = false;
+                NextButton.IsEnabled = false;
+            }
+            else
+            {
+                PreviousButton.IsEnabled = false;
+                NextButton.IsEnabled = true;
+            }
+
+
         }
 
-        public cdAssignEventMembers(Account loginAccount, String ClubName, String EventID, String EventName)
+        public cdAssignEventMembers(Account loginAccount, String ClubID,String ClubName, String EventID, String EventName, String EventAddress)
         {
             InitializeComponent();
             myAccount = loginAccount;
             pClubName = ClubName;
             pEventID = EventID;
             pEventName = EventName;
-
+            pEventAddress = EventAddress;
+            pClubID = ClubID;
 
             if ( loginAccount.Role.Contains("P") == true )
             {
@@ -304,16 +210,12 @@ namespace myClubDriveMaster
             else
             {
                 System.Diagnostics.Debug.WriteLine(" Just use the student key ");
-                cdCheckStd1.Text = loginAccount.FirstName + " " + loginAccount.LastName;
-                cdCheckStd2.IsVisible = false;
-                cdCheckStd3.IsVisible = false;
-                cdCheckStd4.IsVisible = false;
-                cdCheckStd5.IsVisible = false;
-                cdCheckStd6.IsVisible = false;
-                cdCheckStd7.IsVisible = false;
-                cdCheckStd8.IsVisible = false;
-                cdCheckStd9.IsVisible = false;
-                cdCheckStd10.IsVisible = false;
+                cdSignupRider.IsChecked = true;
+                UserName.Text = "User Name: "+loginAccount.FirstName + " " + loginAccount.LastName;
+                cdEmail.Text = "Email Address: "+loginAccount.EmailAddress;
+                cdFirstName.Text = "First Name: "+loginAccount.FirstName;
+                cdMiddleName.Text = "Middle Name: "+loginAccount.MiddleName;
+                cdLastName.Text = "Last Name: "+loginAccount.LastName;
             }
 
         }

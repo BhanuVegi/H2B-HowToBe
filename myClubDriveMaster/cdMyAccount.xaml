@@ -6,7 +6,8 @@
        <Grid BackgroundColor="Transparent"> 
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="600" />
+            <RowDefinition Height="70" />
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">   
@@ -15,33 +16,29 @@
                   <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
                </StackLayout>
         </Grid>
-       <Grid Grid.Row="1">   
-        <Grid.RowDefinitions>
-            <RowDefinition Height="500" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-           <StackLayout> 
+       <Grid Grid.Row="1">
+           <StackLayout Orientation="Vertical"> 
             <Label x:Name="updateStatus" Text="       " Font="32" />         
-            <Label Grid.Row="1" x:Name="cdUserName" Text="User Name" TextColor="Black" FontAttributes="Bold" FontSize="16" />
-            <Entry Grid.Row="4" x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="5" x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="7" x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="8" x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#bababa" FontSize="16"/>  
-            <Entry Grid.Row="9" x:Name="cdCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="10" x:Name="cdState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="11" x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry Grid.Row="12" x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#bababa" FontSize="16"/>
+            <Label x:Name="cdUserName" Text="User Name" TextColor="Black" FontAttributes="Bold" FontSize="16" />
+            <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#bababa" FontSize="16"/>
+            <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#bababa" FontSize="16"/>
+            <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#bababa" FontSize="16"/>
+            <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#bababa" FontSize="16"/>  
+            <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16"/>
+            <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16"/>
+            <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16"/>
+            <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#bababa" FontSize="16"/>
             <input:CheckBox x:Name="cdCheckAdmin" Grid.Row="13" Text="Admin" Type="Check"/>
           </StackLayout>
           <Grid Grid.Row="2">       
           <StackLayout> 
-            <Button Grid.Row="14" Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />            
+            <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />            
           </StackLayout>  
           </Grid>
           <Grid Grid.Row="3">       
           <StackLayout> 
-            <Label Text="       " Font="32" />  
-            <Button Grid.Row="15" Text="Main Menu" Clicked="cdMainPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
+            <Label Text="       " Font="16" />  
+            <Button Text="Main Menu" Clicked="cdMainPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
           </StackLayout>  
           </Grid>         
      </Grid>

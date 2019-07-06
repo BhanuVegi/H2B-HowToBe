@@ -36,7 +36,9 @@ namespace myClubDriveMaster
             {
                     var crresponse = associateClub();
 
-                    if (crresponse.ToString() == "success")
+                System.Diagnostics.Debug.WriteLine(" Response is  "+ crresponse.ToString());
+
+                if (crresponse.ToString() == "success")
                     {
                         await DisplayAlert("Action", "Club Association Successful", "Ok");
                         clubAccociated = 1;
@@ -59,8 +61,10 @@ namespace myClubDriveMaster
         async void cdSubmit(object sender, System.EventArgs e)
         {
 
-                var crresponse = associateClub();
+                var crresponse = await associateClub();
 
+                System.Diagnostics.Debug.WriteLine(" Response is  " + crresponse.ToString());
+                
                 if (crresponse.ToString() == "success")
                 {
                    await DisplayAlert("Action", "Club Association Succesful", "Ok");
@@ -135,24 +139,28 @@ namespace myClubDriveMaster
         {
             if ( loginAccount.UserName == studentAccount.UserName)
             {
-                var getResponse = await createClubMembers(studentAccount, myClub, "R");
-                if (getResponse.ToString().Contains("success"))
+                System.Diagnostics.Debug.WriteLine(" Login and Parent account are same ");
+                var getResponse = await createClubMembers(studentAccount, myClub, "DP", "Parent");
+                System.Diagnostics.Debug.WriteLine(" Do we have an exception? "+ !getResponse.ToString().Contains("Exception"));
+                if ( !getResponse.ToString().Contains("Exception"))
                 {
+                    System.Diagnostics.Debug.WriteLine(" Returning Success");
                     return "success";
                 }
                 else
                 {
+                    System.Diagnostics.Debug.WriteLine(" Returning Failure");
                     return "failed";
                 }
             }
             else
             { 
-                var getResponse = await createClubMembers(studentAccount, myClub, "R");
+                var getResponse = await createClubMembers(studentAccount, myClub, "R",studentAccount.ParentID);
                 if ( !getResponse.ToString().Contains("Exception") )
                 {
                     try 
                     { 
-                        getResponse = await createClubMembers(loginAccount, myClub, "DP");
+                        getResponse = await createClubMembers(loginAccount, myClub, "DP","Parent");
                     }
                     catch (Exception ex)
                     {
@@ -167,7 +175,7 @@ namespace myClubDriveMaster
             }
         }
 
-        private async Task<JToken> createClubMembers(Account regAccount, Club regClub, String assignRole)
+        private async Task<JToken> createClubMembers(Account regAccount, Club regClub, String assignRole, string parentID)
         {
             cdReadError myerror = new cdReadError();
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -178,7 +186,7 @@ namespace myClubDriveMaster
             myclubmembership.ClubName = regClub.ClubName;
             myclubmembership.MemberName = regAccount.FirstName + " " + regAccount.LastName;
             myclubmembership.MemberRole = assignRole;
-            myclubmembership.Attr1 = "NA";
+            myclubmembership.Attr1 = parentID;
             myclubmembership.Attr2 = "NA";
             myclubmembership.Attr3 = "NA";
             myclubmembership.Attr4 = "NA";

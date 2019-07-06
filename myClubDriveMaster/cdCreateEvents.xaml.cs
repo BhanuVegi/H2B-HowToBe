@@ -41,20 +41,27 @@ namespace myClubDriveMaster
                 thisEvent.City = City.Text;
                 thisEvent.cdState = myState.Text;
                 thisEvent.PostalCode = PostalCode.Text;
-                thisEvent.EventID = EventName.Text.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                if (thisEvent.AddressLine2 == null)
+                thisEvent.EventID = EventName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                if (EventAddress2.Text == null)
                 {
                     thisEvent.AddressLine2 = "None";
                 }
+                else 
+                {
+                    thisEvent.AddressLine2 = EventAddress2.Text;
+                }
+
                 thisEvent.AddressLine3 = "NA";
                 thisEvent.Notes = cdNotes.Text;
                 thisEvent.ClubAdmin = myAccount.UserName;
                 String[] mysa = new string[2];
                 char[] mysep = "|".ToCharArray();
                 mysa = picker.SelectedItem.ToString().Split(mysep);
+                System.Diagnostics.Debug.WriteLine(" Club Name "+ mysa[0]+" Club ID "+ mysa[1]);
                 thisEvent.ClubName = mysa[0];
                 thisEvent.ClubID = mysa[1];
                 thisEvent.EventDate = myEventDate;
+                thisEvent.PhoneNumber = "0000000000";
                 thisEvent.Attr1 = "NA";
                 thisEvent.Attr2 = "NA";
                 thisEvent.Attr3 = "NA";
@@ -66,13 +73,28 @@ namespace myClubDriveMaster
                 thisEvent.Attr9 = "NA";
                 thisEvent.Attr10 = "NA";
 
-                var jsresponse = await mycallAPI.cdcallEventsPUT(thisEvent);
+                try 
+                { 
+                    var jsresponse = await mycallAPI.cdcallEventsPUT(thisEvent);
 
-                if (jsresponse.ToString().Contains("ValidationException"))
+                    System.Diagnostics.Debug.WriteLine(" Response received is " + jsresponse);
+
+                    if (jsresponse.ToString().Contains("ValidationException"))
+                    {
+                        System.Diagnostics.Debug.WriteLine(" Event creation call failed " + jsresponse);
+                        var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                        createStatus.Text = "Event Creation Failed. " + myerror.message;
+                    }
+
+                    await DisplayAlert("Event creation Successful", "Event creation Successful" , "ok");
+                    var tpage = new cdHome(myAccount);
+                    await Navigation.PushModalAsync(tpage);
+
+                }
+                catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine(" Event creation call failed " + jsresponse);
-                    var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                    createStatus.Text = "Event Creation Failed. " + myerror.message;
+                    System.Diagnostics.Debug.WriteLine(" Exception is " + ex);
+                    await DisplayAlert("Event creation failed", ex.ToString(), "ok");
                 }
             }
 
@@ -103,7 +125,7 @@ namespace myClubDriveMaster
                     maxarray = maxarray + 1;
                     if (myClubMembers.ClubMember[maxarray].MemberRole.Contains("A") == true)
                     { 
-                        picker.Items.Add(myClubMembers.ClubMember[maxarray].ClubName + " ***"+ myClubMembers.ClubMember[maxarray].ClubID);
+                        picker.Items.Add(myClubMembers.ClubMember[maxarray].ClubName + "|"+ myClubMembers.ClubMember[maxarray].ClubID);
                     }
                 }
             }

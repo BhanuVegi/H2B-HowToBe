@@ -22,14 +22,155 @@ namespace myClubDriveMaster
         public String sdTrackLoc = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
         public String sdTrackLocGet = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage//schooldrive/TripID";
         public String cdClubAPIGet = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-        public String cdClubAPI = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage";
+        public String cdClubAPI = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
         public String cdClubMemberAPIGet = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
         public String cdClubMemberAPI = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
         public String cdEventAPIGet = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-        public String cdEventAPI = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage";
-        public String cdEventRegAPIGet = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/ClubID";
-        public String cdEventRegAPI = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage";
+        public String cdEventAPI = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+        public String cdEventRegAPIGet = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
+        public String cdEventRegAPI = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
 
+        // Function to set global parameters
+        public async Task<JToken> cdSetParameters(String currInstance)
+        {
+            String callingapiurl = "https://jc7b5uxmj0.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+            var uri = new Uri(callingapiurl);
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("IndexName", "IndexName");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("ColIndex", "InstanceIndex");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("ColName", "Instance");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Instance", currInstance);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", "H611aknuHz2MW0PmZYyk8akWrmBdqoAz4qY2fD0j");
+
+            var response = await client.GetAsync(uri);
+
+            var responseJSON = await response.Content.ReadAsStringAsync();
+
+            // System.Diagnostics.Debug.WriteLine(" Response received is ");
+            // System.Diagnostics.Debug.WriteLine(responseJSON);
+
+            if (response.IsSuccessStatusCode)
+            {
+                System.Diagnostics.Debug.WriteLine(" Get Parameters API Call Successful");
+
+                getParameters reqParameters = new getParameters();
+
+                reqParameters = JsonConvert.DeserializeObject<getParameters>((string)responseJSON);
+
+                foreach (var prec in reqParameters.Parameters )
+                {
+                    if (prec.ParameterName == "cdAccountAPIGet")
+                    {
+                        App.cdAccountAPIGetGlobal = prec.EndPoint;
+                        App.cdAccountKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdAccountAPIPutPost")
+                    {
+                        App.cdAccountAPIPutPost = prec.EndPoint;
+                        App.cdAccountKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdDriverAllocURLGet")
+                    {
+                        App.cdDriverAllocURLGet = prec.EndPoint;
+                        App.cdDriverAllocationKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdDriverAllocURLPutPost")
+                    {
+                        App.cdDriverAllocURLPutPost = prec.EndPoint;
+                        App.cdDriverAllocationKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdAuthAPIURL")
+                    {
+                        App.cdAuthAPIURL = prec.EndPoint;
+                        App.cdAuthKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdTrackLocGet")
+                    {
+                        App.cdTrackLocGet = prec.EndPoint;
+                        App.cdDriverLocationKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdTrackLocPutPost")
+                    {
+                        App.cdTrackLocPutPost = prec.EndPoint;
+                        App.cdDriverLocationKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdClubAPIGet")
+                    {
+                        App.cdClubAPIGet = prec.EndPoint;
+                        App.cdClubKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdClubAPIPutPost")
+                    {
+                        App.cdClubAPIPutPost = prec.EndPoint;
+                        App.cdClubKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdClubMemberAPIGet")
+                    {
+                        App.cdClubMemberAPIGet = prec.EndPoint;
+                        App.cdClubMemberKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdClubMemberAPIPutPost")
+                    {
+                        App.cdClubMemberAPIPutPost = prec.EndPoint;
+                        App.cdClubMemberKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdEventAPIGet")
+                    {
+                        App.cdEventAPIGet = prec.EndPoint;
+                        App.cdEventKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdEventAPIPutPost")
+                    {
+                        App.cdEventAPIPutPost = prec.EndPoint;
+                        App.cdEventKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdEventRegAPIGet")
+                    {
+                        App.cdEventRegAPIGet = prec.EndPoint;
+                        App.cdEventRegKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdEventRegAPIPutPost")
+                    {
+                        App.cdEventRegAPIPutPost = prec.EndPoint;
+                        App.cdEventRegKey = prec.AccessKey;
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine("cdAccountAPIGetGlobal = " + App.cdAccountAPIGetGlobal);
+                System.Diagnostics.Debug.WriteLine("cdAccountAPIPutPost = " + App.cdAccountAPIPutPost);
+                System.Diagnostics.Debug.WriteLine("cdDriverAllocURLGet = " + App.cdDriverAllocURLGet);
+                System.Diagnostics.Debug.WriteLine("cdDriverAllocURLPutPost = " + App.cdDriverAllocURLPutPost);
+                System.Diagnostics.Debug.WriteLine("cdAuthAPIURL = " + App.cdAuthAPIURL);
+                System.Diagnostics.Debug.WriteLine("cdTrackLocPutPost = " + App.cdTrackLocPutPost);
+                System.Diagnostics.Debug.WriteLine("cdTrackLocGet = " + App.cdTrackLocGet);
+                System.Diagnostics.Debug.WriteLine("cdClubAPIGet = " + App.cdClubAPIGet);
+                System.Diagnostics.Debug.WriteLine("cdClubAPIPutPost = " + App.cdClubAPIPutPost);
+                System.Diagnostics.Debug.WriteLine("cdClubMemberAPIGet = " + App.cdClubMemberAPIGet);
+                System.Diagnostics.Debug.WriteLine("cdClubMemberAPIPutPost = " + App.cdClubMemberAPIPutPost);
+                System.Diagnostics.Debug.WriteLine("cdEventAPIGet = " + App.cdEventAPIGet);
+                System.Diagnostics.Debug.WriteLine("cdEventAPIPutPost = " + App.cdEventAPIPutPost);
+                System.Diagnostics.Debug.WriteLine("cdEventRegAPIGet = " + App.cdEventRegAPIGet);
+                System.Diagnostics.Debug.WriteLine("cdEventRegAPIPutPost = " + App.cdEventRegAPIPutPost);
+                System.Diagnostics.Debug.WriteLine("cdAccountKey = " + App.cdAccountKey);
+                System.Diagnostics.Debug.WriteLine("cdAuthKey = " + App.cdAuthKey);
+                System.Diagnostics.Debug.WriteLine("cdClubKey = " + App.cdClubKey);
+                System.Diagnostics.Debug.WriteLine("cdClubMemberKey = " + App.cdClubMemberKey);
+                System.Diagnostics.Debug.WriteLine("cdDriverAllocationKey = " + App.cdDriverAllocationKey);
+                System.Diagnostics.Debug.WriteLine("cdDriverLocationKey = " + App.cdDriverLocationKey);
+                System.Diagnostics.Debug.WriteLine("cdEventKey = " + App.cdEventKey);
+                System.Diagnostics.Debug.WriteLine("cdEventRegKey = " + App.cdEventRegKey);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine(" Get API Call failed " + response.ReasonPhrase);
+            }
+
+            return "Success";
+
+        }
+
+        // Function to get Accounts
         public async Task<JToken> cdcallAccountsGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -37,6 +178,7 @@ namespace myClubDriveMaster
             return getLocations;
 
         }
+
         public async Task<JToken> cdcallEventsGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -160,6 +302,13 @@ namespace myClubDriveMaster
             myLoginObject.password = password;
             cdCallAPI mycallAPI = new cdCallAPI();
             var response = await mycallAPI.cdCallPostAPI(sdAuthAPIURL, myLoginObject);
+            return response;
+        }
+
+        public async Task<JToken> cdCreateSignup(signupAccount mysignupAccount)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPutAPI(sdAuthAPIURL, mysignupAccount);
             return response;
         }
 

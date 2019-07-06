@@ -138,7 +138,7 @@ namespace myClubDriveMaster
             cdState.Text = regAccount.cdState;
             cdPostalCode.Text = regAccount.PostalCode;
             cdPhone.Text = regAccount.Phone;
-            if (regAccount.Role.Contains("D"))
+            if (regAccount.Role.Contains("A"))
             {
                 System.Diagnostics.Debug.WriteLine("Populate Admin..");
                 cdCheckAdmin.IsChecked = true;

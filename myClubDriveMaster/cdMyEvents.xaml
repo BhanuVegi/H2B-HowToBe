@@ -26,7 +26,7 @@
             </Grid>
             <Grid Grid.Row="1">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Start" >
-                    <input:CheckBox x:Name="cdAddAll"  Text="ADD ALL REGISTERED MEMBERS" Type="Check" />
+                    <input:CheckBox x:Name="cdAddAll"  Text="ADD ALL REGISTERED CLUB MEMBERS" Type="Check" />
                     <input:CheckBox x:Name="cdCheckRider" Text="CAN YOU DRIVE TO THE EVENT" Type="Check"/>
                      <Label Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 </StackLayout>     
@@ -40,7 +40,7 @@
             </Grid>
             <Grid Grid.Row="3">        
                 <StackLayout Orientation="Vertical" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                    <Button Clicked="cdRiders" Text="Add Riders" x:Name="AddStudents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                    <Button Clicked="cdRiders" Text="Signup Club Members" x:Name="AddStudents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
                     <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
                     <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
                     <Button Clicked="cdSubmit" Text="Submit" x:Name="DriveButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30"  VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />

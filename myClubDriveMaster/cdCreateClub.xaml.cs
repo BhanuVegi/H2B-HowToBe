@@ -9,6 +9,7 @@ namespace myClubDriveMaster
     public partial class cdCreateClub : ContentPage
     {
         Account myAccount = new Account();
+        String myclubCreated = "";
 
         async void cdHome(object sender, System.EventArgs e)
         {
@@ -33,7 +34,8 @@ namespace myClubDriveMaster
                 thisClub.City = City.Text;
                 thisClub.cdState = myState.Text;
                 thisClub.PostalCode = PostalCode.Text;
-                thisClub.ClubID = ClubName.Text.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                thisClub.ClubID = ClubName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                myclubCreated = thisClub.ClubID;
                 if (thisClub.AddressLine2 == null )
                 {
                     thisClub.AddressLine2 = "None";
@@ -62,8 +64,8 @@ namespace myClubDriveMaster
                 else
                 {
                     ClubMembers myclubmembership = new ClubMembers();
-                    myclubmembership.ClubMemberID = myAccount.UserName + ClubName.Text.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    myclubmembership.ClubID = ClubName.Text.Substring(1, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                    myclubmembership.ClubMemberID = myAccount.UserName + ClubName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                    myclubmembership.ClubID = myclubCreated;
                     myclubmembership.MemberAccountID = myAccount.UserName;
                     myclubmembership.ClubName = ClubName.Text;
                     myclubmembership.MemberName = myAccount.FirstName + " " + myAccount.LastName;

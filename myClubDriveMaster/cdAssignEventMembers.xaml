@@ -3,32 +3,35 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              BackgroundImage="ClubDrive.png">
     <ContentPage.Content>
-          <Grid BackgroundColor="Transparent">
-          <Grid.RowDefinitions>
-                <RowDefinition Height="500" />
-                <RowDefinition Height="70" />     
-          </Grid.RowDefinitions>  
-              <Grid Grid.Row="0">
-                <StackLayout x:Name="signupStack" Orientation="Vertical"> 
-                    <Label x:Name="insertMessage" HorizontalOptions="Center" TextColor="#485992" FontSize="16"/>
-                    <input:CheckBox x:Name="cdCheckStd1" Grid.Row="0" Text="Std1" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd2" Grid.Row="1" Text="std2" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd3" Grid.Row="2" Text="std3" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd4" Grid.Row="3" Text="std4" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd5" Grid.Row="0" Text="Std1" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd6" Grid.Row="1" Text="std2" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd7" Grid.Row="2" Text="std3" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd8" Grid.Row="3" Text="std4" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd9" Grid.Row="0" Text="Std1" Type="Check"/>
-                    <input:CheckBox x:Name="cdCheckStd10" Grid.Row="1" Text="std2" Type="Check"/>
-                </StackLayout>
-               </Grid>
-              <Grid Grid.Row="0">
-                <StackLayout x:Name="buttonStack" Orientation="Vertical"> 
-                <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                <Button Text="Home" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />                    
-                </StackLayout>
-               </Grid>               
-          </Grid>
+      <Grid BackgroundColor="Transparent"> 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="550" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+       <Grid Grid.Row="0">   
+           <StackLayout Orientation="Vertical" > 
+            <Label x:Name="updateStatus" Text="       " Font="32" />         
+            <Label x:Name="UserName" Text="User Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+            <Label x:Name="cdEmail" Text="Email: " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+            <Label x:Name="cdFirstName" Text="First Name" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+            <Label x:Name="cdMiddleName" Text="Middle Name" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+            <Label x:Name="cdLastName" Text="Last Name" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+             <input:CheckBox x:Name="cdSignupRider" Text="Rider" Type="Check"/>
+          </StackLayout>
+       </Grid>      
+       <Grid Grid.Row="1">             
+          <StackLayout>                 
+               <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="Start" Grid.Row="11"/>
+               <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="Start" Grid.Row="12"/>
+          </StackLayout>  
+       </Grid>          
+       <Grid Grid.Row="2">             
+          <StackLayout> 
+            <Button Grid.Row="13" Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />            
+            <Button Grid.Row="14" Text="Home Page" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
+          </StackLayout>  
+       </Grid>
+    </Grid>  
     </ContentPage.Content>
 </ContentPage>
