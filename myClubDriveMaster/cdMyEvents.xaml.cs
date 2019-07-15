@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace myClubDriveMaster
 {
@@ -10,6 +12,7 @@ namespace myClubDriveMaster
         Account myAccount = new Account();
         getEvents myEvents = new getEvents();
         List<cdEvents> assignedEvents = new List<cdEvents>();
+        String returnError = "NA";
         String myClubName = " ";
         String myEventID = " ";
         String myEventName = " ";
@@ -29,7 +32,10 @@ namespace myClubDriveMaster
 
         async void cdRiders(object sender, System.EventArgs e)
         {
-
+            if (cdCheckRider.IsChecked == true)
+            {
+                var resp = await createEventSignups("Self");
+            }
             var tpage = new cdAssignEventMembers(myAccount,myClubID ,myClubName, myEventID, myEventName,myEventAddress);
             await Navigation.PushModalAsync(tpage);
         }
@@ -41,35 +47,181 @@ namespace myClubDriveMaster
 
         }
 
-        async void cdSubmit(object sender, System.EventArgs e)
+        async Task<JToken> createEventSignups(String fwho)
         {
-            cdReadError myerror = new cdReadError();
-            cdUpdateEvent updateAddress = new cdUpdateEvent();
-            updateAddress.EventID = assignedEvents[counter].EventID;
-            updateAddress.ColumnName = "AddressLine1";
-            updateAddress.ColumnValue = EventAddress.Text;
-            updateAddress.ColumnName2 = "City";
-            updateAddress.ColumnValue2 = City.Text;
-            updateAddress.ColumnName3 = "cdState";
-            updateAddress.ColumnValue3 = myState.Text;
-            updateAddress.ColumnName4 = "PostalCode";
-            updateAddress.ColumnValue4 = PostalCode.Text;
-
-            System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
-            cdCallAPI mycallAPI = new cdCallAPI();
-            var jsresponse = await mycallAPI.cdcallEventsPOST(updateAddress);
-
-            System.Diagnostics.Debug.WriteLine(" After calling Post API ");
-            if (jsresponse.ToString().Contains("ValidationException"))
-            {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
-                myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                updateStatus.Text = "Update Failed. " + myerror.message;
+            if ( fwho == "Self")
+            { 
+                cdCallAPI mycallAPI = new cdCallAPI();
+                cdReadError myerror = new cdReadError();
+                cdEventSignups insertEventMembers = new cdEventSignups();
+                insertEventMembers.EventID = assignedEvents[counter].EventID;
+                insertEventMembers.EventName = assignedEvents[counter].EventName;
+                insertEventMembers.ClubName = assignedEvents[counter].ClubName;
+                insertEventMembers.ClubID = assignedEvents[counter].ClubID;
+                insertEventMembers.AllocationStatus = "UNALLOCATED";
+                insertEventMembers.DriverCar = CarType.Text;
+                insertEventMembers.RiderCount = CarAllowance.Text;
+                insertEventMembers.PickupLocation = assignedEvents[counter].AddressLine1+ " "+assignedEvents[counter].City + " " + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
+                insertEventMembers.Attr1 = "None";
+                insertEventMembers.Attr2 = "None";
+                insertEventMembers.Attr3 = "None";
+                insertEventMembers.Attr4 = "None";
+                insertEventMembers.Attr5 = "None";
+                insertEventMembers.Attr6 = "None";
+                insertEventMembers.Attr7 = "None";
+                insertEventMembers.Attr8 = "None";
+                insertEventMembers.Attr9 = "None";
+                insertEventMembers.Attr10 = "None";
+                insertEventMembers.EventMemberID = myAccount.UserName + assignedEvents[counter].ClubName.Substring(0, 3) + assignedEvents[counter].EventName.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                insertEventMembers.MemberName = myAccount.FirstName + " " + myAccount.LastName;
+                insertEventMembers.MemberAccountID = myAccount.UserName;
+                if (cdCheckRider.IsChecked == true)
+                { 
+                    insertEventMembers.MemberRole = "D";
+                }
+                else
+                {
+                    insertEventMembers.MemberRole = "R";
+                }
+                var jsresponse = await mycallAPI.cdcallEventsMemberPUT(insertEventMembers);
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Put API Call failed " + jsresponse);
+                    myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    await DisplayAlert("Event Signup Failed", jsresponse.ToString(), "ok");
+                    return "failed";
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" Put API Call Successful");
+                    await DisplayAlert("Event Signup Successful", "Event Signup Successful", "ok");
+                    return "success";
+                }
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                updateStatus.Text = "Update Successful";
+                cdQueryAttr qryAcct = new cdQueryAttr();
+                qryAcct.ColIndex = "IndexName";
+                qryAcct.IndexName = "ParentIDIndex";
+                qryAcct.ColName = "Attr1";
+                qryAcct.ColValue = myAccount.UserName;
+
+                System.Diagnostics.Debug.WriteLine(" Getting Students from login user");
+
+                getClubMembers myClubMembers = new getClubMembers();
+                cdCallAPI mycallAPI = new cdCallAPI();
+
+                var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
+                myClubMembers = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
+
+                System.Diagnostics.Debug.WriteLine(" Club Member payload is " + jsreponse);
+
+                try
+                {
+                    foreach (var stacc in myClubMembers.ClubMember)
+                    {
+                        cdCallAPI myscallAPI = new cdCallAPI();
+                        cdReadError myerror = new cdReadError();
+                        cdEventSignups insertEventMembers = new cdEventSignups();
+                        insertEventMembers.EventID = assignedEvents[counter].EventID;
+                        insertEventMembers.EventName = assignedEvents[counter].EventName;
+                        insertEventMembers.ClubName = assignedEvents[counter].ClubName;
+                        insertEventMembers.ClubID = assignedEvents[counter].ClubID;
+                        insertEventMembers.AllocationStatus = "UNALLOCATED";
+                        insertEventMembers.DriverCar = "NA";
+                        insertEventMembers.RiderCount = "0";
+                        insertEventMembers.PickupLocation = assignedEvents[counter].AddressLine1 + " " + assignedEvents[counter].City + " " + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
+                        insertEventMembers.Attr1 = "None";
+                        insertEventMembers.Attr2 = "None";
+                        insertEventMembers.Attr3 = "None";
+                        insertEventMembers.Attr4 = "None";
+                        insertEventMembers.Attr5 = "None";
+                        insertEventMembers.Attr6 = "None";
+                        insertEventMembers.Attr7 = "None";
+                        insertEventMembers.Attr8 = "None";
+                        insertEventMembers.Attr9 = "None";
+                        insertEventMembers.Attr10 = "None";
+                        insertEventMembers.EventMemberID = stacc.MemberAccountID +stacc.ClubName.Substring(0, 3) + assignedEvents[counter].EventName.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                        insertEventMembers.MemberName = stacc.MemberName;
+                        insertEventMembers.MemberRole = "R";
+                        var jsresponse = await myscallAPI.cdcallEventsMemberPUT(insertEventMembers);
+                        if (jsresponse.ToString().Contains("ValidationException"))
+                        {
+                            System.Diagnostics.Debug.WriteLine(" Put API Call failed " + jsresponse);
+                            myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                            returnError = returnError+" "+ stacc.MemberName;
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine(" Put API Call Successful for "+ stacc.MemberName);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("End of Clubs Loop " + ex);
+                }
+
+                System.Diagnostics.Debug.WriteLine(" Looped through all students assigned to the club ");
+                if (returnError == "NA")
+                {
+                    await DisplayAlert("Event Signup Successful", "Event Signup Successful for all members", "ok");
+                    return "success"; 
+                }
+                else
+                {
+                    await DisplayAlert("Event Signup Failed", "Event Signup failed for "+ returnError+". Sign up individual members" , "ok");
+                    return "failed for "+ returnError;
+                }
+
+            }
+
+
+        }
+
+        async void cdSubmit(object sender, System.EventArgs e)
+        {
+
+            if (assignedEvents[counter].Attr1.Contains("A") == true)
+            {
+                cdReadError myerror = new cdReadError();
+                cdUpdateEvent updateAddress = new cdUpdateEvent();
+                updateAddress.EventID = assignedEvents[counter].EventID;
+                updateAddress.ColumnName = "AddressLine1";
+                updateAddress.ColumnValue = EventAddress.Text;
+                updateAddress.ColumnName2 = "City";
+                updateAddress.ColumnValue2 = City.Text;
+                updateAddress.ColumnName3 = "cdState";
+                updateAddress.ColumnValue3 = myState.Text;
+                updateAddress.ColumnName4 = "PostalCode";
+                updateAddress.ColumnValue4 = PostalCode.Text;
+
+                System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
+                cdCallAPI mycallAPI = new cdCallAPI();
+                var jsresponse = await mycallAPI.cdcallEventsPOST(updateAddress);
+
+                System.Diagnostics.Debug.WriteLine(" After calling Post API ");
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                    myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    updateStatus.Text = "Update Failed. " + myerror.message;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                    updateStatus.Text = "Update Successful";
+                }
+                if (cdAddAll.IsChecked == true)
+                {
+                    var resp = await createEventSignups("Everyone");
+                }
+                if (cdCheckRider.IsChecked == true )
+                {
+                    var resp = await createEventSignups("Self");
+                }
+
             }
 
         }
@@ -99,6 +251,31 @@ namespace myClubDriveMaster
             PostalCode.Text = assignedEvents[counter].PostalCode;
             ClubName.Text = assignedEvents[counter].ClubName;
             cdNotes.Text = assignedEvents[counter].Notes;
+
+            if (assignedEvents[counter].Attr1.Contains("A") == false)
+            {
+                EventName.IsEnabled = false;
+                EventID.IsEnabled = false;
+                EventAddress.IsEnabled = false;
+                EventAddress2.IsEnabled = false;
+                City.IsEnabled = false;
+                myState.IsEnabled = false;
+                PostalCode.IsEnabled = false;
+                cdNotes.IsEnabled = false;
+                eventDatePicker.IsEnabled = false;
+            }
+            else
+            {
+                EventName.IsEnabled = true;
+                EventID.IsEnabled = true;
+                EventAddress.IsEnabled = true;
+                EventAddress2.IsEnabled = true;
+                City.IsEnabled = true;
+                myState.IsEnabled = true;
+                PostalCode.IsEnabled = true;
+                cdNotes.IsEnabled = true;
+                eventDatePicker.IsEnabled = true;
+            }
 
             if (counter == 0)
             {
@@ -151,6 +328,31 @@ namespace myClubDriveMaster
             PostalCode.Text = assignedEvents[counter].PostalCode;
             ClubName.Text = assignedEvents[counter].ClubName;
             cdNotes.Text = assignedEvents[counter].Notes;
+
+            if (assignedEvents[counter].Attr1.Contains("A") == false)
+            {
+                EventName.IsEnabled = false;
+                EventID.IsEnabled = false;
+                EventAddress.IsEnabled = false;
+                EventAddress2.IsEnabled = false;
+                City.IsEnabled = false;
+                myState.IsEnabled = false;
+                PostalCode.IsEnabled = false;
+                cdNotes.IsEnabled = false;
+                eventDatePicker.IsEnabled = false;
+            }
+            else
+            {
+                EventName.IsEnabled = true;
+                EventID.IsEnabled = true;
+                EventAddress.IsEnabled = true;
+                EventAddress2.IsEnabled = true;
+                City.IsEnabled = true;
+                myState.IsEnabled = true;
+                PostalCode.IsEnabled = true;
+                cdNotes.IsEnabled = true;
+                eventDatePicker.IsEnabled = true;
+            }
 
             if (counter >= maxarray)
             {
@@ -223,6 +425,7 @@ namespace myClubDriveMaster
                             foreach (var mte in myTempEvents.cdEvents)
                             {
                                 System.Diagnostics.Debug.WriteLine(" Event counter is " + eventcounter);
+                                mte.Attr1 = stacc.MemberRole;
                                 assignedEvents.Add(mte);
                                 eventcounter = eventcounter + 1;
                             }
@@ -275,6 +478,31 @@ namespace myClubDriveMaster
 
             maxarray = eventcounter-1;
             System.Diagnostics.Debug.WriteLine(" Max Array is " + maxarray);
+
+            if (assignedEvents[0].Attr1.Contains("A") == false)
+            {
+                EventName.IsEnabled = false;
+                EventID.IsEnabled = false;
+                EventAddress.IsEnabled = false;
+                EventAddress2.IsEnabled = false;
+                City.IsEnabled = false;
+                myState.IsEnabled = false;
+                PostalCode.IsEnabled = false;
+                cdNotes.IsEnabled = false;
+                eventDatePicker.IsEnabled = false;
+            }
+            else
+            {
+                EventName.IsEnabled = true;
+                EventID.IsEnabled = true;
+                EventAddress.IsEnabled = true;
+                EventAddress2.IsEnabled = true;
+                City.IsEnabled = true;
+                myState.IsEnabled = true;
+                PostalCode.IsEnabled = true;
+                cdNotes.IsEnabled = true;
+                eventDatePicker.IsEnabled = true;
+            }
 
             if (counter == maxarray)
             {

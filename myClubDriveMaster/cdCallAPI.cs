@@ -15,21 +15,25 @@ namespace myClubDriveMaster
 
     public class cdCallAPI
     {
-        public String sdAccountAPIURL = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AccountID}";
-        public String sdAccountAPIURLPOST = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-        public String sdDriverAllocURL = "https://fjziwkczek.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AllocationID}";
-        public String sdAuthAPIURL = "https://olx0fy0k5k.execute-api.us-west-2.amazonaws.com/Stage/apigateway";
-        public String sdTrackLoc = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-        public String sdTrackLocGet = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage//schooldrive/TripID";
-        public String cdClubAPIGet = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-        public String cdClubAPI = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-        public String cdClubMemberAPIGet = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-        public String cdClubMemberAPI = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-        public String cdEventAPIGet = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-        public String cdEventAPI = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-        public String cdEventRegAPIGet = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-        public String cdEventRegAPI = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+        /* 
+                    
+            public String sdAccountAPIURL = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AccountID}";
+            public String sdAccountAPIURLPOST = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+            public String sdDriverAllocURL = "https://fjziwkczek.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AllocationID}";
+            public String sdAuthAPIURL = "https://olx0fy0k5k.execute-api.us-west-2.amazonaws.com/Stage/apigateway";
+            public String sdTrackLoc = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+            public String sdTrackLocGet = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage//schooldrive/TripID";
+            public String cdClubAPIGet = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
+            public String cdClubAPI = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+            public String cdClubMemberAPIGet = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
+            public String cdClubMemberAPI = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+            public String cdEventAPIGet = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
+            public String cdEventAPI = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
+            public String cdEventRegAPIGet = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
+            public String cdEventRegAPI = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
 
+        */
+   
         // Function to set global parameters
         public async Task<JToken> cdSetParameters(String currInstance)
         {
@@ -174,7 +178,7 @@ namespace myClubDriveMaster
         public async Task<JToken> cdcallAccountsGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var getLocations = await mycallAPI.cdCallGetAPI(sdAccountAPIURL, QueryObject);
+            var getLocations = await mycallAPI.cdCallGetAPI(App.cdAccountAPIGetGlobal, QueryObject, App.cdAccountKey);
             return getLocations;
 
         }
@@ -182,28 +186,28 @@ namespace myClubDriveMaster
         public async Task<JToken> cdcallEventsGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallGetAPI(cdEventAPIGet, QueryObject);
+            var response = await mycallAPI.cdCallGetAPI(App.cdEventAPIGet, QueryObject, App.cdEventKey);
             return response;
 
         }
         public async Task<JToken> cdcallClubMembersGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var getClubMembers = await mycallAPI.cdCallGetAPI(cdClubMemberAPIGet, QueryObject);
+            var getClubMembers = await mycallAPI.cdCallGetAPI(App.cdClubMemberAPIGet, QueryObject,App.cdClubKey);
             return getClubMembers;
 
         }
         public async Task<JToken> cdcallEventMembersGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var getClubMembers = await mycallAPI.cdCallGetAPI(cdEventAPIGet, QueryObject);
+            var getClubMembers = await mycallAPI.cdCallGetAPI(App.cdEventRegAPIGet, QueryObject, App.cdEventRegKey);
             return getClubMembers;
 
         }
         public async Task<JToken> cdcallClubsGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var getClubMembers = await mycallAPI.cdCallGetAPI(cdClubAPIGet, QueryObject);
+            var getClubMembers = await mycallAPI.cdCallGetAPI(App.cdClubAPIGet, QueryObject, App.cdClubKey);
             return getClubMembers;
 
         }
@@ -211,7 +215,7 @@ namespace myClubDriveMaster
         public async Task<JToken> cdcallTrackLocGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var getAccounts = await mycallAPI.cdCallGetAPI(sdTrackLocGet, QueryObject);
+            var getAccounts = await mycallAPI.cdCallGetAPI(App.cdTrackLocGet, QueryObject, App.cdDriverLocationKey);
             return getAccounts;
 
         }
@@ -221,77 +225,77 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine("  Location is "+dloc.cdLongitude+" "+dloc.cdLatitude);
             System.Diagnostics.Debug.WriteLine("  Trip ID is " + dloc.TripID);
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(sdTrackLoc, dloc);
+            var response = await mycallAPI.cdCallPutAPI(App.cdTrackLocPutPost, dloc,App.cdDriverLocationKey);
             return response;
         }
 
         public async Task<JToken> cdcallDriverAllocGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var getDriverAlloc = await mycallAPI.cdCallGetAPI(sdDriverAllocURL, QueryObject);
+            var getDriverAlloc = await mycallAPI.cdCallGetAPI(App.cdDriverAllocURLGet, QueryObject, App.cdDriverAllocationKey);
             return getDriverAlloc;
 
         }
         public async Task<JToken> cdcallAccountsPUT(Account regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(sdAccountAPIURLPOST, regacccount);
+            var response = await mycallAPI.cdCallPutAPI(App.cdAccountAPIPutPost, regacccount, App.cdAccountKey);
             return response;
 
         }
         public async Task<JToken> cdcallClubsPUT(Club regClub)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(cdClubAPI, regClub);
+            var response = await mycallAPI.cdCallPutAPI(App.cdClubAPIPutPost, regClub,App.cdClubKey);
             return response;
 
         }
         public async Task<JToken> cdcallEventsPUT(cdEvents regEvent)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(cdEventAPI, regEvent);
+            var response = await mycallAPI.cdCallPutAPI(App.cdEventAPIPutPost, regEvent,App.cdEventKey);
             return response;
 
         }
         public async Task<JToken> cdcallEventsMemberPUT(cdEventSignups regEvent)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(cdEventRegAPI, regEvent);
+            var response = await mycallAPI.cdCallPutAPI(App.cdEventRegAPIPutPost, regEvent, App.cdEventRegKey);
             return response;
 
         }
         public async Task<JToken> cdcallClubMemberPUT(ClubMembers regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(cdClubMemberAPI, regacccount);
+            var response = await mycallAPI.cdCallPutAPI(App.cdClubMemberAPIPutPost, regacccount,App.cdClubMemberKey);
             return response;
 
         }
         public async Task<JToken> cdcallEventRegPUT(Account regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(cdEventRegAPI, regacccount);
+            var response = await mycallAPI.cdCallPutAPI(App.cdEventRegAPIPutPost, regacccount,App.cdEventRegKey);
             return response;
 
         }
         public async Task<JToken> cdcallAccountsPOST(cdUpdateAccount regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPostAPI(sdAccountAPIURLPOST, regacccount);
+            var response = await mycallAPI.cdCallPostAPI(App.cdAccountAPIPutPost, regacccount, App.cdAccountKey);
             return response;
 
         }
         public async Task<JToken> cdcallEventsPOST(cdUpdateEvent regEvent)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPostAPI(sdAccountAPIURLPOST, regEvent);
+            var response = await mycallAPI.cdCallPostAPI(App.cdEventAPIPutPost, regEvent,App.cdEventKey);
             return response;
 
         }
         public async Task<JToken> cdcallClubsPOST(cdUpdateClub regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPostAPI(cdClubAPI, regacccount);
+            var response = await mycallAPI.cdCallPostAPI(App.cdClubAPIPutPost, regacccount,App.cdClubKey);
             return response;
 
         }
@@ -301,18 +305,19 @@ namespace myClubDriveMaster
             myLoginObject.username = username;
             myLoginObject.password = password;
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPostAPI(sdAuthAPIURL, myLoginObject);
+            var response = await mycallAPI.cdCallPostAPI(App.cdAuthAPIURL, myLoginObject, App.cdAuthKey);
             return response;
         }
 
         public async Task<JToken> cdCreateSignup(signupAccount mysignupAccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(sdAuthAPIURL, mysignupAccount);
+            var response = await mycallAPI.cdCallPutAPI(App.cdAuthAPIURL, mysignupAccount, App.cdAuthKey);
             return response;
         }
 
-        public async Task<JToken> cdCallGetAPI(string callingapiurl, cdQueryAttr qobj)
+        // This is the generic Get API call
+        public async Task<JToken> cdCallGetAPI(string callingapiurl, cdQueryAttr qobj, String accessKey)
         {
             var uri = new Uri(callingapiurl);
             HttpClient client = new HttpClient();
@@ -321,6 +326,7 @@ namespace myClubDriveMaster
             client.DefaultRequestHeaders.TryAddWithoutValidation("ColIndex", qobj.IndexName);
             client.DefaultRequestHeaders.TryAddWithoutValidation("ColName",qobj.ColName);
             client.DefaultRequestHeaders.TryAddWithoutValidation(qobj.ColName,qobj.ColValue);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", accessKey);
 
             System.Diagnostics.Debug.WriteLine(" Request passed is " + qobj.IndexName +qobj.ColName + " " + qobj.ColValue);
 
@@ -342,11 +348,14 @@ namespace myClubDriveMaster
 
         }
 
-        public async Task<JToken> cdCallPutAPI(string callingapiurl, Object callingapiobject)
+        // This is the generic Put API call
+        public async Task<JToken> cdCallPutAPI(string callingapiurl, Object callingapiobject, String accessKey)
         {
             HttpClient client = new HttpClient();
 
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", accessKey);
+
             var inputJson = JsonConvert.SerializeObject(callingapiobject);
             var inputContent = new StringContent(inputJson, System.Text.Encoding.UTF8, "application/json");
             System.Diagnostics.Debug.WriteLine(" Input JSON " + inputJson);
@@ -366,10 +375,12 @@ namespace myClubDriveMaster
             return responseJSON;
         }
 
-        public async Task<JToken> cdCallPostAPI(string callingapiurl, Object callingapiobject)
+        //This is a generic POST API function
+        public async Task<JToken> cdCallPostAPI(string callingapiurl, Object callingapiobject, String accessKey)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", accessKey);
 
             var inputJson = JsonConvert.SerializeObject(callingapiobject);
             var inputContent = new StringContent(inputJson, System.Text.Encoding.UTF8, "application/json");

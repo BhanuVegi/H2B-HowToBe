@@ -281,6 +281,9 @@ namespace myClubDriveMaster
         public string ClubID { get; set; }
         public string MemberAccountID { get; set; }
         public string MemberRole { get; set; }
+        public string AllocationStatus { get; set; }
+        public string DriverCar { get; set; }
+        public string RiderCount { get; set; }
         public string EventName { get; set; }
         public string ClubName { get; set; }
         public string MemberName { get; set; }

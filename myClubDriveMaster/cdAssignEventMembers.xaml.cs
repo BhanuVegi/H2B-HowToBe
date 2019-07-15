@@ -126,6 +126,9 @@ namespace myClubDriveMaster
                 insertEventMembers.ClubName = pClubName;
                 insertEventMembers.ClubID = pClubID;
                 insertEventMembers.PickupLocation = pEventAddress;
+                insertEventMembers.AllocationStatus = "UNALLOCATED";
+                insertEventMembers.DriverCar = "NA";
+                insertEventMembers.RiderCount = "0";
                 insertEventMembers.Attr1 = "None";
                 insertEventMembers.Attr2 = "None";
                 insertEventMembers.Attr3 = "None";
