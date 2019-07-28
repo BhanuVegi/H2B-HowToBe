@@ -14,24 +14,24 @@
                 <Label x:Name="cdStatus" Text="       " Font="24" />
            </Grid>     
            <Grid Grid.Row="1">
-                <input:CheckBox x:Name="cdNewClub" Grid.Row="0" Text="New Club" Type="Check"/>
-                <Entry Grid.Row="1" x:Name="cdClubName" Placeholder="Club Name" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry Grid.Row="2" x:Name="cdcAddress1" Placeholder="Address Line 1" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry Grid.Row="3" x:Name="cdcAddress2" Placeholder="Address Line 2" PlaceholderColor="#bababa" FontSize="16"/>   
-                <Entry Grid.Row="4" x:Name="cdcCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry Grid.Row="5" x:Name="cdcState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry Grid.Row="6" x:Name="cdcPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdNewClub" Grid.Row="0" Text="New Club" Type="Check"/>
+                <Entry Grid.Row="1" x:Name="cdClubName" Placeholder="Club Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry Grid.Row="2" x:Name="cdcAddress1" Placeholder="Address Line 1" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry Grid.Row="3" x:Name="cdcAddress2" Placeholder="Address Line 2" PlaceholderColor="#ebaf4c" FontSize="16"/>   
+                <Entry Grid.Row="4" x:Name="cdcCity" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry Grid.Row="5" x:Name="cdcState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry Grid.Row="6" x:Name="cdcPostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="16"/>
             </Grid>
             <Grid Grid.Row="2">
-                <input:CheckBox x:Name="cdCheckRider" Grid.Row="0" Text="Rider" Type="Check"/>
-                <input:CheckBox x:Name="cdCheckParent" Grid.Row="1" Text="Parent" Type="Check"/>
-                <input:CheckBox x:Name="cdCheckDriver" Grid.Row="2" Text="Driver" Type="Check"/>
-                <input:CheckBox x:Name="cdCheckAdmin" Grid.Row="3" Text="Admin" Type="Check"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckRider" Grid.Row="0" Text="Rider" Type="Check"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckParent" Grid.Row="1" Text="Parent" Type="Check"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckDriver" Grid.Row="2" Text="Driver" Type="Check"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckAdmin" Grid.Row="3" Text="Admin" Type="Check"/>
             </Grid>
             <StackLayout Grid.Row="3" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
-                <Button Grid.Row="5" Text="Personal Information" Clicked="cdAccounts" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                <Button Grid.Row="6" Text="Main Menu" Clicked="cdMain" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                <Button Grid.Row="7" Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Grid.Row="5" Text="Personal Information" Clicked="cdAccounts" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Grid.Row="6" Text="Main Menu" Clicked="cdMain" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Grid.Row="7" Text="Submit" Clicked="cdSubmit" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

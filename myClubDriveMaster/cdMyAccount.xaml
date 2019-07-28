@@ -12,33 +12,33 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">   
                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                  <Label Text="       " Font="32" />  
+                  <Label TextColor="#ebaf4c" Text="       " Font="32" />  
                   <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
                </StackLayout>
         </Grid>
        <Grid Grid.Row="1">
            <StackLayout Orientation="Vertical"> 
-            <Label x:Name="updateStatus" Text="       " Font="32" />         
-            <Label x:Name="cdUserName" Text="User Name" TextColor="Black" FontAttributes="Bold" FontSize="16" />
-            <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#bababa" FontSize="16"/>  
-            <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16"/>
-            <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#bababa" FontSize="16"/>
-            <input:CheckBox x:Name="cdCheckAdmin" Grid.Row="13" Text="Admin" Type="Check"/>
+            <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="       " Font="32" />         
+            <Label TextColor="#ebaf4c" x:Name="cdUserName" Text="User Name" FontAttributes="Bold" FontSize="16" />
+            <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#ebaf4c" FontSize="16"/>
+            <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
+            <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
+            <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#ebaf4c" FontSize="16"/>  
+            <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="16"/>
+            <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="16"/>
+            <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="16"/>
+            <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#ebaf4c" FontSize="16"/>
+            <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckAdmin" Grid.Row="13" Text="Admin" Type="Check"/>
           </StackLayout>
           <Grid Grid.Row="2">       
           <StackLayout> 
-            <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />            
+            <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />            
           </StackLayout>  
           </Grid>
           <Grid Grid.Row="3">       
           <StackLayout> 
-            <Label Text="       " Font="16" />  
-            <Button Text="Main Menu" Clicked="cdMainPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
+            <Label TextColor="#ebaf4c" Text="       " Font="16" />  
+            <Button Text="Home Page" Clicked="cdMainPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
           </StackLayout>  
           </Grid>         
      </Grid>

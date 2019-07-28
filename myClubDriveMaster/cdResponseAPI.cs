@@ -54,6 +54,20 @@ namespace myClubDriveMaster
         public string ColumnName4 { get; set; }
         public string ColumnValue4 { get; set; }
     }
+    public class cdUpdateEventMembers
+    {
+        public string EventMemberID { get; set; }
+        public string ColumnName { get; set; }
+        public string ColumnValue { get; set; }
+        public string ColumnName1 { get; set; }
+        public string ColumnValue1 { get; set; }
+        public string ColumnName2 { get; set; }
+        public string ColumnValue2 { get; set; }
+        public string ColumnName3 { get; set; }
+        public string ColumnValue3 { get; set; }
+        public string ColumnName4 { get; set; }
+        public string ColumnValue4 { get; set; }
+    }
     public class cdLocation
     {
         public string TripID { get; set; }
@@ -324,6 +338,81 @@ namespace myClubDriveMaster
     {
         public List<Parameter> Parameters { get; set; }
 
+    }
+
+    public class EventSignup
+    {
+        public string EventMemberID { get; set; }
+        public string EventID { get; set; }
+        public string ClubID { get; set; }
+        public string MemberAccountID { get; set; }
+        public string MemberRole { get; set; }
+        public string AllocationStatus { get; set; }
+        public string DriverCar { get; set; }
+        public string RiderCount { get; set; }
+        public string EventName { get; set; }
+        public string ClubName { get; set; }
+        public string MemberName { get; set; }
+        public string PickupLocation { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
+    }
+
+    public class cdAllEventSignups
+    {
+        public List<EventSignup> EventSignup { get; set; }
+    }
+
+    public class DriverAllocation
+    {
+        public string AllocationID { get; set; }
+        public string EventID { get; set; }
+        public string ClubID { get; set; }
+        public string DriverID { get; set; }
+        public string StudentID { get; set; }
+        public string EventName { get; set; }
+        public string ClubName { get; set; }
+        public string DriverName { get; set; }
+        public string StudentName { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
+    }
+
+    public class cdEmails
+    {
+        public string EmailID { get; set; }
+        public string EmailSubject { get; set; }
+        public string EmailBody { get; set; }
+        public string EmailAddress { get; set; }
+        public string EventName { get; set; }
+        public string ClubName { get; set; }
+        public String EmailCount { get; set; }
+        public string Attr1 { get; set; }
+        public string Attr2 { get; set; }
+        public string Attr3 { get; set; }
+        public string Attr4 { get; set; }
+        public string Attr5 { get; set; }
+        public string Attr6 { get; set; }
+        public string Attr7 { get; set; }
+        public string Attr8 { get; set; }
+        public string Attr9 { get; set; }
+        public string Attr10 { get; set; }
     }
 
 }

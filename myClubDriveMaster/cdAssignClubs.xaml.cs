@@ -187,7 +187,7 @@ namespace myClubDriveMaster
             myclubmembership.MemberName = regAccount.FirstName + " " + regAccount.LastName;
             myclubmembership.MemberRole = assignRole;
             myclubmembership.Attr1 = parentID;
-            myclubmembership.Attr2 = "NA";
+            myclubmembership.Attr2 = regAccount.EmailAddress;
             myclubmembership.Attr3 = "NA";
             myclubmembership.Attr4 = "NA";
             myclubmembership.Attr5 = "NA";

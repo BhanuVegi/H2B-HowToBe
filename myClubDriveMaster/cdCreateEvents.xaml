@@ -9,31 +9,31 @@
       </Grid.RowDefinitions>  
           <Grid Grid.Row="0"> 
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-               <Label Text="       " Font="32" />
+               <Label TextColor="#ebaf4c" Text="       " Font="32" />
                 <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-                <Entry x:Name="EventName"  Placeholder="Event Name" PlaceholderColor="#bababa" FontSize="12" />
-                <Label x:Name="EventID" Text="Event ID:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
-                <Entry x:Name="EventAddress" Placeholder="Address Line" PlaceholderColor="#bababa" FontSize="12" /> 
-                <Entry x:Name="EventAddress2" Placeholder="Address Line2" PlaceholderColor="#bababa" FontSize="12" /> 
-                <Entry x:Name="City" Placeholder="City" PlaceholderColor="#bababa" FontSize="12" />  
-                <Entry x:Name="myState" Placeholder="State" PlaceholderColor="#bababa" FontSize="12" />  
-                <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="12" />
-                <Picker x:Name="picker" Title="Club Name" TextColor="Blue" Grid.Row="4"> 
+                <Entry x:Name="EventName"  Placeholder="Event Name" PlaceholderColor="#ebaf4c" FontSize="12" />
+                <Label TextColor="#ebaf4c" x:Name="EventID" Text="Event ID:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <Entry x:Name="EventAddress" Placeholder="Address Line" PlaceholderColor="#ebaf4c" FontSize="12" /> 
+                <Entry x:Name="EventAddress2" Placeholder="Address Line2" PlaceholderColor="#ebaf4c" FontSize="12" /> 
+                <Entry x:Name="City" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="12" />  
+                <Entry x:Name="myState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="12" />  
+                <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="12" />
+                <Picker x:Name="picker" Title="Club Name" TextColor="#ebaf4c" Grid.Row="4"> 
                 </Picker>
                 <DatePicker x:Name="eventDatePicker" TextColor="Black" Format="D" Margin="30, 0, 0, 30" DateSelected="OnDateSelected" />
-                <Entry x:Name="cdNotes" Placeholder="Enter any notes for participants" PlaceholderColor="#bababa" FontSize="12" /> 
-                <Label x:Name="createStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
+                <Entry x:Name="cdNotes" Placeholder="Enter any notes for participants" PlaceholderColor="#ebaf4c" FontSize="12" /> 
+                <Label TextColor="#ebaf4c" x:Name="createStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
             </StackLayout>  
         </Grid>         
         <Grid Grid.Row="1">        
            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
             <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
-            <Button Clicked="cdSubmit" Text="Submit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Button Clicked="cdSubmit" Text="Submit" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
             </StackLayout>            
         </Grid>
         <Grid Grid.Row="2">     
             <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Text="Home" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </Grid>
      </Grid>

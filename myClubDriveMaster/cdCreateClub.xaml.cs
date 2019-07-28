@@ -71,7 +71,7 @@ namespace myClubDriveMaster
                     myclubmembership.MemberName = myAccount.FirstName + " " + myAccount.LastName;
                     myclubmembership.MemberRole = "A"+myAccount.Role;
                     myclubmembership.Attr1 = "NA";
-                    myclubmembership.Attr2 = "NA";
+                    myclubmembership.Attr2 = myAccount.EmailAddress;
                     myclubmembership.Attr3 = "NA";
                     myclubmembership.Attr4 = "NA";
                     myclubmembership.Attr5 = "NA";

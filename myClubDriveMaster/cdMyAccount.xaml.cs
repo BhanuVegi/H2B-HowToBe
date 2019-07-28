@@ -12,7 +12,7 @@ namespace myClubDriveMaster
         async void cdMainPage(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Main Page button clicked");
-            var bpage = new MainPage();
+            var bpage = new cdHome(regAccount);
             await Navigation.PushModalAsync(bpage);
         }
 

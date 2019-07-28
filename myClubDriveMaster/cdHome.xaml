@@ -11,41 +11,42 @@
        </Grid.RowDefinitions> 
           <Grid Grid.Row="0">    
               <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,30,0,0" Grid.Row="0">
-                   <Label Text="       " Font="32" />
+                   <Label TextColor="#ebaf4c" Text="       " Font="32" />
                    <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
               </StackLayout>   
           </Grid>      
         <Grid Grid.Row="1"> 
             <StackLayout Orientation="Vertical">  
-                <Label Text="Roles" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />               
-                <Button Clicked="cdParentPage" Text="Parent Page" x:Name="ParentPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start"  Grid.Row="2"/>
-                <Button Clicked="cdDriverPage" Text="Driver Page" x:Name="DriverPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="3"/>
-                <Button Clicked="cdAdminPage" Text="Admin Page" x:Name="AdminPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="4"/>
-                <Button Clicked="cdRiderPage" Text="Rider Page" x:Name="RiderPage" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="5"/>        
+                <Label TextColor="#ebaf4c" Text="Roles" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />               
+                <Button Clicked="cdParentPage" Text="Parent Page" x:Name="ParentPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start"  Grid.Row="2"/>
+                <Button Clicked="cdDriverPage" Text="Driver Page" x:Name="DriverPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="3"/>
+                <Button Clicked="cdAdminPage" Text="Admin Page" x:Name="AdminPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="4"/>
+                <Button Clicked="cdMerchPage" Text="Club Merchandise" x:Name="MerchPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="5"/>
+                <Button Clicked="cdRiderPage" Text="Rider Page" x:Name="RiderPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="4"/>    
              </StackLayout>
         </Grid>        
         <Grid Grid.Row="2">          
             <StackLayout Orientation="Vertical">   
-                <Label Text="       " Font="24" />               
-                <Label x:Name="cdMyData" Text="My Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/> 
-                <Button Clicked="cdmyClubs" Text="My Clubs N Signup" x:Name="MyClubs" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="6"/>
-                <Button Clicked="cdmyAccount" Text="My Account" x:Name="MyAccount" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="7"/>
-                <Button Clicked="cdmyRiders" Text="My Riders" x:Name="MyRiders" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>
-                <Button Clicked="cdmyEvents" Text="My Events N Signup" x:Name="MyEvents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>            
+                <Label TextColor="#ebaf4c" Text="       " Font="24" />               
+                <Label TextColor="#ebaf4c" x:Name="cdMyData" Text="My Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/> 
+                <Button Clicked="cdmyClubs" Text="My Clubs N Signup" x:Name="MyClubs" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="6"/>
+                <Button Clicked="cdmyAccount" Text="My Account" x:Name="MyAccount" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="7"/>
+                <Button Clicked="cdmyRiders" Text="My Riders" x:Name="MyRiders" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>
+                <Button Clicked="cdmyEvents" Text="My Events N Signup" x:Name="MyEvents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>            
              </StackLayout>
         </Grid>         
         <Grid Grid.Row="3">               
             <StackLayout Orientation="Vertical">   
-                 <Label Text="       " Font="24" />           
-                 <Label x:Name="cdCreateData" Text="Create Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/>            
-                 <Button Clicked="cdCreateclub" Text="Create New Club" x:Name="CreateClub" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="9"/>
-                 <Button Clicked="cdCreateStudents" Text="Register Students" x:Name="RegisterStudents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="10"/>
-                 <Button Clicked="cdCreateEvents" Text="Create Events" x:Name="CreateEvents" BackgroundColor="#3897f0" TextColor="White" HeightRequest="25" VerticalOptions="Start" Grid.Row="11"/>
+                 <Label TextColor="#ebaf4c" Text="       " Font="24" />           
+                 <Label TextColor="#ebaf4c" x:Name="cdCreateData" Text="Create Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/>            
+                 <Button Clicked="cdCreateclub" Text="Create New Club" x:Name="CreateClub" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="9"/>
+                 <Button Clicked="cdCreateStudents" Text="Register Students" x:Name="RegisterStudents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="10"/>
+                 <Button Clicked="cdCreateEvents" Text="Create Events" x:Name="CreateEvents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="11"/>
                  </StackLayout>
         </Grid>
         <Grid Grid.Row="4">     
             <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Text="Logout" Clicked="cdLogout" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Text="Logout" Clicked="cdLogout" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </Grid>        
     </Grid>

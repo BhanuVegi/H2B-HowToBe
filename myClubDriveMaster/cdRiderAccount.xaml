@@ -8,26 +8,26 @@
         </Grid.RowDefinitions>
            <Grid Grid.Row="0">
                <StackLayout Orientation="Vertical"> 
-                <Label x:Name="createStatus" Text="       " Font="32" />         
-                <Entry x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#bababa" FontSize="16" />
-                <Entry x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true" />
-                <Entry x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="true"/>
-                <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry x:Name="cdMiddleName" Placeholder="Middle Name" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#bababa" FontSize="16"/> 
-                <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#bababa" FontSize="16"/>
-                <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#bababa" FontSize="16"/>
+                <Label TextColor="#ebaf4c" x:Name="createStatus" Text="       " Font="32" />         
+                <Entry x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="16" />
+                <Entry x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#ebaf4c" FontSize="16" IsPassword="true" />
+                <Entry x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#ebaf4c" FontSize="16" IsPassword="true"/>
+                <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry x:Name="cdMiddleName" Placeholder="Middle Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#ebaf4c" FontSize="16"/> 
+                <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#ebaf4c" FontSize="16"/>
                 </StackLayout>
             </Grid>
             <Grid Grid.Row="1">
               <StackLayout Orientation="Vertical"> 
-                <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                <Button Text="Associate Clubs" Clicked="cdAClub" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>              
-                <Button Text="Home Page" Clicked="cdHome" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/> 
+                <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Text="Associate Clubs" Clicked="cdAClub" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>              
+                <Button Text="Home Page" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/> 
               </StackLayout>  
             </Grid>          
 

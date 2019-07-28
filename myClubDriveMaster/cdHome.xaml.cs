@@ -27,6 +27,11 @@ namespace myClubDriveMaster
             var tpage = new cdAdminDrive(loginAccount);
             await Navigation.PushModalAsync(tpage);
         }
+        void cdMerchPage(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Rider Page Button");
+            Device.OpenUri(new Uri(App.cdShopMyURL));
+        }
         void cdRiderPage(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Rider Page Button");
@@ -81,10 +86,35 @@ namespace myClubDriveMaster
             await Navigation.PushModalAsync(tpage);
         }
 
+        async void cdValToken()
+        {
+            try { 
+                    cdCallAPI mycallAPI = new cdCallAPI();
+                    var resp = await mycallAPI.cdvalidateToken();
+                    String stresp = (String)resp;
+                    if ( stresp.Contains("Success"))
+                    {
+                        System.Diagnostics.Debug.WriteLine(" Valid Login");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine(" Login invalid. Navigating to main page "+stresp);
+                        var tpage = new MainPage();
+                        await Navigation.PushModalAsync(tpage);
+                    }
+                }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(" In error " + ex);
+            }
+        }
+
         public cdHome(Account logAccount)
         {
             InitializeComponent();
             loginAccount = logAccount;
+
+            cdValToken();
 
             System.Diagnostics.Debug.WriteLine("Length of role is " +logAccount.Role+" "+ logAccount.Role.Length);
 
@@ -98,6 +128,7 @@ namespace myClubDriveMaster
             {
                 System.Diagnostics.Debug.WriteLine("Enable Driver..");
                 DriverPage.IsEnabled = true;
+                MerchPage.IsEnabled = true;
             }
             else
             {
@@ -109,6 +140,7 @@ namespace myClubDriveMaster
                 AdminPage.IsEnabled = true;
                 CreateEvents.IsEnabled = true;
                 CreateClub.IsEnabled = true;
+                MerchPage.IsEnabled = true;
             }
             else
             {
@@ -121,6 +153,7 @@ namespace myClubDriveMaster
                 System.Diagnostics.Debug.WriteLine("Enable Parent..");
                 ParentPage.IsEnabled = true;
                 RegisterStudents.IsEnabled = true;
+                MerchPage.IsEnabled = true;
             }
             else
             {
@@ -139,11 +172,13 @@ namespace myClubDriveMaster
                 ParentPage.IsVisible = false;
                 DriverPage.IsVisible = false;
                 AdminPage.IsVisible = false;
+                MerchPage.IsEnabled = false;
 
             }
             else
             {
                 RiderPage.IsEnabled = false;
+
             }
 
         }

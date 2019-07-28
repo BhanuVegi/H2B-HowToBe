@@ -40,10 +40,6 @@ namespace myClubDriveMaster
             //Populate regiatration data
             if (regAccount.UserName == null || 
                 regAccount.FirstName == null || 
-                regAccount.AddressLine1 == null || 
-                regAccount.cdState == null ||
-                regAccount.City == null ||
-                regAccount.PostalCode == null ||
                 regAccount.EmailAddress == null ||
                 regAccount.LastName == null)
             {
@@ -54,7 +50,7 @@ namespace myClubDriveMaster
             {
                 performSubmit = 1;
                 regAccount.AccountID = regAccount.UserName;
-                if (cdNewClub.IsChecked == true)
+                if (cdNewClub.IsChecked is true)
                 { 
                     regAccount.AccountStatus = "Approved";
                 }
@@ -62,22 +58,42 @@ namespace myClubDriveMaster
                 {
                     regAccount.AccountStatus = "NotApproved";
                 }
-                if (regAccount.AddressLine2 ==null)
+                if (regAccount.AddressLine1 is null)
                 {
                     regAccount.AddressLine2 = "None";
+                }
+                if (regAccount.AddressLine2 is null)
+                {
+                    regAccount.AddressLine2 = "None";
+                }
+                if (regAccount.AddressLine1 is null)
+                {
+                    regAccount.AddressLine2 = "None";
+                }
+                if (regAccount.City is null)
+                {
+                    regAccount.City = "None";
+                }
+                if (regAccount.cdState is null)
+                {
+                    regAccount.cdState = "None";
+                }
+                if (regAccount.PostalCode is null)
+                {
+                    regAccount.PostalCode = "None";
                 }
                 regAccount.AddressLine3 = "None";
                 regAccount.County = "NA";
                 regAccount.Destination = "NA";
-                if (regAccount.MiddleName == null )
+                if (regAccount.MiddleName is null )
                 {
                     regAccount.MiddleName = "None";
                 }
-                if (regAccount.ParentID == null)
+                if (regAccount.ParentID is null)
                 {
                     regAccount.ParentID = "NA";
                 }
-                if (regAccount.Phone == null)
+                if (regAccount.Phone is null)
                 {
                     regAccount.Phone = "None";
                 }
@@ -85,11 +101,11 @@ namespace myClubDriveMaster
                 {
                     regAccount.School = "None";
                 }
-                if (regAccount.SchoolID == null)
+                if (regAccount.SchoolID is null)
                 {
                     regAccount.SchoolID = "None";
                 }
-                if (regAccount.Teacher == null)
+                if (regAccount.Teacher is null)
                 {
                     regAccount.Teacher = "None";
                 }
@@ -200,7 +216,7 @@ namespace myClubDriveMaster
                                 myclubmembership.MemberName = regAccount.FirstName + " " + regAccount.LastName;
                                 myclubmembership.MemberRole = regAccount.Role;
                                 myclubmembership.Attr1 = "NA";
-                                myclubmembership.Attr2 = "NA";
+                                myclubmembership.Attr2 = regAccount.EmailAddress;
                                 myclubmembership.Attr3 = "NA";
                                 myclubmembership.Attr4 = "NA";
                                 myclubmembership.Attr5 = "NA";

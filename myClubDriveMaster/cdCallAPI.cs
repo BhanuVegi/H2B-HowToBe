@@ -69,10 +69,36 @@ namespace myClubDriveMaster
                         App.cdAccountAPIGetGlobal = prec.EndPoint;
                         App.cdAccountKey = prec.AccessKey;
                     }
+                    if (prec.ParameterName == "cdLoginHelp")
+                    {
+                        App.cdGetLoginHelp = prec.EndPoint;
+                    }
+                    if (prec.ParameterName == "cdSocialLogin")
+                    {
+                        App.cdSocial = prec.EndPoint;
+                    }
+                    if (prec.ParameterName == "cdValToken")
+                    {
+                        App.cdValidateToken = prec.EndPoint;
+                    }
+                    if (prec.ParameterName == "cdShopURL")
+                    {
+                        App.cdShopMyURL = prec.EndPoint;
+                    }
                     if (prec.ParameterName == "cdAccountAPIPutPost")
                     {
                         App.cdAccountAPIPutPost = prec.EndPoint;
                         App.cdAccountKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdEmailAPIGet")
+                    {
+                        App.cdEmailAPIGetGlobal = prec.EndPoint;
+                        App.cdEmailRegKey = prec.AccessKey;
+                    }
+                    if (prec.ParameterName == "cdEmailAPIPutPost")
+                    {
+                        App.cdEmailAPIPutPost = prec.EndPoint;
+                        App.cdEmailRegKey = prec.AccessKey;
                     }
                     if (prec.ParameterName == "cdDriverAllocURLGet")
                     {
@@ -182,6 +208,31 @@ namespace myClubDriveMaster
             return getLocations;
 
         }
+        public async Task<JToken> cdvalidateToken()
+        {
+            String tokenURI = App.cdValidateToken;
+            var uri = new Uri(tokenURI);
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+            var inputJson = JsonConvert.SerializeObject(App.mylresp);
+            var inputContent = new StringContent(inputJson, System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(tokenURI, inputContent);
+
+            var responseJSON = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                System.Diagnostics.Debug.WriteLine(" Get API Call Successful");
+
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine(" Get API Call failed " + response.ReasonPhrase);
+            }
+
+            return "Success";
+
+        }
 
         public async Task<JToken> cdcallEventsGET(cdQueryAttr QueryObject)
         {
@@ -236,6 +287,13 @@ namespace myClubDriveMaster
             return getDriverAlloc;
 
         }
+        public async Task<JToken> cdcallDriverAllocPUT(DriverAllocation dalloc)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPutAPI(App.cdDriverAllocURLPutPost, dalloc, App.cdDriverAllocationKey);
+            return response;
+
+        }
         public async Task<JToken> cdcallAccountsPUT(Account regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -271,13 +329,57 @@ namespace myClubDriveMaster
             return response;
 
         }
-        public async Task<JToken> cdcallEventRegPUT(Account regacccount)
+        public async Task<JToken> cdcallEmailPUT(String EventID, String EventName, String myClubID, String ClubName, String EventDate)
         {
+            const String emailcount = "3";
+            String consEmails = "";
+            cdEmails eventEmail = new cdEmails();
+            eventEmail.EmailID = EventID;
+            eventEmail.EmailCount = emailcount;
+            eventEmail.EventName = EventName;
+            eventEmail.ClubName = ClubName;
+            eventEmail.Attr1 = EventDate;
+            eventEmail.Attr2 = "None";
+            eventEmail.Attr3 = "None";
+            eventEmail.Attr4 = "None"; 
+            eventEmail.Attr5 = "None";
+            eventEmail.Attr6 = "None";
+            eventEmail.Attr7 = "None";
+            eventEmail.Attr8 = "None";
+            eventEmail.Attr9 = "None";
+            eventEmail.Attr10 = "None";
+            eventEmail.EmailSubject = "Signup for new event - " + EventName;
+            eventEmail.EmailBody = "Please sign up for a new event "+EventName +" on "+EventDate+" , of your "+ ClubName+" by logging on to clubhives App";
             cdCallAPI mycallAPI = new cdCallAPI();
-            var response = await mycallAPI.cdCallPutAPI(App.cdEventRegAPIPutPost, regacccount,App.cdEventRegKey);
-            return response;
+            cdQueryAttr qryAcct = new cdQueryAttr();
+            getClubMembers cdcm = new getClubMembers();
+            qryAcct.ColIndex = "IndexName";
+            qryAcct.IndexName = "ClubIDIndex";
+            qryAcct.ColName = "ClubID";
+            qryAcct.ColValue = myClubID;
+            var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
+            cdcm = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
+            int counter = 0;
 
+            foreach (var stacc in cdcm.ClubMember)
+            {
+                if (counter == 0)
+                {
+                    consEmails = stacc.Attr2;
+                    counter = counter + 1;
+                }
+                else
+                {
+                    consEmails = consEmails +" | "+ stacc.Attr2;
+                }
+            }
+
+            eventEmail.EmailAddress = consEmails;
+
+            var response = await mycallAPI.cdCallPutAPI(App.cdEmailAPIPutPost, eventEmail, App.cdClubMemberKey);
+            return response;
         }
+
         public async Task<JToken> cdcallAccountsPOST(cdUpdateAccount regacccount)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -289,6 +391,13 @@ namespace myClubDriveMaster
         {
             cdCallAPI mycallAPI = new cdCallAPI();
             var response = await mycallAPI.cdCallPostAPI(App.cdEventAPIPutPost, regEvent,App.cdEventKey);
+            return response;
+
+        }
+        public async Task<JToken> cdEventMembersPOST(cdUpdateEventMembers regEventMembers)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPostAPI(App.cdEventRegAPIPutPost, regEventMembers, App.cdEventRegKey);
             return response;
 
         }

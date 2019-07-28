@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:maps="clr-namespace:Xamarin:Forms:Maps;assembly=Xamarin:Forms:Maps" x:Class="myClubDriveMaster.cdTrackDriver">
     <ContentPage.Content>
         <Grid BackgroundColor="Transparent">
@@ -9,7 +9,7 @@
              <StackLayout Grid.Row="1" x:Name="mapStack" VerticalOptions="StartAndExpand" Padding="0">
             </StackLayout>
             <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                   <Button Text="Complete Drive" Clicked="completeDrive" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                   <Button Text="Complete Drive" Clicked="completeDrive" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

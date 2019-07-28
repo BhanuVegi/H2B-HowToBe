@@ -6,6 +6,24 @@ namespace myClubDriveMaster
 {
     public partial class MainPage : ContentPage
     {
+        async void cdloginHelp(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked on Login Help "+ App.cdGetLoginHelp);
+            bool x = await DisplayAlert("Login Help", "Please click Ok button which will open the browser window with login screen. Click on forgot password link and follow the steps to reset your password.", "ok", "cancel");
+            if (x==true)
+            { 
+            Device.OpenUri(new Uri(App.cdGetLoginHelp));
+            }
+            else 
+            {
+                System.Diagnostics.Debug.WriteLine(" Clicked on cancel button ");
+            }
+        }
+        void cdloginFacebook(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked on social login");
+            Device.OpenUri(new Uri(App.cdGetLoginHelp));
+        }
         async void cdRegistration(object sender, System.EventArgs e)
         {
             Account pAccount = new Account();
@@ -31,6 +49,7 @@ namespace myClubDriveMaster
 
             var jsreponse = await mycallAPI.cdLoginAccount(myusername, mypassword);
             lresp = JsonConvert.DeserializeObject<loginResponse>((string)jsreponse);
+            App.mylresp = lresp;
 
             if (lresp.status == "success")
             {
@@ -82,12 +101,29 @@ namespace myClubDriveMaster
 
         }
 
+        async void getMyParam()
+        {
+            App.getAPIURLs = "NewTestValue";
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var myParamResp = await mycallAPI.cdSetParameters("Stage");
+            System.Diagnostics.Debug.WriteLine("socialText Login is " + App.cdSocial);
+            if (App.cdSocial == "Disabled")
+            {
+                socialImage.IsEnabled = false;
+                socialText.IsEnabled = false;
+            }
+            else
+            {
+                socialImage.IsEnabled = true;
+                socialText.IsEnabled = true;
+            }
+        }
+
         public MainPage()
         {
             InitializeComponent();
-            App.getAPIURLs = "NewTestValue";
-            cdCallAPI mycallAPI = new cdCallAPI();
-            var myParamResp = mycallAPI.cdSetParameters("Stage");
+            getMyParam();
+            System.Diagnostics.Debug.WriteLine("Date time is " + DateTime.Today.Date.ToShortDateString());
         }
     }
 }

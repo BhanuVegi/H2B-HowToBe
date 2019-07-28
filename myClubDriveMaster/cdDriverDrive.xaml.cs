@@ -121,7 +121,8 @@ namespace myClubDriveMaster
         async void getStudentData(Account logAccount)
         {
             //Getting Student Information
-
+          try
+          {
             cdQueryAttr qryAcct = new cdQueryAttr();
             qryAcct.ColIndex = "IndexName";
             qryAcct.IndexName = "DriverIDAllocationIDindex";
@@ -136,17 +137,11 @@ namespace myClubDriveMaster
             myStudentArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
             mystudArray = myStudentArray;
 
-            try
-            { 
+ 
                 foreach (var dalloc in myStudentArray.DriverAlloc)
                 {
                     maxarray = maxarray + 1;
                 }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("End of Array "+ex);
-            }
 
             StudentName.Text = "Student Name: " + mystudArray.DriverAlloc[counter].Attr6 + " " + mystudArray.DriverAlloc[counter].Attr7;
             String myaddline2 = "";
@@ -160,8 +155,13 @@ namespace myClubDriveMaster
             }
             DestinationAddress.Text = "Destination Address : " + mystudArray.DriverAlloc[counter].AddressLine1 + " , " + myaddline2;
             DestinationAddress2.Text = "                                       " + mystudArray.DriverAlloc[counter].City + " , " + mystudArray.DriverAlloc[counter].State + " " + mystudArray.DriverAlloc[counter].PostalCode;
-
-            if (counter == maxarray)
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("End of Array " + ex);
+                await DisplayAlert("No Student Allocation Found", "No Student Allocation Found", "ok");
+            }
+            if (counter >= maxarray)
             {
                 PreviousButton.IsEnabled = false;
                 NextButton.IsEnabled = false;

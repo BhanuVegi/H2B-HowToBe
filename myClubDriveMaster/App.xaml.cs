@@ -10,6 +10,8 @@ namespace myClubDriveMaster
         public static String getAPIURLs = "";
         public static String cdAccountAPIGetGlobal = "";
         public static String cdAccountAPIPutPost = "";
+        public static String cdEmailAPIGetGlobal = "";
+        public static String cdEmailAPIPutPost = "";
         public static String cdDriverAllocURLGet = "";
         public static String cdDriverAllocURLPutPost = "";
         public static String cdAuthAPIURL = "";
@@ -31,6 +33,14 @@ namespace myClubDriveMaster
         public static String cdDriverLocationKey = "";
         public static String cdEventKey = "";
         public static String cdEventRegKey = "";
+        public static String cdEmailRegKey = "";
+        public static String cdShopMyURL = "";
+        public static String cdGetLoginHelp = "";
+        public static String cdSocial = "";
+        public static String cdValidateToken = "";
+        public static String cdGobalToken = "";
+        public static String cdGobalUserID = "";
+        public static loginResponse mylresp = new loginResponse();
 
         public App()
         {

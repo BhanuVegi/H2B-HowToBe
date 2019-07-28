@@ -22,28 +22,28 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />     
         </Grid.RowDefinitions>
-        <Label x:Name="loginMessage" HorizontalOptions="Center" TextColor="#485992" FontSize="16"/>
-        <Entry Grid.Row="1" x:Name="eusername" Placeholder="User Name" PlaceholderColor="#bababa" FontSize="16"/>
-        <Entry Grid.Row="2" x:Name="epassword" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16"/>
-        <Button Clicked="cdLogin" Text="LogIn" BackgroundColor="#3897f0" TextColor="White" HeightRequest="50" VerticalOptions="Start" Grid.Row="3"/>
-        <Label Text="LoginTrouble?GetHelp" HorizontalOptions="Center" Grid.Row="4" Margin="0,10,0,0" FontSize="12"/>
+        <Label x:Name="loginMessage" HorizontalOptions="Center" TextColor="#ebaf4c" FontSize="16"/>
+        <Entry Grid.Row="1" x:Name="eusername" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
+        <Entry Grid.Row="2" x:Name="epassword" Placeholder="Password" PlaceholderColor="#ebaf4c" FontSize="16"/>
+        <Button Clicked="cdLogin" Text="Log In" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="3"/>
+        <Button Clicked="cdloginHelp" BackgroundColor="Transparent" Text="Login Trouble? Get Help" HorizontalOptions="Center" Grid.Row="4" Margin="0,10,0,0" TextColor="#ebaf4c" FontSize="12"/>
          <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
                     <Label BackgroundColor="#bababa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                    <Image Source="gflogo.png" Grid.Column="1" VerticalOptions="Center" Margin="10,0,10,0"/>
+                    <Button Clicked="cdloginFacebook" x:Name="socialImage" Text="" Image="gflogo.png" Grid.Column="1" VerticalOptions="Center" Margin="10,0,10,0"/>
                     <Label BackgroundColor="#bababa" Grid.Column="2" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
           </Grid>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="6">
-                    <Label Text="Login With Facebook" TextColor="#485992" />
+                    <Button Clicked="cdloginFacebook" x:Name="socialText" Text="Login With Facebook" BackgroundColor="Transparent" TextColor="#ebaf4c" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
           </Grid>
         
             <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Text="Account Registration" Clicked="cdRegistration" BackgroundColor="#3897f0" TextColor="White" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Text="Account Registration" Clicked="cdRegistration" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
     </Grid>
 </ContentPage>

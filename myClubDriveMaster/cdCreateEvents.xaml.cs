@@ -62,7 +62,7 @@ namespace myClubDriveMaster
                 thisEvent.ClubID = mysa[1];
                 thisEvent.EventDate = myEventDate;
                 thisEvent.PhoneNumber = "0000000000";
-                thisEvent.Attr1 = "NA";
+                thisEvent.Attr1 = DateTime.Today.Date.ToShortDateString();
                 thisEvent.Attr2 = "NA";
                 thisEvent.Attr3 = "NA";
                 thisEvent.Attr4 = "NA";
@@ -86,6 +86,7 @@ namespace myClubDriveMaster
                         createStatus.Text = "Event Creation Failed. " + myerror.message;
                     }
 
+                    var eresp = mycallAPI.cdcallEmailPUT(thisEvent.EventID,thisEvent.EventName,thisEvent.ClubID,thisEvent.ClubName,thisEvent.EventDate);
                     await DisplayAlert("Event creation Successful", "Event creation Successful" , "ok");
                     var tpage = new cdHome(myAccount);
                     await Navigation.PushModalAsync(tpage);
