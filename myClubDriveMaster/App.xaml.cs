@@ -20,6 +20,7 @@ namespace myClubDriveMaster
         public static String cdClubAPIGet = "";
         public static String cdClubAPIPutPost = "";
         public static String cdClubMemberAPIGet = "";
+        public static String cdClubMemberAPIUAGet = "";
         public static String cdClubMemberAPIPutPost = "";
         public static String cdEventAPIGet = "";
         public static String cdEventAPIPutPost = "";

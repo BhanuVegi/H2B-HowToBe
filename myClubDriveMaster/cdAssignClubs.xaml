@@ -3,13 +3,14 @@
     <ContentPage.Content>
        <Grid BackgroundColor="Transparent"> 
        <Grid.RowDefinitions>
-                <RowDefinition Height="150" />
-                <RowDefinition Height="75" />
-                <RowDefinition Height="350" />
-                <RowDefinition Height="200" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Label TextColor="#ebaf4c" Text=" " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" HorizontalOptions="FillAndExpand" />     
                 <Label TextColor="#ebaf4c" Text="Enter ClubID Or Club Name" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" HorizontalOptions="FillAndExpand" />  
                 <Entry x:Name="CubID" Placeholder="Enter Club ID" PlaceholderColor="#ebaf4c" FontSize="12" HorizontalOptions="FillAndExpand" />           
                 <Entry x:Name="getClubName" Placeholder="Enter Club Name" PlaceholderColor="#ebaf4c" FontSize="12" HorizontalOptions="FillAndExpand" />

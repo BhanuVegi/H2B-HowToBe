@@ -104,31 +104,16 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
@@ -145,6 +130,11 @@
     <ImageAsset Include="Assets.xcassets\Image.imageset\ClubDrive.png" />
     <ImageAsset Include="Assets.xcassets\Image.imageset\ClubDriveLogo.png" />
     <ImageAsset Include="Assets.xcassets\Image.imageset\ClubDriveLogo.pdf" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ClubHivesIcon_1_87x87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ClubHivesIcon_80x80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ClubHivesIcon_58x58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ClubHivesIcon_120x120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ClubHivesIcon_180x180.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -170,5 +160,9 @@
     <BundleResource Include="Resources\ClubDriveLogo1.png" />
     <BundleResource Include="Resources\ClubDriveLogo2.png" />
     <BundleResource Include="Resources\ClubDriveLogoFinal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
 </Project>

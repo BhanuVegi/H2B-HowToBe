@@ -3,24 +3,24 @@
     <ContentPage.Content>
       <Grid BackgroundColor="Transparent"> 
         <Grid.RowDefinitions>
-            <RowDefinition Height="600" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
            <Grid Grid.Row="0">
                <StackLayout Orientation="Vertical"> 
-                <Label TextColor="#ebaf4c" x:Name="createStatus" Text="       " Font="32" />         
-                <Entry x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="16" />
-                <Entry x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#ebaf4c" FontSize="16" IsPassword="true" />
-                <Entry x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#ebaf4c" FontSize="16" IsPassword="true"/>
-                <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#ebaf4c" FontSize="16"/>
-                <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
-                <Entry x:Name="cdMiddleName" Placeholder="Middle Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
-                <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
-                <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#ebaf4c" FontSize="16"/> 
-                <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="16"/>
-                <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="16"/>
-                <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="16"/>
-                <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#ebaf4c" FontSize="16"/>
+                <Label TextColor="#ebaf4c" x:Name="createStatus" Text="       " Font="12" />         
+                <Entry x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="12" />
+                <Entry x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#ebaf4c" FontSize="12" IsPassword="true" />
+                <Entry x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#ebaf4c" FontSize="12" IsPassword="true"/>
+                <Entry x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="cdMiddleName" Placeholder="Middle Name" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#ebaf4c" FontSize="12"/> 
+                <Entry x:Name="cdCity" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="cdState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#ebaf4c" FontSize="12"/>
                 </StackLayout>
             </Grid>
             <Grid Grid.Row="1">

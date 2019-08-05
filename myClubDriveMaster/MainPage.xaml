@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:myClubDriveMaster" x:Class="myClubDriveMaster.MainPage" BackgroundImage="ClubDrive.png">
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <OnPlatform.iOS>
-                0,20,0,0
-            </OnPlatform.iOS>
-            <OnPlatform.Android>
-                0,0,0,0                
-            </OnPlatform.Android>                
-        </OnPlatform>
-    </ContentPage.Padding>
-    
+
     <Grid BackgroundColor="Transparent">
-          <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,30,0,0" Grid.Row="0">
-               <Label Text="       " Font="32" />
-                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-            </StackLayout>  
-        <Grid Grid.Row="1">        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />     
+       <Grid.RowDefinitions>
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="5*" />    
+            <RowDefinition Height="1*" /> 
+            <RowDefinition Height="4*" />   
         </Grid.RowDefinitions>
-        <Label x:Name="loginMessage" HorizontalOptions="Center" TextColor="#ebaf4c" FontSize="16"/>
-        <Entry Grid.Row="1" x:Name="eusername" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="16"/>
-        <Entry Grid.Row="2" x:Name="epassword" Placeholder="Password" PlaceholderColor="#ebaf4c" FontSize="16"/>
-        <Button Clicked="cdLogin" Text="Log In" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="3"/>
-        <Button Clicked="cdloginHelp" BackgroundColor="Transparent" Text="Login Trouble? Get Help" HorizontalOptions="Center" Grid.Row="4" Margin="0,10,0,0" TextColor="#ebaf4c" FontSize="12"/>
-         <Grid Grid.Row="5">
+        <Grid Grid.Row="0"> 
+          <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,20,0,0">
+                <Label Text=" " HorizontalOptions="Center" TextColor="#ebaf4c" FontSize="8"/>
+                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+          </StackLayout>  
+       </Grid>
+       <Grid Grid.Row="1">
+            <StackLayout Orientation="Vertical">
+                <Label x:Name="loginMessage" HorizontalOptions="Center" TextColor="#ebaf4c" FontSize="8"/>
+                <Entry x:Name="eusername" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="12"/>
+                <Entry x:Name="epassword" Placeholder="Password" PlaceholderColor="#ebaf4c" IsPassword="true" FontSize="12"/>
+            </StackLayout>    
+       </Grid>
+        <Grid Grid.Row="2"> 
+          <StackLayout Orientation="Vertical">  
+            <Button Clicked="cdLogin" Text="Log In" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" FontSize="10" VerticalOptions="Start"/>
+             <Label Text=" " HorizontalOptions="Center" TextColor="#ebaf4c" FontSize="8"/>    
+            <Button Clicked="cdloginHelp" BackgroundColor="Transparent" Text="Login Trouble? Get Help" HeightRequest="30" FontSize="10" VerticalOptions="Start" TextColor="#ebaf4c" />
+          </StackLayout>      
+        </Grid> 
+         <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label BackgroundColor="#bababa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                    <Button Clicked="cdloginFacebook" x:Name="socialImage" Text="" Image="gflogo.png" Grid.Column="1" VerticalOptions="Center" Margin="10,0,10,0"/>
-                    <Label BackgroundColor="#bababa" Grid.Column="2" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Label BackgroundColor="#bababa"  Grid.Column="0" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Button Clicked="cdloginFacebook" x:Name="socialImage" Text="" Image="gflogo.png" Grid.Column="1" VerticalOptions="Center" Margin="10,0,10,0"/>
+                        <Label BackgroundColor="#bababa" Grid.Column="2" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="6">
+                        <Button Clicked="cdloginFacebook" x:Name="socialText" Text="Login With Facebook" BackgroundColor="Transparent" TextColor="#ebaf4c" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
           </Grid>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="6">
-                    <Button Clicked="cdloginFacebook" x:Name="socialText" Text="Login With Facebook" BackgroundColor="Transparent" TextColor="#ebaf4c" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                </StackLayout>
-          </Grid>
-        
-            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Text="Account Registration" Clicked="cdRegistration" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+          <Grid Grid.Row="4">
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Button Text="Account Registration" Clicked="cdRegistration" BackgroundColor="#ebaf4c" FontSize="10" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
+          </Grid>
     </Grid>
 </ContentPage>

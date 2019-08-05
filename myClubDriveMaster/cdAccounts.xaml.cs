@@ -20,9 +20,13 @@ namespace myClubDriveMaster
 
         async void cdSecond(object sender, System.EventArgs e)
         {
-            if (regAccount.UserName != null || regAccount.EmailAddress != null || regAccount.FirstName != null ||
-                regAccount.LastName != null || cdPassword.Text != null )
-            { 
+            if (cdUserName.Text is null || cdEmail.Text is null || cdFirstName.Text is null ||
+                cdLastName.Text is null || cdPassword.Text is null )
+            {
+                await DisplayAlert("Enter Required Values ", " User Name, Email Address, First Name, Last Name, Password are required fields. Please enter the same.", "OK");
+            }
+            else 
+            {
                 System.Diagnostics.Debug.WriteLine(" Account Reg button clicked");
                 regAccount.UserName = cdUserName.Text;
                 regAccount.EmailAddress = cdEmail.Text;
@@ -35,12 +39,8 @@ namespace myClubDriveMaster
                 regAccount.cdState = cdState.Text;
                 regAccount.PostalCode = cdPostalCode.Text;
                 regAccount.Phone = cdPhone.Text;
-                var cpage = new cdAccounts2(regAccount,regClub, cdPassword.Text);
+                var cpage = new cdAccounts2(regAccount, regClub, cdPassword.Text);
                 await Navigation.PushModalAsync(cpage);
-            }
-            else 
-            {
-                await DisplayAlert("Enter Required Values ", " User Name, Email Address, First Name, Last Name, Password are required fields. Please enter the same.", "OK");
             }
         }
 

@@ -130,6 +130,8 @@ namespace myClubDriveMaster
 
         async void cdTrack(object sender, System.EventArgs e)
         {
+            try
+            { 
             System.Diagnostics.Debug.WriteLine(" Clicked Track Button");
             cdQueryAttr qryAcct = new cdQueryAttr();
             qryAcct.ColIndex = "IndexName";
@@ -138,19 +140,24 @@ namespace myClubDriveMaster
             qryAcct.ColValue = mystudAccounts.Account[counter].UserName;
 
             getDriver myDriverArray = new getDriver();
-            DriverAlloc pubDriverInfo = new DriverAlloc();
+            DriverAllocation pubDriverInfo = new DriverAllocation();
             cdCallAPI mycallAPI = new cdCallAPI();
 
             var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
             myDriverArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
 
-            pubDriverInfo = myDriverArray.DriverAlloc[0];
+            pubDriverInfo = myDriverArray.DriverAllocation[0];
 
             String trackkey = pubDriverInfo.DriverID+ DateTime.Now.ToShortDateString();
             System.Diagnostics.Debug.WriteLine(" Tracking "+ mystudAccounts.Account[counter].UserName + "with the key "+ trackkey);
 
             var tpage = new cdTrackRiders(trackkey,loginAccount);
             await Navigation.PushModalAsync(tpage);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("No Tracking", "No Tracking information available for this student","OK");
+            }
 
         }
 

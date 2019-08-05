@@ -22,5 +22,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="MyPage.xaml.cs" />
+    <Compile Remove="cdChoose.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="cdResponseAPI.cs~" />
+    <None Remove="cdAccounts.xaml~" />
+    <None Remove="cdAccounts2.xaml~" />
+    <None Remove="cdAdminDrive.xaml~" />
+    <None Remove="cdAssignClubs.xaml~" />
+    <None Remove="cdAssignClubs.xaml.cs~" />
+    <None Remove="cdClubs.xaml~" />
+    <None Remove="cdCreateClub.xaml~" />
+    <None Remove="cdCreateEvents.xaml~" />
+    <None Remove="cdDriverDrive.xaml.cs~" />
+    <None Remove="cdHome.xaml.cs~" />
+    <None Remove="cdHome.xaml~" />
+    <None Remove="cdMyAccount.xaml~" />
+    <None Remove="cdMyEvents.xaml.cs~" />
+    <None Remove="cdMyEvents.xaml~" />
+    <None Remove="cdMyRiders.xaml~" />
+    <None Remove="cdParentDrive.xaml~" />
+    <None Remove="cdParentDrive.xaml.cs~" />
+    <None Remove="cdResponseAPI.cs~" />
+    <None Remove="cdRiderAccount.xaml~" />
+    <None Remove="cdRiderAccount.xaml.cs~" />
+    <None Remove="cdRiderDrive.xaml.cs~" />
+    <None Remove="cdRiderDrive.xaml~" />
+    <None Remove="MainPage.xaml~" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="cdChoose.xaml" />
   </ItemGroup>
 </Project>

@@ -32,9 +32,11 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Rider Page Button");
             Device.OpenUri(new Uri(App.cdShopMyURL));
         }
-        void cdRiderPage(object sender, System.EventArgs e)
+        async void cdRiderPage(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Rider Page Button");
+            var tpage = new cdRiderDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
         }
         async void cdmyClubs(object sender, System.EventArgs e)
         {
@@ -164,16 +166,14 @@ namespace myClubDriveMaster
             {
                 System.Diagnostics.Debug.WriteLine("Enable Rider..");
                 RiderPage.IsEnabled = true;
-                RegisterStudents.IsVisible = false;
-                CreateClub.IsVisible = false;
-                CreateEvents.IsVisible = false;
-                cdCreateData.Text = " ";
-                cdMyData.Text = " ";
-                ParentPage.IsVisible = false;
-                DriverPage.IsVisible = false;
-                AdminPage.IsVisible = false;
+                RegisterStudents.IsEnabled = false;
+                CreateClub.IsEnabled = false;
+                CreateEvents.IsEnabled = false;
+                ParentPage.IsEnabled = false;
+                DriverPage.IsEnabled = false;
+                AdminPage.IsEnabled = false;
                 MerchPage.IsEnabled = false;
-
+                MyRiders.IsEnabled = false;
             }
             else
             {

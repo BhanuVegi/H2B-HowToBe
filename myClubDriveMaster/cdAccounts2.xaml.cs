@@ -50,17 +50,10 @@ namespace myClubDriveMaster
             {
                 performSubmit = 1;
                 regAccount.AccountID = regAccount.UserName;
-                if (cdNewClub.IsChecked is true)
-                { 
-                    regAccount.AccountStatus = "Approved";
-                }
-                else 
-                {
-                    regAccount.AccountStatus = "NotApproved";
-                }
+                regAccount.AccountStatus = "Approved";
                 if (regAccount.AddressLine1 is null)
                 {
-                    regAccount.AddressLine2 = "None";
+                    regAccount.AddressLine1 = "None";
                 }
                 if (regAccount.AddressLine2 is null)
                 {
@@ -82,16 +75,21 @@ namespace myClubDriveMaster
                 {
                     regAccount.PostalCode = "None";
                 }
-                regAccount.AddressLine3 = "None";
-                regAccount.County = "NA";
-                regAccount.Destination = "NA";
-                if (regAccount.MiddleName is null )
+                if (regAccount.MiddleName is null || regAccount.MiddleName == " " || regAccount.MiddleName == "")
                 {
+                    System.Diagnostics.Debug.WriteLine(" Setting middle name to none ");
                     regAccount.MiddleName = "None";
                 }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" middle name is populated ");
+                }
+                regAccount.AddressLine3 = "None";
+                regAccount.County = "None";
+                regAccount.Destination = "None";
                 if (regAccount.ParentID is null)
                 {
-                    regAccount.ParentID = "NA";
+                    regAccount.ParentID = "None";
                 }
                 if (regAccount.Phone is null)
                 {
@@ -127,16 +125,16 @@ namespace myClubDriveMaster
                     regAccount.Role = regAccount.Role + "P";
 
                 }
-                regAccount.Attr1 = "NA";
-                regAccount.Attr2 = "NA";
-                regAccount.Attr3 = "NA";
-                regAccount.Attr4 = "NA";
-                regAccount.Attr5 = "NA";
-                regAccount.Attr6 = "NA";
-                regAccount.Attr7 = "NA";
-                regAccount.Attr8 = "NA";
-                regAccount.Attr9 = "NA";
-                regAccount.Attr10 = "NA";
+                regAccount.Attr1 = "None";
+                regAccount.Attr2 = "None";
+                regAccount.Attr3 = "None";
+                regAccount.Attr4 = "None";
+                regAccount.Attr5 = "None";
+                regAccount.Attr6 = "None";
+                regAccount.Attr7 = "None";
+                regAccount.Attr8 = "None";
+                regAccount.Attr9 = "None";
+                regAccount.Attr10 = "None";
             }
 
             if ( performSubmit == 1 )
@@ -148,7 +146,8 @@ namespace myClubDriveMaster
                 {
                     System.Diagnostics.Debug.WriteLine(" Account creation call failed " + jsresponse);
                     var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                    cdStatus.Text = "Account Creation Failed. " + myerror.message;
+                    cdStatus.Text = "Account Creation Failed because " + myerror.message;
+                    await DisplayAlert("Account creation failed", cdStatus.Text, "OK");
                 }
                 else
                 {
@@ -163,7 +162,8 @@ namespace myClubDriveMaster
                     {
                         System.Diagnostics.Debug.WriteLine(" Account signup failed " + jsresponse);
                         var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                        cdStatus.Text = "Account signup failed. " + myerror.message;
+                        cdStatus.Text = "Login creation failed. " + myerror.message;
+                        await DisplayAlert("Login creation failed", cdStatus.Text, "OK");
                     }
                     else 
                     { 
@@ -195,7 +195,7 @@ namespace myClubDriveMaster
                             regClub.Attr6 = "NA";
                             regClub.Attr7 = "NA";
                             regClub.Attr8 = "NA";
-                            regClub.Attr9 = "NA";
+                            regClub.Attr9 = "Approved";
                             regClub.Attr10 = "NA";
 
                             jsresponse = await mycallAPI.cdcallClubsPUT(regClub);
@@ -205,6 +205,7 @@ namespace myClubDriveMaster
                                 System.Diagnostics.Debug.WriteLine(" Club creation call failed " + jsresponse);
                                 var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
                                 cdStatus.Text = "Club Creation Failed. " + myerror.message;
+                                await DisplayAlert("Club creation failed", cdStatus.Text, "OK");
                             }
                             else
                             {
@@ -223,7 +224,7 @@ namespace myClubDriveMaster
                                 myclubmembership.Attr6 = "NA";
                                 myclubmembership.Attr7 = "NA";
                                 myclubmembership.Attr8 = "NA";
-                                myclubmembership.Attr9 = "NA";
+                                myclubmembership.Attr9 = "NotApproved";
                                 myclubmembership.Attr10 = "NA";
 
                                 jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);
@@ -232,6 +233,7 @@ namespace myClubDriveMaster
                                     System.Diagnostics.Debug.WriteLine(" Club Membership creation call failed " + jsresponse);
                                     var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
                                     cdStatus.Text = "Club Member Creation Failed. " + myerror.message;
+                                    await DisplayAlert("Club Member creation failed", cdStatus.Text, "OK");
                                 }
                                 else
                                 {

@@ -82,12 +82,13 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable\ClubDrive.png" />
-    <AndroidResource Include="Resources\drawable\ClubDriveLogo.png" />
     <AndroidResource Include="Resources\drawable\gflogo.png" />
     <AndroidResource Include="Resources\drawable\ClubDriveLogo1.png" />
     <AndroidResource Include="Resources\drawable\ClubDriveLogo2.png" />
-    <AndroidResource Include="Resources\drawable\ClubDriveLogoFinal.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ClubDrive.png" />
+    <AndroidResource Include="Resources\drawable\ClubDrive.jpg" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ClubDriveLogoFinal.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ClubDriveLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

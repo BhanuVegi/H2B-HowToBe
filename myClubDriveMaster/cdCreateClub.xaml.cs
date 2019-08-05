@@ -78,7 +78,7 @@ namespace myClubDriveMaster
                     myclubmembership.Attr6 = "NA";
                     myclubmembership.Attr7 = "NA";
                     myclubmembership.Attr8 = "NA";
-                    myclubmembership.Attr9 = "NA";
+                    myclubmembership.Attr9 = "Approved";
                     myclubmembership.Attr10 = "NA";
 
                     jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);

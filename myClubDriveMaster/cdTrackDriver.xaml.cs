@@ -45,9 +45,9 @@ namespace myClubDriveMaster
         private async void moveToCurrentLoc()
         {
         
-                var mypos = new Position(cPosLat, cPosLong);
+                //var mypos = new Position(cPosLat, cPosLong);
 
-                //var mypos = new Position(33.850417, -118.358729);
+                var mypos = new Position(33.850417, -118.358729);
 
                 var map = new Map(
                 MapSpan.FromCenterAndRadius(

@@ -4,14 +4,14 @@
     <ContentPage.Content>
       <Grid BackgroundColor="Transparent">
       <Grid.RowDefinitions>
-            <RowDefinition Height="380" />
-            <RowDefinition Height="80" />
-            <RowDefinition Height="50" />    
-            <RowDefinition Height="200" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.5*" />    
+            <RowDefinition Height="2.5*" />
         </Grid.RowDefinitions> 
            <Grid Grid.Row="0">
              <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
-               <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="       " Font="32" />
+               <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="       " Font="20" />
                 <Label TextColor="#ebaf4c" x:Name="EventName" Text="Club Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 <Label TextColor="#ebaf4c" x:Name="EventID" Text="Event ID:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 <Entry x:Name="EventAddress" Placeholder="Address Line1" PlaceholderColor="#ebaf4c" FontSize="12" /> 
@@ -28,24 +28,24 @@
                 <StackLayout Orientation="Vertical" HorizontalOptions="Start" >
                     <input:CheckBox TextColor="#ebaf4c" x:Name="cdAddAll"  Text="ADD ALL REGISTERED CLUB MEMBERS" Type="Check" />
                     <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckRider" Text="CAN YOU DRIVE TO THE EVENT" Type="Check"/>
-                     <Label TextColor="#ebaf4c" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 </StackLayout>     
             </Grid>
             <Grid Grid.Row="2">
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
-                    <Entry x:Name="CarType" Placeholder="Car Type" PlaceholderColor="#ebaf4c" FontSize="12" /> 
-                    <Entry x:Name="CarAllowance" Placeholder="Number of Passengers" PlaceholderColor="#ebaf4c" FontSize="12" /> 
+                    <Entry x:Name="CarType" Placeholder="Car Model Including Color" PlaceholderColor="#ebaf4c" FontSize="10" /> 
+                    <Entry x:Name="CarAllowance" Placeholder="Number of Passengers" PlaceholderColor="#ebaf4c" FontSize="10" /> 
+                    <Entry x:Name="CarLicense" Placeholder="Car License (For Identification)" PlaceholderColor="#ebaf4c" FontSize="10" /> 
                 </StackLayout>  
             </Grid>
             <Grid Grid.Row="3">        
-                <StackLayout Orientation="Vertical" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                    <Button Clicked="cdRiders" Text="Signup Club Members" x:Name="AddStudents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                    <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                    <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                    <Button Clicked="cdSubmit" Text="Submit" x:Name="DriveButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30"  VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                    <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <StackLayout Orientation="Vertical" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <Button Clicked="cdRiders" Text="Signup Club Members" x:Name="AddStudents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                    <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                    <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                    <Button Clicked="cdSubmit" Text="Submit" x:Name="DriveButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30"  VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                    <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
-            </Grid>
-    </Grid>
+           </Grid>
+      </Grid>
   </ContentPage.Content>
 </ContentPage>

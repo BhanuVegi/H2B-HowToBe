@@ -2,38 +2,48 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdAdminDrive" BackgroundImage="ClubDrive.png">
     <ContentPage.Content>  
     <Grid BackgroundColor="Transparent">
-          <StackLayout Orientation="Vertical" HorizontalOptions="Center"  Grid.Row="0">
-                <Label TextColor="#ebaf4c" Text="       " Font="32" />
+       <Grid.RowDefinitions>
+             <RowDefinition Height="9*" />
+             <RowDefinition Height="3*" />
+             <RowDefinition Height="9*" />
+             <RowDefinition Height="3*" />   
+        </Grid.RowDefinitions>    
+         <Grid Grid.Row="0">      
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                 <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-                <Entry x:Name="EmailAddress" Placeholder="EmailAddress" PlaceholderColor="#ebaf4c" FontSize="16" /> 
-                <Button x:Name="FindButton" Text="Find" Clicked="cdFind" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" />
-                <Label TextColor="#ebaf4c" x:Name="ApplicantName" Text="Applicant Name:" BackgroundColor="Transparent" FontSize="16" />
-                <Label TextColor="#ebaf4c" x:Name="ApplicantType" Text="Applicant Type:" BackgroundColor="Transparent" FontSize="16" />
-                <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="  " BackgroundColor="Transparent" FontSize="16" />
-            </StackLayout>  
-        <Grid Grid.Row="1">        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />     
-        </Grid.RowDefinitions>
-        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
-               <Label TextColor="#ebaf4c" x:Name="ApprovalStatus" Text="Approval Status:" BackgroundColor="Transparent" FontSize="16" Grid.Row="3" /> 
-               <Picker x:Name="picker" Title="Approval Status" TextColor="#ebaf4c" Grid.Row="4"> 
+                <Label TextColor="#ebaf4c"  Text=" " BackgroundColor="Transparent" FontSize="10" />
+                <Entry x:Name="EmailAddress" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="10" /> 
+                <Button x:Name="FindButton" Text="Find" Clicked="cdFind" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
+                <Label TextColor="#ebaf4c" x:Name="ApplicantName" Text="Applicant Name:" BackgroundColor="Transparent" FontSize="10" />
+                <Label TextColor="#ebaf4c" x:Name="ApplicantType" Text="Applicant Type:" BackgroundColor="Transparent" FontSize="10" />
+                <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="  " BackgroundColor="Transparent" FontSize="10" />
+            </StackLayout> 
+        </Grid>    
+        <Grid Grid.Row="1">
+           <StackLayout Orientation="Vertical">     
+               <Label TextColor="#ebaf4c" x:Name="ApprovalStatus" Text="Approval Status:" BackgroundColor="Transparent" FontSize="10" Grid.Row="3" /> 
+               <Picker x:Name="picker" Title="Approval Status" TextColor="#ebaf4c"> 
                      <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                           <x:String>Approved</x:String>
                           <x:String>Rejected</x:String>
                         </x:Array>
                      </Picker.ItemsSource>
-                </Picker>    
-                <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="6"/>            
-                <Button Clicked="cdPrevious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="7"/>
-                <Button Clicked="cdSubmit" Text="Submit" x:Name="SubmitButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="5"/>
-            </Grid>
-            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                </Picker>
+            </StackLayout>
+         </Grid>
+         <Grid Grid.Row="2"> 
+             <StackLayout Orientation="Vertical">     
+                <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />            
+                <Button Clicked="cdPrevious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
+                <Button Clicked="cdSubmit" Text="Submit" x:Name="SubmitButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
+             </StackLayout>
+         </Grid>
+         <Grid Grid.Row="3">    
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                 <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
+         </Grid>       
     </Grid>
-    </ContentPage.Content>  
+ </ContentPage.Content>  
 </ContentPage>

@@ -62,8 +62,8 @@ namespace myClubDriveMaster
                 insertEventMembers.DriverCar = CarType.Text;
                 insertEventMembers.RiderCount = CarAllowance.Text;
                 insertEventMembers.PickupLocation = assignedEvents[counter].AddressLine1+ " "+assignedEvents[counter].City + " " + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
-                insertEventMembers.Attr1 = "None";
-                insertEventMembers.Attr2 = "None";
+                insertEventMembers.Attr1 = assignedEvents[counter].AddressLine1+" "+ assignedEvents[counter].AddressLine2;
+                insertEventMembers.Attr2 = assignedEvents[counter].City + " " + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
                 insertEventMembers.Attr3 = "None";
                 insertEventMembers.Attr4 = "None";
                 insertEventMembers.Attr5 = "None";
@@ -78,6 +78,8 @@ namespace myClubDriveMaster
                 if (cdCheckRider.IsChecked == true)
                 { 
                     insertEventMembers.MemberRole = "D";
+                    insertEventMembers.Attr3 = CarType.Text;
+                    insertEventMembers.Attr4 = CarLicense.Text;
                 }
                 else
                 {
@@ -131,8 +133,8 @@ namespace myClubDriveMaster
                         insertEventMembers.DriverCar = "NA";
                         insertEventMembers.RiderCount = "0";
                         insertEventMembers.PickupLocation = assignedEvents[counter].AddressLine1 + " " + assignedEvents[counter].City + " " + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
-                        insertEventMembers.Attr1 = "None";
-                        insertEventMembers.Attr2 = "None";
+                        insertEventMembers.Attr1 = assignedEvents[counter].AddressLine1 + " " + assignedEvents[counter].AddressLine2;
+                        insertEventMembers.Attr2 = assignedEvents[counter].City + " " + assignedEvents[counter].cdState + " " + assignedEvents[counter].PostalCode;
                         insertEventMembers.Attr3 = "None";
                         insertEventMembers.Attr4 = "None";
                         insertEventMembers.Attr5 = "None";
@@ -149,6 +151,7 @@ namespace myClubDriveMaster
                         {
                             System.Diagnostics.Debug.WriteLine(" Put API Call failed " + jsresponse);
                             myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                            await DisplayAlert("Create Event Members", "Unable to create event members", "ok");
                             returnError = returnError+" "+ stacc.MemberName;
                         }
                         else
@@ -185,33 +188,37 @@ namespace myClubDriveMaster
 
             if (assignedEvents[counter].Attr1.Contains("A") == true)
             {
-                cdReadError myerror = new cdReadError();
-                cdUpdateEvent updateAddress = new cdUpdateEvent();
-                updateAddress.EventID = assignedEvents[counter].EventID;
-                updateAddress.ColumnName = "AddressLine1";
-                updateAddress.ColumnValue = EventAddress.Text;
-                updateAddress.ColumnName2 = "City";
-                updateAddress.ColumnValue2 = City.Text;
-                updateAddress.ColumnName3 = "cdState";
-                updateAddress.ColumnValue3 = myState.Text;
-                updateAddress.ColumnName4 = "PostalCode";
-                updateAddress.ColumnValue4 = PostalCode.Text;
+                if (assignedEvents[counter].AddressLine1 != EventAddress.Text ||
+                    assignedEvents[counter].City != City.Text ||
+                    assignedEvents[counter].cdState != myState.Text ||
+                    assignedEvents[counter].PostalCode != PostalCode.Text )
+                 { 
+                    cdReadError myerror = new cdReadError();
+                    cdUpdateEvent updateAddress = new cdUpdateEvent();
+                    updateAddress.EventID = assignedEvents[counter].EventID;
+                    updateAddress.ColumnName = "AddressLine1";
+                    updateAddress.ColumnValue = EventAddress.Text;
+                    updateAddress.ColumnName2 = "City";
+                    updateAddress.ColumnValue2 = City.Text;
+                    updateAddress.ColumnName3 = "cdState";
+                    updateAddress.ColumnValue3 = myState.Text;
+                    updateAddress.ColumnName4 = "PostalCode";
+                    updateAddress.ColumnValue4 = PostalCode.Text;
 
-                System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
-                cdCallAPI mycallAPI = new cdCallAPI();
-                var jsresponse = await mycallAPI.cdcallEventsPOST(updateAddress);
+                    System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
+                    cdCallAPI mycallAPI = new cdCallAPI();
+                    var jsresponse = await mycallAPI.cdcallEventsPOST(updateAddress);
 
-                System.Diagnostics.Debug.WriteLine(" After calling Post API ");
-                if (jsresponse.ToString().Contains("ValidationException"))
-                {
-                    System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
-                    myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                    updateStatus.Text = "Update Failed. " + myerror.message;
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                    updateStatus.Text = "Update Successful";
+                    System.Diagnostics.Debug.WriteLine(" After calling Post API ");
+                    if (jsresponse.ToString().Contains("ValidationException"))
+                    {
+                        System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                        myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                    }
                 }
 
             }
@@ -596,10 +603,10 @@ namespace myClubDriveMaster
                                     myDriverAlloc.ClubName = allsignup.ClubName;
                                     myDriverAlloc.StudentName = stdeventsignups[stdcounter].MemberName;
                                     myDriverAlloc.DriverName = allsignup.MemberName;
-                                    myDriverAlloc.Attr1 = "None";
-                                    myDriverAlloc.Attr2 = "None";
-                                    myDriverAlloc.Attr3 = "None";
-                                    myDriverAlloc.Attr4 = "None";
+                                    myDriverAlloc.Attr1 =allsignup.Attr1;
+                                    myDriverAlloc.Attr2 = allsignup.Attr2;
+                                    myDriverAlloc.Attr3 = allsignup.Attr3;
+                                    myDriverAlloc.Attr4 = allsignup.Attr4;
                                     myDriverAlloc.Attr5 = "None";
                                     myDriverAlloc.Attr6 = "None";
                                     myDriverAlloc.Attr7 = "None";
@@ -672,7 +679,7 @@ namespace myClubDriveMaster
                              {
                                     updem.EventMemberID = allsignup.EventMemberID;
                                     updem.ColumnName = "AllocationStatus";
-                                    updem.ColumnValue = "ALLOCATED";
+                                    updem.ColumnValue = "UNALLOCATED";
                                     updem.ColumnName1 = "RiderCount";
                                     updem.ColumnValue1 = rcount.ToString();
                                     updem.ColumnName2 = "Attr1";

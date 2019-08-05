@@ -140,6 +140,11 @@ namespace myClubDriveMaster
                         App.cdClubMemberAPIGet = prec.EndPoint;
                         App.cdClubMemberKey = prec.AccessKey;
                     }
+                    if (prec.ParameterName == "cdClubMemberAPIUAGet")
+                    {
+                        App.cdClubMemberAPIUAGet = prec.EndPoint;
+                        App.cdClubMemberKey = prec.AccessKey;
+                    }
                     if (prec.ParameterName == "cdClubMemberAPIPutPost")
                     {
                         App.cdClubMemberAPIPutPost = prec.EndPoint;
@@ -248,6 +253,13 @@ namespace myClubDriveMaster
             return getClubMembers;
 
         }
+        public async Task<JToken> cdcallClubMembersUAGET(cdQueryAttr QueryObject)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var getClubMembers = await mycallAPI.cdCallGetAPI(App.cdClubMemberAPIUAGet, QueryObject, App.cdClubKey);
+            return getClubMembers;
+
+        }
         public async Task<JToken> cdcallEventMembersGET(cdQueryAttr QueryObject)
         {
             cdCallAPI mycallAPI = new cdCallAPI();
@@ -326,6 +338,13 @@ namespace myClubDriveMaster
         {
             cdCallAPI mycallAPI = new cdCallAPI();
             var response = await mycallAPI.cdCallPutAPI(App.cdClubMemberAPIPutPost, regacccount,App.cdClubMemberKey);
+            return response;
+
+        }
+        public async Task<JToken> cdcallClubMembersPOST(cdUpdateClubMembers regacccount)
+        {
+            cdCallAPI mycallAPI = new cdCallAPI();
+            var response = await mycallAPI.cdCallPostAPI(App.cdClubMemberAPIPutPost, regacccount, App.cdClubMemberKey);
             return response;
 
         }

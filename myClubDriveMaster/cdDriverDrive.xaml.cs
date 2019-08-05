@@ -18,18 +18,10 @@ namespace myClubDriveMaster
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
             counter = counter + 1;
-            StudentName.Text = "Student Name: "+mystudArray.DriverAlloc[counter].Attr6 + " "+ mystudArray.DriverAlloc[counter].Attr7;
-            String myaddline2 = "";
-            if (mystudArray.DriverAlloc[counter].AddressLine2 == "NA")
-            {
-                myaddline2 = "";
-            }
-            else
-            {
-                myaddline2 = mystudArray.DriverAlloc[counter].AddressLine2 + " , ";
-            }
-            DestinationAddress.Text = "Destination Address : "+ mystudArray.DriverAlloc[counter].AddressLine1 + " , " + myaddline2 ;
-            DestinationAddress2.Text = "                                       " + mystudArray.DriverAlloc[counter].City + " , " + mystudArray.DriverAlloc[counter].State + " " + mystudArray.DriverAlloc[counter].PostalCode;
+            StudentName.Text = "Student Name: "+mystudArray.DriverAllocation[counter].StudentName;
+           
+            DestinationAddress.Text = "Destination Address : "+ mystudArray.DriverAllocation[counter].Attr1;
+            DestinationAddress2.Text = "                       "+mystudArray.DriverAllocation[counter].Attr2;
 
             if (counter >= maxarray)
             {
@@ -63,18 +55,10 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Previous Button");
             System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
             counter = counter - 1;
-            StudentName.Text = "Student Name: " + mystudArray.DriverAlloc[counter].Attr6 + " " + mystudArray.DriverAlloc[counter].Attr7;
-            String myaddline2 = "";
-            if (mystudArray.DriverAlloc[counter].AddressLine2 == "NA")
-            {
-                myaddline2 = "";
-            }
-            else
-            {
-                myaddline2 = mystudArray.DriverAlloc[counter].AddressLine2 + " , ";
-            }
-            DestinationAddress.Text = "Destination Address : " + mystudArray.DriverAlloc[counter].AddressLine1 + " , " + myaddline2;
-            DestinationAddress2.Text = "                                       " + mystudArray.DriverAlloc[counter].City + " , " + mystudArray.DriverAlloc[counter].State + " " + mystudArray.DriverAlloc[counter].PostalCode;
+
+            StudentName.Text = "Student Name: " + mystudArray.DriverAllocation[counter].StudentName;
+            DestinationAddress.Text = "Destination Address : " + mystudArray.DriverAllocation[counter].Attr1;
+            DestinationAddress2.Text = "                       "+mystudArray.DriverAllocation[counter].Attr2;
 
             if (counter == 0)
             {
@@ -128,38 +112,39 @@ namespace myClubDriveMaster
             qryAcct.IndexName = "DriverIDAllocationIDindex";
             qryAcct.ColName = "DriverID";
             qryAcct.ColValue = logAccount.UserName;
+                counter = 0;
 
             getDriver myStudentArray = new getDriver();
-            DriverAlloc pubStudentInfo = new DriverAlloc();
+            DriverAllocation pubStudentInfo = new DriverAllocation();
             cdCallAPI mycallAPI = new cdCallAPI();
 
             var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
             myStudentArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
             mystudArray = myStudentArray;
 
- 
-                foreach (var dalloc in myStudentArray.DriverAlloc)
-                {
-                    maxarray = maxarray + 1;
+            System.Diagnostics.Debug.WriteLine("Get response for students is " + jsreponse);
+            try { 
+                    foreach (var dalloc in myStudentArray.DriverAllocation)
+                    {
+                            maxarray = maxarray + 1;
+                    }
+                }
+                catch (Exception ex)
+                { 
+                    System.Diagnostics.Debug.WriteLine("End of Array " + ex); 
                 }
 
-            StudentName.Text = "Student Name: " + mystudArray.DriverAlloc[counter].Attr6 + " " + mystudArray.DriverAlloc[counter].Attr7;
-            String myaddline2 = "";
-            if (mystudArray.DriverAlloc[counter].AddressLine2 == "NA")
-            {
-                myaddline2 = "";
-            }
-            else
-            {
-                myaddline2 = mystudArray.DriverAlloc[counter].AddressLine2 + " , ";
-            }
-            DestinationAddress.Text = "Destination Address : " + mystudArray.DriverAlloc[counter].AddressLine1 + " , " + myaddline2;
-            DestinationAddress2.Text = "                                       " + mystudArray.DriverAlloc[counter].City + " , " + mystudArray.DriverAlloc[counter].State + " " + mystudArray.DriverAlloc[counter].PostalCode;
+                System.Diagnostics.Debug.WriteLine("Assigning student name. Max array "+ maxarray);
+
+                StudentName.Text = "Student Name: " + mystudArray.DriverAllocation[counter].StudentName;
+                DestinationAddress.Text = "Destination Address : " + mystudArray.DriverAllocation[counter].Attr1;
+                DestinationAddress2.Text = "                       "+mystudArray.DriverAllocation[counter].Attr2;
+                System.Diagnostics.Debug.WriteLine("Assigned dest address ");
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("End of Array " + ex);
-                await DisplayAlert("No Student Allocation Found", "No Student Allocation Found", "ok");
+                await DisplayAlert("No Student Allocation Found", "No Student Allocation Found "+ex, "ok");
             }
             if (counter >= maxarray)
             {

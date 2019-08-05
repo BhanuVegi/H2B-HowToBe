@@ -8,7 +8,7 @@ namespace myClubDriveMaster
     public partial class cdAdminDrive : ContentPage
     {
         Account loginAccount = new Account();
-        getAccounts mystudArray = new getAccounts();
+        List<ClubMembers> unClubMembers = new List<ClubMembers>();
         int maxarray = -1;
         int counter = 0;
 
@@ -17,22 +17,26 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
             String myrole = " ";
             counter = counter + 1;
-            ApplicantName.Text = "Applicant Name: " + mystudArray.Account[counter].FirstName + " " + mystudArray.Account[counter].LastName;
+            ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
 
-            if (mystudArray.Account[counter].Role.Contains("D"))
+            if (unClubMembers[counter].MemberRole.Contains("D"))
             {
-                myrole = myrole+" Driver ";
+                myrole = myrole + " Driver ";
             }
-            if (mystudArray.Account[counter].Role.Contains("P"))
+            if (unClubMembers[counter].MemberRole.Contains("P"))
             {
-                myrole = myrole+" Parent ";
+                myrole = myrole + " Parent ";
             }
-            if (mystudArray.Account[counter].Role.Contains("A"))
+            if (unClubMembers[counter].MemberRole.Contains("A"))
             {
-                myrole = myrole+" Admin ";
+                myrole = myrole + " Admin ";
+            }
+            if (unClubMembers[counter].MemberRole.Contains("R"))
+            {
+                myrole = myrole + " Rider ";
             }
 
-            ApplicantType.Text = "Applicant Role: "+myrole;
+            ApplicantType.Text = "Applicant Role: " + myrole;
 
             if (counter >= maxarray)
             {
@@ -66,22 +70,26 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Track Button");
             counter = counter - 1;
             String myrole = " ";
-            ApplicantName.Text = "Applicant Name: " + mystudArray.Account[counter].FirstName + " " + mystudArray.Account[counter].LastName;
+            ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
 
-            if (mystudArray.Account[counter].Role.Contains("D"))
+            if (unClubMembers[counter].MemberRole.Contains("D"))
             {
                 myrole = myrole + " Driver ";
             }
-            if (mystudArray.Account[counter].Role.Contains("P"))
+            if (unClubMembers[counter].MemberRole.Contains("P"))
             {
                 myrole = myrole + " Parent ";
             }
-            if (mystudArray.Account[counter].Role.Contains("A"))
+            if (unClubMembers[counter].MemberRole.Contains("A"))
             {
                 myrole = myrole + " Admin ";
             }
+            if (unClubMembers[counter].MemberRole.Contains("R"))
+            {
+                myrole = myrole + " Rider ";
+            }
 
-            ApplicantType.Text = "Applicant Role: "+myrole;
+            ApplicantType.Text = "Applicant Role: " + myrole;
 
             if (counter == 0)
             {
@@ -113,34 +121,34 @@ namespace myClubDriveMaster
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Submit Button");
             cdReadError myerror = new cdReadError();
-            cdUpdateAccount updatemyAccount = new cdUpdateAccount();
-            updatemyAccount.AccountID = mystudArray.Account[counter].AccountID;
-            updatemyAccount.ColumnName = "AccountStatus";
+            cdUpdateClubMembers updatemyAccount = new cdUpdateClubMembers();
+            updatemyAccount.ClubMemberID = unClubMembers[counter].ClubMemberID;
+            updatemyAccount.ColumnName = "Attr9";
             updatemyAccount.ColumnValue = picker.SelectedItem.ToString();
             updatemyAccount.ColumnName1 = "Attr6";
-            updatemyAccount.ColumnValue1 = mystudArray.Account[counter].Attr6;
+            updatemyAccount.ColumnValue1 = unClubMembers[counter].Attr6;
             updatemyAccount.ColumnName2 = "Attr7";
-            updatemyAccount.ColumnValue2 = mystudArray.Account[counter].Attr7;
+            updatemyAccount.ColumnValue2 = unClubMembers[counter].Attr7;
             updatemyAccount.ColumnName3 = "Attr8";
-            updatemyAccount.ColumnValue3 = mystudArray.Account[counter].Attr8;
-            updatemyAccount.ColumnName4 = "Attr9";
-            updatemyAccount.ColumnValue4 = mystudArray.Account[counter].Attr9;
+            updatemyAccount.ColumnValue3 = unClubMembers[counter].Attr8;
+            updatemyAccount.ColumnName4 = "Attr5";
+            updatemyAccount.ColumnValue4 = unClubMembers[counter].Attr9;
 
             System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
             cdCallAPI mycallAPI = new cdCallAPI();
-            var jsresponse = await mycallAPI.cdcallAccountsPOST(updatemyAccount);
+            var jsresponse = await mycallAPI.cdcallClubMembersPOST(updatemyAccount);
 
             System.Diagnostics.Debug.WriteLine(" After calling Post API ");
             if (jsresponse.ToString().Contains("ValidationException"))
             {
                 System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
                 myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                updateStatus.Text = "Update Failed. " + myerror.message;
+                await DisplayAlert("Update Failed", "Update Failed. " + myerror.message,"OK");
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                updateStatus.Text = "Update Successful";
+                await DisplayAlert("Update Successful", "Update Successful","OK");
             }
         }
 
@@ -155,41 +163,51 @@ namespace myClubDriveMaster
         async void cdqueryAll()
         {
             String myrole = " ";
+            int clubUACM = 0;
             cdCallAPI mycallAPI = new cdCallAPI();
             Account myaccount = new Account();
             cdQueryAttr qryAcct = new cdQueryAttr();
             qryAcct.ColIndex = "IndexName";
-            qryAcct.IndexName = "AccountStatusindex";
-            qryAcct.ColName = "AccountStatus";
-            qryAcct.ColValue = "NotApproved";
+            qryAcct.IndexName = "MemberAccountIDIndex";
+            qryAcct.ColName = "MemberAccountID";
+            qryAcct.ColValue = loginAccount.AccountID;
 
-            getAccounts myAccountsArray = new getAccounts();
+            getClubMembers myClubs = new getClubMembers();
+            getClubMembers myUnApprovedMembers = new getClubMembers();
 
-            var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
-            myAccountsArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
-            mystudArray = myAccountsArray;
-            ApplicantName.Text = "Applicant Name: " + mystudArray.Account[counter].FirstName + " " + mystudArray.Account[counter].LastName;
+            var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
+            myClubs = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
 
-            if (mystudArray.Account[0].Role.Contains("D"))
-            {
-                myrole = myrole + " Driver ";
-            }
-            if (mystudArray.Account[0].Role.Contains("P"))
-            {
-                myrole = myrole + " Parent ";
-            }
-            if (mystudArray.Account[0].Role.Contains("A"))
-            {
-                myrole = myrole + " Admin ";
-            }
-
-            ApplicantType.Text = "Applicant Role: "+ myrole;
+            System.Diagnostics.Debug.WriteLine("Getting Clubs. Response received is " + jsreponse);
 
             try
             {
-                foreach ( var myacc in myAccountsArray.Account)
+                foreach ( var myc in myClubs.ClubMember)
                 {
-                    maxarray = maxarray + 1;
+
+                    if (myc.MemberRole.Contains("A"))
+                    {
+                        cdQueryAttr qryAcctUACM = new cdQueryAttr();
+                        qryAcctUACM.ColIndex = "IndexName";
+                        qryAcctUACM.IndexName = "AccountStatusIndex";
+                        qryAcctUACM.ColName = "ClubID";
+                        qryAcctUACM.ColValue = myc.ClubID;
+
+                        System.Diagnostics.Debug.WriteLine("Getting unapproved members for Club ID " + myc.ClubID);
+
+                        var jsreponseUACM = await mycallAPI.cdcallClubMembersUAGET(qryAcctUACM);
+                        myUnApprovedMembers = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponseUACM);
+
+                        System.Diagnostics.Debug.WriteLine("Getting Unapproved club members. Response received is " + jsreponseUACM);
+
+                        foreach (var mycuam in myUnApprovedMembers.ClubMember)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Adding Club Member to the list "+ mycuam.MemberAccountID);
+                            unClubMembers.Add(mycuam);
+                            maxarray = maxarray + 1;
+                            clubUACM = clubUACM + 1;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -197,15 +215,46 @@ namespace myClubDriveMaster
                 System.Diagnostics.Debug.WriteLine("End of Array " + ex);
             }
 
+            System.Diagnostics.Debug.WriteLine("Max Array " + maxarray + " club ua array " + clubUACM + " Counter "+counter);
+
+            if ( clubUACM >0 )
+            {
+                ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
+
+                if (unClubMembers[counter].MemberRole.Contains("D"))
+                {
+                    myrole = myrole + " Driver ";
+                }
+                if (unClubMembers[counter].MemberRole.Contains("P"))
+                {
+                    myrole = myrole + " Parent ";
+                }
+                if (unClubMembers[counter].MemberRole.Contains("A"))
+                {
+                    myrole = myrole + " Admin ";
+                }
+                if (unClubMembers[counter].MemberRole.Contains("R"))
+                {
+                    myrole = myrole + " Rider ";
+                }
+                ApplicantType.Text = "Applicant Role: " + myrole;
+            }
+
+
             if (counter == maxarray)
             {
                 PreviousButton.IsEnabled = false;
                 NextButton.IsEnabled = false;
             }
-            else
+            else if (counter < maxarray)
             {
                 PreviousButton.IsEnabled = false;
                 NextButton.IsEnabled = true;
+            }
+            else
+            {
+                PreviousButton.IsEnabled = false;
+                NextButton.IsEnabled = false;
             }
 
         }
@@ -218,28 +267,32 @@ namespace myClubDriveMaster
             Account myaccount = new Account();
             cdQueryAttr qryAcct = new cdQueryAttr();
             qryAcct.ColIndex = "IndexName";
-            qryAcct.IndexName = "EmailAddressIndex";
-            qryAcct.ColName = "EmailAddress";
+            qryAcct.IndexName = "MemberAccountIDIndex";
+            qryAcct.ColName = "MemberAccountID";
             qryAcct.ColValue = EmailAddress.Text;
+            counter = 0;
 
-            getAccounts myAccountsArray = new getAccounts();
+            getClubMembers myAccountsArray = new getClubMembers();
 
-            var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
-            myAccountsArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
-            mystudArray = myAccountsArray;
-            ApplicantName.Text = "Applicant Name: " + mystudArray.Account[counter].FirstName + " " + mystudArray.Account[counter].LastName;
+            var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
+            myAccountsArray = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
+            ApplicantName.Text = "Applicant Name: " + myAccountsArray.ClubMember[counter].MemberName;
 
-            if (mystudArray.Account[0].Role.Contains("D"))
+            if (myAccountsArray.ClubMember[counter].MemberRole.Contains("D"))
             {
                 myrole = myrole + " Driver ";
             }
-            if (mystudArray.Account[0].Role.Contains("P"))
+            if (myAccountsArray.ClubMember[counter].MemberRole.Contains("P"))
             {
                 myrole = myrole + " Parent ";
             }
-            if (mystudArray.Account[0].Role.Contains("A"))
+            if (myAccountsArray.ClubMember[counter].MemberRole.Contains("A"))
             {
                 myrole = myrole + " Admin ";
+            }
+            if (unClubMembers[counter].MemberRole.Contains("R"))
+            {
+                myrole = myrole + " Rider ";
             }
 
             ApplicantType.Text = "Applicant Role: " + myrole;

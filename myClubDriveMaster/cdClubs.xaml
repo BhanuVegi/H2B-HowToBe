@@ -2,9 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdClubs" BackgroundImage="ClubDrive.png">
     <ContentPage.Content>
     <Grid BackgroundColor="Transparent">
-          <StackLayout Orientation="Vertical" HorizontalOptions="Center"  Grid.Row="0">
+       <Grid.RowDefinitions>
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />     
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">     
+          <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                <Label TextColor="#ebaf4c" Text="       " Font="32" />
                 <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+                <Label TextColor="#ebaf4c" Text="       " Font="16" />    
                 <Label TextColor="#ebaf4c" x:Name="ClubName" Text="Club Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 <Label TextColor="#ebaf4c" x:Name="ClubID" Text="Club ID:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 <Entry x:Name="CubAddress" Placeholder="Address Line" PlaceholderColor="#ebaf4c" FontSize="12" /> 
@@ -12,22 +19,22 @@
                 <Entry x:Name="myState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="12" />  
                 <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="12" /> 
                 <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
-            </StackLayout>  
-        <Grid Grid.Row="1">        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />     
-        </Grid.RowDefinitions>
-        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
-        <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="3"/>
-        <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="4"/>
-        <Button Clicked="cdAssign" Text="Club Signup" x:Name="AssignButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="5"/>
-        <Button Clicked="cdSubmit" Text="Submit" x:Name="SubmitButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="6"/>
+            </StackLayout> 
         </Grid>        
-            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+        <Grid Grid.Row="1">     
+            <StackLayout Orientation="Vertical">
+                <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start"/>
+                <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start"/>
+                <Button Clicked="cdAssign" Text="Club Signup" x:Name="AssignButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start"/>
+                <Button Clicked="cdSubmit" Text="Submit" x:Name="SubmitButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start"/>
             </StackLayout>
+                    
+        </Grid> 
+        <Grid Grid.Row="2">       
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </Grid>
     </Grid>
     </ContentPage.Content>
 </ContentPage>

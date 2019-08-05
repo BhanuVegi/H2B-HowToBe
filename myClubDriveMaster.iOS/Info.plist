@@ -30,8 +30,6 @@
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>CFBundleName</key>
-	<string>myClubDriveMaster</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -46,5 +44,7 @@
 	<array>
 		<string>location</string>
 	</array>
+	<key>CFBundleName</key>
+	<string>ClubHives</string>
 </dict>
 </plist>

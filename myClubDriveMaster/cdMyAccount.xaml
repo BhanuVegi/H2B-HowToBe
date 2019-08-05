@@ -5,18 +5,19 @@
     <ContentPage.Content>
        <Grid BackgroundColor="Transparent"> 
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="600" />
-            <RowDefinition Height="70" />
-            <RowDefinition Height="70" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">   
                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                  <Label TextColor="#ebaf4c" Text="       " Font="32" />  
+                  <Label TextColor="#ebaf4c" Text="       " Font="16" />  
                   <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+                  <Label TextColor="#ebaf4c" Text="       " Font="16" />   
                </StackLayout>
         </Grid>
-       <Grid Grid.Row="1">
+        <Grid Grid.Row="1">
            <StackLayout Orientation="Vertical"> 
             <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="       " Font="32" />         
             <Label TextColor="#ebaf4c" x:Name="cdUserName" Text="User Name" FontAttributes="Bold" FontSize="16" />
@@ -30,18 +31,17 @@
             <Entry x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#ebaf4c" FontSize="16"/>
             <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckAdmin" Grid.Row="13" Text="Admin" Type="Check"/>
           </StackLayout>
-          <Grid Grid.Row="2">       
+        </Grid>        
+        <Grid Grid.Row="2">       
           <StackLayout> 
             <Button Text="Submit" Clicked="cdSubmit" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />            
           </StackLayout>  
-          </Grid>
-          <Grid Grid.Row="3">       
+        </Grid>
+        <Grid Grid.Row="3">       
           <StackLayout> 
-            <Label TextColor="#ebaf4c" Text="       " Font="16" />  
-            <Button Text="Home Page" Clicked="cdMainPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
+            <Button Text="Home Page" Clicked="cdMainPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>         
           </StackLayout>  
-          </Grid>         
-     </Grid>
+        </Grid>         
     </Grid>  
     </ContentPage.Content>
 </ContentPage>

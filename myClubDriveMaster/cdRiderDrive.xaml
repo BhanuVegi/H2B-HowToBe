@@ -2,34 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdRiderDrive" BackgroundImage="ClubDrive.png">
    <ContentPage.Content>        
     <Grid BackgroundColor="Transparent">
+       <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="3*" />     
+       </Grid.RowDefinitions>
+       <Grid Grid.Row="0">     
           <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,30,0,0" Grid.Row="0">
                <Label Text="       " Font="32" />
                 <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-            </StackLayout>  
-        <Grid Grid.Row="1">        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />     
-        </Grid.RowDefinitions>
-        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->
-        <StackLayout Orientation="Vertical">       
-        <Label TextColor="#ebaf4c" x:Name="Status" Text=" " BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />               
-        <Label TextColor="#ebaf4c" x:Name="StudentName" Text="Student Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="16" />
-        <Label TextColor="#ebaf4c" x:Name="DriverName" Text="Driver Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="16" /> 
-        <Label TextColor="#ebaf4c" x:Name="CarType" Text="Car Details" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />  
-        <Label TextColor="#ebaf4c" x:Name="LicensePlate" Text="License Plate" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />
-        <Label TextColor="#ebaf4c" x:Name="DestinationAddress" Text="Destination Address" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />  
-        <Label TextColor="#ebaf4c" x:Name="City" Text="City" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />    
-        <Label TextColor="#ebaf4c" x:Name="State" Text="State" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />    
-        <Label TextColor="#ebaf4c" x:Name="PostalCode" Text="Postal Code" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" /> 
-        <Label TextColor="#ebaf4c" Text="     " BackgroundColor="Transparent" FontSize="32" />            
-        </StackLayout>
+            </StackLayout>
         </Grid>        
-            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Clicked="cdDrive" Text="Send My Location" x:Name="DriveButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" Grid.Row="5"/>
+        <Grid Grid.Row="1">
+            <StackLayout Orientation="Vertical">       
+                <Label TextColor="#ebaf4c" x:Name="Status" Text=" " BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />               
+                <Label TextColor="#ebaf4c" x:Name="StudentName" Text="Student Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="16" />
+                <Label TextColor="#ebaf4c" x:Name="DriverName" Text="Driver Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="16" /> 
+                <Label TextColor="#ebaf4c" x:Name="CarType" Text="Car Details" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />  
+                <Label TextColor="#ebaf4c" x:Name="LicensePlate" Text="License Plate" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />
+                <Label TextColor="#ebaf4c" x:Name="DestinationAddress" Text="Destination Address" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />  
+                <Label TextColor="#ebaf4c" x:Name="DestinationAddress2" Text="City" BackgroundColor="Transparent"  FontAttributes="Bold" FontSize="16" />    
+                <Label TextColor="#ebaf4c" Text="     " BackgroundColor="Transparent" FontSize="32" />            
+            </StackLayout>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Button Clicked="cdDrive" Text="Send My Location" x:Name="DriveButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start"/>
                 <Button Text="Logout" Clicked="cdLogout" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
+        </Grid>        
     </Grid>
     </ContentPage.Content>
 </ContentPage>

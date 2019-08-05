@@ -2,29 +2,37 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdDriverDrive" BackgroundImage="ClubDrive.png">
    <ContentPage.Content>        
     <Grid BackgroundColor="Transparent">
-          <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,30,0,0" Grid.Row="0">
-               <Label TextColor="#ebaf4c" Text="       " Font="32" />
-                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-            </StackLayout>  
-        <Grid Grid.Row="1">        
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />     
-        </Grid.RowDefinitions>
-        <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->
-        <StackLayout Orientation="Vertical">        
-        <Label TextColor="#ebaf4c" x:Name="StudentName" Text="Student Name:" BackgroundColor="Transparent" FontSize="16" />
-        <Label TextColor="#ebaf4c" x:Name="DestinationAddress" Text="Destination Address" BackgroundColor="Transparent" FontSize="16" /> 
-        <Label TextColor="#ebaf4c" x:Name="DestinationAddress2" Text="Destination City" BackgroundColor="Transparent" FontSize="16" />  
-        </StackLayout>            
-        <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="3"/>
-        <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="4"/>
-        <Button Clicked="cdDrive" Text="Drive" x:Name="DriveButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" Grid.Row="5"/>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="3*" />      
+        </Grid.RowDefinitions>        
+        <Grid Grid.Row="0">               
+          <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
+               <Label TextColor="#ebaf4c" Text="       " Font="10" />
+                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+            </StackLayout>
         </Grid>        
-            <StackLayout Grid.Row="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+        <Grid Grid.Row="1">
+           <StackLayout Orientation="Vertical">        
+                <Label TextColor="#ebaf4c" x:Name="StudentName" Text="Student Name:" BackgroundColor="Transparent" FontSize="12" />
+                <Label TextColor="#ebaf4c" x:Name="DestinationAddress" Text="Destination Address" BackgroundColor="Transparent" FontSize="12" /> 
+                <Label TextColor="#ebaf4c" x:Name="DestinationAddress2" Text="Destination City" BackgroundColor="Transparent" FontSize="12" />  
+            </StackLayout> 
+        </Grid>        
+        <Grid Grid.Row="2">
+            <StackLayout Orientation="Vertical">      
+                <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
+                <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
+                <Button Clicked="cdDrive" Text="Drive" x:Name="DriveButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
+             </StackLayout>         
+        </Grid>
+        <Grid Grid.Row="3">    
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                 <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
+        </Grid>  
     </Grid>
     </ContentPage.Content>
 </ContentPage>

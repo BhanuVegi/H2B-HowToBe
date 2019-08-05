@@ -3,14 +3,15 @@
     <ContentPage.Content>
       <Grid BackgroundColor="Transparent">
       <Grid.RowDefinitions>
-            <RowDefinition Height="600" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />     
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />     
       </Grid.RowDefinitions>  
           <Grid Grid.Row="0"> 
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-               <Label TextColor="#ebaf4c" Text="       " Font="32" />
+               <Label TextColor="#ebaf4c" Text="       " Font="24" />
                 <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+                <Label TextColor="#ebaf4c" Text="       " Font="24" />    
                 <Entry x:Name="EventName"  Placeholder="Event Name" PlaceholderColor="#ebaf4c" FontSize="12" />
                 <Label TextColor="#ebaf4c" x:Name="EventID" Text="Event ID:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
                 <Entry x:Name="EventAddress" Placeholder="Address Line" PlaceholderColor="#ebaf4c" FontSize="12" /> 
@@ -26,13 +27,12 @@
             </StackLayout>  
         </Grid>         
         <Grid Grid.Row="1">        
-           <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-            <!-- <Image Source="ClubDriveLogoFinal.png" HeightRequest="70" VerticalOptions="EndAndExpand"/> -->  
+           <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
             <Button Clicked="cdSubmit" Text="Submit" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
             </StackLayout>            
         </Grid>
         <Grid Grid.Row="2">     
-            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                 <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </Grid>

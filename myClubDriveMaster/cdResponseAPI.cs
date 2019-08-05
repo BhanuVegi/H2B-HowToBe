@@ -26,6 +26,20 @@ namespace myClubDriveMaster
         public string ColumnName4 { get; set; }
         public string ColumnValue4 { get; set; }
     }
+    public class cdUpdateClubMembers
+    {
+        public string ClubMemberID { get; set; }
+        public string ColumnName { get; set; }
+        public string ColumnValue { get; set; }
+        public string ColumnName1 { get; set; }
+        public string ColumnValue1 { get; set; }
+        public string ColumnName2 { get; set; }
+        public string ColumnValue2 { get; set; }
+        public string ColumnName3 { get; set; }
+        public string ColumnValue3 { get; set; }
+        public string ColumnName4 { get; set; }
+        public string ColumnValue4 { get; set; }
+    }
     public class cdUpdateClub
     {
         public string ClubID { get; set; }
@@ -142,17 +156,18 @@ namespace myClubDriveMaster
         public string is_new { get; set; }
     }
 
-    public class DriverAlloc
+
+    public class DriverAllocation
     {
         public string AllocationID { get; set; }
-        public string StudentID { get; set; }
+        public string EventID { get; set; }
+        public string ClubID { get; set; }
         public string DriverID { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string AddressLine3 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string PostalCode { get; set; }
+        public string StudentID { get; set; }
+        public string EventName { get; set; }
+        public string ClubName { get; set; }
+        public string DriverName { get; set; }
+        public string StudentName { get; set; }
         public string Attr1 { get; set; }
         public string Attr2 { get; set; }
         public string Attr3 { get; set; }
@@ -167,7 +182,7 @@ namespace myClubDriveMaster
 
     public class getDriver
     {
-        public List<DriverAlloc> DriverAlloc { get; set; }
+        public List<DriverAllocation> DriverAllocation { get; set; }
     }
 
     public class Trip
@@ -369,29 +384,6 @@ namespace myClubDriveMaster
     public class cdAllEventSignups
     {
         public List<EventSignup> EventSignup { get; set; }
-    }
-
-    public class DriverAllocation
-    {
-        public string AllocationID { get; set; }
-        public string EventID { get; set; }
-        public string ClubID { get; set; }
-        public string DriverID { get; set; }
-        public string StudentID { get; set; }
-        public string EventName { get; set; }
-        public string ClubName { get; set; }
-        public string DriverName { get; set; }
-        public string StudentName { get; set; }
-        public string Attr1 { get; set; }
-        public string Attr2 { get; set; }
-        public string Attr3 { get; set; }
-        public string Attr4 { get; set; }
-        public string Attr5 { get; set; }
-        public string Attr6 { get; set; }
-        public string Attr7 { get; set; }
-        public string Attr8 { get; set; }
-        public string Attr9 { get; set; }
-        public string Attr10 { get; set; }
     }
 
     public class cdEmails

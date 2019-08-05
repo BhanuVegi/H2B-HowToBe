@@ -90,7 +90,7 @@ namespace myClubDriveMaster
                 qryAcct.ColName = "ClubID";
                 qryAcct.ColValue = CubID.Text;
             }
-            else if (getClubName !=null)
+            else if (getClubName.Text != null)
             {
 
                 qryAcct = new cdQueryAttr();
@@ -194,7 +194,7 @@ namespace myClubDriveMaster
             myclubmembership.Attr6 = "NA";
             myclubmembership.Attr7 = "NA";
             myclubmembership.Attr8 = "NA";
-            myclubmembership.Attr9 = "NA";
+            myclubmembership.Attr9 = "NotApproved";
             myclubmembership.Attr10 = "NA";
 
             var jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);

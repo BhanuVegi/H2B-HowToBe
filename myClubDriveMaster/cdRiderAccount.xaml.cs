@@ -102,12 +102,26 @@ namespace myClubDriveMaster
                 {
                     System.Diagnostics.Debug.WriteLine(" Account creation call failed " + jsresponse);
                     var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                    createStatus.Text = "Account Creation Failed. " + myerror.message;
-                    return "failed";
+                    return "failed " + myerror.message;
                 }
                 else
                 {
                     accCreated = 1;
+                    signupAccount mysignupAccount = new signupAccount();
+                    mysignupAccount.email = cdEmail.Text;
+                    mysignupAccount.username = cdUserName.Text;
+                    mysignupAccount.password = cdPassword.Text;
+
+                    var signupRespose = await mycallAPI.cdCreateSignup(mysignupAccount);
+
+                    if (signupRespose.ToString().Contains("ValidationException"))
+                    {
+                        System.Diagnostics.Debug.WriteLine(" Account signup failed " + jsresponse);
+                        var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                        await DisplayAlert("Login creation failed","Login creation failed. "+jsresponse, "OK");
+                        return "failed";
+                    }
+
                     return "success";
                 }
             }

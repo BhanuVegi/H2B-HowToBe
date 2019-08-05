@@ -3,15 +3,15 @@
     <ContentPage.Content>    
        <Grid BackgroundColor="Transparent">
        <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="150" />
-            <RowDefinition Height="200" />
-            <RowDefinition Height="150" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="3*" />
        </Grid.RowDefinitions> 
           <Grid Grid.Row="0">    
               <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,30,0,0" Grid.Row="0">
-                   <Label TextColor="#ebaf4c" Text="       " Font="32" />
+                   <Label TextColor="#ebaf4c" Text="       " Font="10" />
                    <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
               </StackLayout>   
           </Grid>      
@@ -27,7 +27,7 @@
         </Grid>        
         <Grid Grid.Row="2">          
             <StackLayout Orientation="Vertical">   
-                <Label TextColor="#ebaf4c" Text="       " Font="24" />               
+                <Label TextColor="#ebaf4c" Text="   " Font="12" />               
                 <Label TextColor="#ebaf4c" x:Name="cdMyData" Text="My Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/> 
                 <Button Clicked="cdmyClubs" Text="My Clubs N Signup" x:Name="MyClubs" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="6"/>
                 <Button Clicked="cdmyAccount" Text="My Account" x:Name="MyAccount" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="7"/>
@@ -37,7 +37,7 @@
         </Grid>         
         <Grid Grid.Row="3">               
             <StackLayout Orientation="Vertical">   
-                 <Label TextColor="#ebaf4c" Text="       " Font="24" />           
+                 <Label TextColor="#ebaf4c" Text="       " Font="12" />           
                  <Label TextColor="#ebaf4c" x:Name="cdCreateData" Text="Create Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/>            
                  <Button Clicked="cdCreateclub" Text="Create New Club" x:Name="CreateClub" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="9"/>
                  <Button Clicked="cdCreateStudents" Text="Register Students" x:Name="RegisterStudents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="10"/>
@@ -45,7 +45,7 @@
                  </StackLayout>
         </Grid>
         <Grid Grid.Row="4">     
-            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                 <Button Text="Logout" Clicked="cdLogout" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </Grid>        

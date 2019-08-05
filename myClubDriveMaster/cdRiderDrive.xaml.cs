@@ -33,21 +33,20 @@ namespace myClubDriveMaster
             qryAcct.ColValue = logAccount.UserName;
 
             getDriver myDriverArray = new getDriver();
-            DriverAlloc pubDriverInfo = new DriverAlloc();
+            DriverAllocation pubDriverInfo = new DriverAllocation();
             cdCallAPI mycallAPI = new cdCallAPI();
 
             var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
             myDriverArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
 
-            pubDriverInfo = myDriverArray.DriverAlloc[0];
+            pubDriverInfo = myDriverArray.DriverAllocation[0];
 
-            DriverName.Text = "Driver Name: "+ pubDriverInfo.Attr1 + " " + pubDriverInfo.Attr2;
+            DriverName.Text = "Driver Name: " + pubDriverInfo.DriverName;
             CarType.Text = "Car Type: "+ pubDriverInfo.Attr3;
-            LicensePlate.Text = "License Plate: "+ pubDriverInfo.Attr5;
-            DestinationAddress.Text = "Address: "+ pubDriverInfo.AddressLine1 + " " + pubDriverInfo.AddressLine2;
-            City.Text = "City: "+ pubDriverInfo.City;
-            State.Text = "State: "+ pubDriverInfo.State;
-            PostalCode.Text = "Postal Code: "+ pubDriverInfo.PostalCode;
+            LicensePlate.Text = "License Plate: "+ pubDriverInfo.Attr4;
+            DestinationAddress.Text = "Address: "+ pubDriverInfo.Attr1;
+            DestinationAddress2.Text = "               "+pubDriverInfo.Attr2;
+
 
         }
 
