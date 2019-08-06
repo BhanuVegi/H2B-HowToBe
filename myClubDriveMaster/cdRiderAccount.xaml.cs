@@ -94,37 +94,45 @@ namespace myClubDriveMaster
                 regAccount.Attr8 = "NA";
                 regAccount.Attr9 = "NA";
                 regAccount.Attr10 = "NA";
+                try 
+                { 
+                    cdCallAPI mycallAPI = new cdCallAPI();
+                    var jsresponse = await mycallAPI.cdcallAccountsPUT(regAccount);
 
-                cdCallAPI mycallAPI = new cdCallAPI();
-                var jsresponse = await mycallAPI.cdcallAccountsPUT(regAccount);
-
-                if (jsresponse.ToString().Contains("ValidationException"))
-                {
-                    System.Diagnostics.Debug.WriteLine(" Account creation call failed " + jsresponse);
-                    var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                    return "failed " + myerror.message;
-                }
-                else
-                {
-                    accCreated = 1;
-                    signupAccount mysignupAccount = new signupAccount();
-                    mysignupAccount.email = cdEmail.Text;
-                    mysignupAccount.username = cdUserName.Text;
-                    mysignupAccount.password = cdPassword.Text;
-
-                    var signupRespose = await mycallAPI.cdCreateSignup(mysignupAccount);
-
-                    if (signupRespose.ToString().Contains("ValidationException"))
+                    if (jsresponse.ToString().Contains("ValidationException"))
                     {
-                        System.Diagnostics.Debug.WriteLine(" Account signup failed " + jsresponse);
+                        System.Diagnostics.Debug.WriteLine(" Account creation call failed " + jsresponse);
                         var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                        await DisplayAlert("Login creation failed","Login creation failed. "+jsresponse, "OK");
-                        return "failed";
+                        return "failed " + myerror.message;
                     }
+                    else
+                    {
+                        accCreated = 1;
+                        signupAccount mysignupAccount = new signupAccount();
+                        mysignupAccount.email = cdEmail.Text;
+                        mysignupAccount.username = cdUserName.Text;
+                        mysignupAccount.password = cdPassword.Text;
 
-                    return "success";
+                        var signupRespose = await mycallAPI.cdCreateSignup(mysignupAccount);
+
+                        if (signupRespose.ToString().Contains("ValidationException"))
+                        {
+                            System.Diagnostics.Debug.WriteLine(" Account signup failed " + jsresponse);
+                            var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                            await DisplayAlert("Login creation failed","Login creation failed. "+jsresponse, "OK");
+                            return "failed";
+                        }
+
+                        return "success";
+                    }
                 }
-            }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("End of Clubs Loop " + ex);
+                    await DisplayAlert("Action", "Update Status Failed", "OK");
+                    return "failed";
+                }
+        }
 
         }
 

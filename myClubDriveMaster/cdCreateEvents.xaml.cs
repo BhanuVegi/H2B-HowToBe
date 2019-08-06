@@ -113,22 +113,21 @@ namespace myClubDriveMaster
 
             getClubMembers myClubMembers = new getClubMembers();
             cdCallAPI mycallAPI = new cdCallAPI();
-
-            var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
-            myClubMembers = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
-
-            System.Diagnostics.Debug.WriteLine(" Club Member payload is " + jsreponse);
-
             try
             {
-                foreach (var stacc in myClubMembers.ClubMember)
-                {
-                    maxarray = maxarray + 1;
-                    if (myClubMembers.ClubMember[maxarray].MemberRole.Contains("A") == true)
-                    { 
-                        picker.Items.Add(myClubMembers.ClubMember[maxarray].ClubName + "|"+ myClubMembers.ClubMember[maxarray].ClubID);
+                var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
+                myClubMembers = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
+
+                System.Diagnostics.Debug.WriteLine(" Club Member payload is " + jsreponse);
+
+                    foreach (var stacc in myClubMembers.ClubMember)
+                    {
+                        maxarray = maxarray + 1;
+                        if (myClubMembers.ClubMember[maxarray].MemberRole.Contains("A") == true)
+                        { 
+                            picker.Items.Add(myClubMembers.ClubMember[maxarray].ClubName + "|"+ myClubMembers.ClubMember[maxarray].ClubID);
+                        }
                     }
-                }
             }
             catch (Exception ex)
             {

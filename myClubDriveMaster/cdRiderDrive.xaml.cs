@@ -26,29 +26,36 @@ namespace myClubDriveMaster
 
         async void callGetDriver(Account logAccount)
         {
-            cdQueryAttr qryAcct = new cdQueryAttr();
-            qryAcct.ColIndex = "IndexName";
-            qryAcct.IndexName = "StudentIDindex";
-            qryAcct.ColName = "StudentID";
-            qryAcct.ColValue = logAccount.UserName;
+            try 
+            { 
+                cdQueryAttr qryAcct = new cdQueryAttr();
+                qryAcct.ColIndex = "IndexName";
+                qryAcct.IndexName = "StudentIDindex";
+                qryAcct.ColName = "StudentID";
+                qryAcct.ColValue = logAccount.UserName;
 
-            getDriver myDriverArray = new getDriver();
-            DriverAllocation pubDriverInfo = new DriverAllocation();
-            cdCallAPI mycallAPI = new cdCallAPI();
+                getDriver myDriverArray = new getDriver();
+                DriverAllocation pubDriverInfo = new DriverAllocation();
+                cdCallAPI mycallAPI = new cdCallAPI();
 
-            var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
-            myDriverArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
+                var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
+                myDriverArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
 
-            pubDriverInfo = myDriverArray.DriverAllocation[0];
+                pubDriverInfo = myDriverArray.DriverAllocation[0];
 
-            DriverName.Text = "Driver Name: " + pubDriverInfo.DriverName;
-            CarType.Text = "Car Type: "+ pubDriverInfo.Attr3;
-            LicensePlate.Text = "License Plate: "+ pubDriverInfo.Attr4;
-            DestinationAddress.Text = "Address: "+ pubDriverInfo.Attr1;
-            DestinationAddress2.Text = "               "+pubDriverInfo.Attr2;
+                DriverName.Text = "Driver Name: " + pubDriverInfo.DriverName;
+                CarType.Text = "Car Type: "+ pubDriverInfo.Attr3;
+                LicensePlate.Text = "License Plate: "+ pubDriverInfo.Attr4;
+                DestinationAddress.Text = "Address: "+ pubDriverInfo.Attr1;
+                DestinationAddress2.Text = "               "+pubDriverInfo.Attr2;
+             }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("End of Clubs Loop " + ex);
+                await DisplayAlert("Action", "Update Status Failed", "OK");
+            }
 
-
-        }
+}
 
         async void cdDrive(object sender, System.EventArgs e)
         {
@@ -74,7 +81,7 @@ namespace myClubDriveMaster
             {
                 System.Diagnostics.Debug.WriteLine(" Result is " + ex);
 
-                await DisplayAlert("Failed", ex.Message, "OK");
+                await DisplayAlert("Failed to get data. Please try later.", "Failed to get data. Please try later.", "OK");
             }
         }
 

@@ -5,9 +5,9 @@
        <Grid.RowDefinitions>
             <RowDefinition Height="9*" />
             <RowDefinition Height="4*" />
-            <RowDefinition Height="5*" />    
-            <RowDefinition Height="1*" /> 
-            <RowDefinition Height="4*" />   
+            <RowDefinition Height="4*" />    
+            <RowDefinition Height="3*" /> 
+            <RowDefinition Height="3*" />   
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"> 
           <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,20,0,0">
@@ -30,21 +30,13 @@
           </StackLayout>      
         </Grid> 
          <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                        <Label BackgroundColor="#bababa"  Grid.Column="0" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                        <Button Clicked="cdloginFacebook" x:Name="socialImage" Text="" Image="gflogo.png" Grid.Column="1" VerticalOptions="Center" Margin="10,0,10,0"/>
-                        <Label BackgroundColor="#bababa" Grid.Column="2" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="6">
-                        <Button Clicked="cdloginFacebook" x:Name="socialText" Text="Login With Facebook" BackgroundColor="Transparent" TextColor="#ebaf4c" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
+            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+               <Button Clicked="cdHelp" x:Name="myhelp" Text="Club Hives Learning" BackgroundColor="#ebaf4c" FontSize="10" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
           </Grid>
           <Grid Grid.Row="4">
             <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                <Button Text="Account Registration" Clicked="cdRegistration" BackgroundColor="#ebaf4c" FontSize="10" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Text="Account Registration" Clicked="cdRegistration" BackgroundColor="#ebaf4c" FontSize="10" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
           </Grid>
     </Grid>

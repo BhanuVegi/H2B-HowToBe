@@ -177,39 +177,47 @@ namespace myClubDriveMaster
 
         private async Task<JToken> createClubMembers(Account regAccount, Club regClub, String assignRole, string parentID)
         {
-            cdReadError myerror = new cdReadError();
-            cdCallAPI mycallAPI = new cdCallAPI();
-            ClubMembers myclubmembership = new ClubMembers();
-            myclubmembership.ClubMemberID = regAccount.UserName + regClub.ClubID;
-            myclubmembership.ClubID = regClub.ClubID;
-            myclubmembership.MemberAccountID = regAccount.UserName;
-            myclubmembership.ClubName = regClub.ClubName;
-            myclubmembership.MemberName = regAccount.FirstName + " " + regAccount.LastName;
-            myclubmembership.MemberRole = assignRole;
-            myclubmembership.Attr1 = parentID;
-            myclubmembership.Attr2 = regAccount.EmailAddress;
-            myclubmembership.Attr3 = "NA";
-            myclubmembership.Attr4 = "NA";
-            myclubmembership.Attr5 = "NA";
-            myclubmembership.Attr6 = "NA";
-            myclubmembership.Attr7 = "NA";
-            myclubmembership.Attr8 = "NA";
-            myclubmembership.Attr9 = "NotApproved";
-            myclubmembership.Attr10 = "NA";
+            try
+            { 
+                cdReadError myerror = new cdReadError();
+                cdCallAPI mycallAPI = new cdCallAPI();
+                ClubMembers myclubmembership = new ClubMembers();
+                myclubmembership.ClubMemberID = regAccount.UserName + regClub.ClubID;
+                myclubmembership.ClubID = regClub.ClubID;
+                myclubmembership.MemberAccountID = regAccount.UserName;
+                myclubmembership.ClubName = regClub.ClubName;
+                myclubmembership.MemberName = regAccount.FirstName + " " + regAccount.LastName;
+                myclubmembership.MemberRole = assignRole;
+                myclubmembership.Attr1 = parentID;
+                myclubmembership.Attr2 = regAccount.EmailAddress;
+                myclubmembership.Attr3 = "NA";
+                myclubmembership.Attr4 = "NA";
+                myclubmembership.Attr5 = "NA";
+                myclubmembership.Attr6 = "NA";
+                myclubmembership.Attr7 = "NA";
+                myclubmembership.Attr8 = "NA";
+                myclubmembership.Attr9 = "NotApproved";
+                myclubmembership.Attr10 = "NA";
 
-            var jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);
+                var jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);
 
-            System.Diagnostics.Debug.WriteLine(" Response is " + jsresponse);
+                System.Diagnostics.Debug.WriteLine(" Response is " + jsresponse);
 
-            if (jsresponse.ToString().Contains("ValidationException"))
-            {
-                System.Diagnostics.Debug.WriteLine(" Club Membership creation call failed " + jsresponse);
-                var myError = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                return "failed";
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Club Membership creation call failed " + jsresponse);
+                    var myError = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    return "failed";
+                }
+                else
+                {
+                    return "success";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return "success";
+                System.Diagnostics.Debug.WriteLine("Unable to create data " + ex);
+                return "failed";
             }
         }
 

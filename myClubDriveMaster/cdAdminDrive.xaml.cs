@@ -119,36 +119,43 @@ namespace myClubDriveMaster
 
         async void cdSubmit(object sender, System.EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(" Clicked Submit Button");
-            cdReadError myerror = new cdReadError();
-            cdUpdateClubMembers updatemyAccount = new cdUpdateClubMembers();
-            updatemyAccount.ClubMemberID = unClubMembers[counter].ClubMemberID;
-            updatemyAccount.ColumnName = "Attr9";
-            updatemyAccount.ColumnValue = picker.SelectedItem.ToString();
-            updatemyAccount.ColumnName1 = "Attr6";
-            updatemyAccount.ColumnValue1 = unClubMembers[counter].Attr6;
-            updatemyAccount.ColumnName2 = "Attr7";
-            updatemyAccount.ColumnValue2 = unClubMembers[counter].Attr7;
-            updatemyAccount.ColumnName3 = "Attr8";
-            updatemyAccount.ColumnValue3 = unClubMembers[counter].Attr8;
-            updatemyAccount.ColumnName4 = "Attr5";
-            updatemyAccount.ColumnValue4 = unClubMembers[counter].Attr9;
+            try
+            { 
+                System.Diagnostics.Debug.WriteLine(" Clicked Submit Button");
+                cdReadError myerror = new cdReadError();
+                cdUpdateClubMembers updatemyAccount = new cdUpdateClubMembers();
+                updatemyAccount.ClubMemberID = unClubMembers[counter].ClubMemberID;
+                updatemyAccount.ColumnName = "Attr9";
+                updatemyAccount.ColumnValue = picker.SelectedItem.ToString();
+                updatemyAccount.ColumnName1 = "Attr6";
+                updatemyAccount.ColumnValue1 = unClubMembers[counter].Attr6;
+                updatemyAccount.ColumnName2 = "Attr7";
+                updatemyAccount.ColumnValue2 = unClubMembers[counter].Attr7;
+                updatemyAccount.ColumnName3 = "Attr8";
+                updatemyAccount.ColumnValue3 = unClubMembers[counter].Attr8;
+                updatemyAccount.ColumnName4 = "Attr5";
+                updatemyAccount.ColumnValue4 = unClubMembers[counter].Attr9;
 
-            System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
-            cdCallAPI mycallAPI = new cdCallAPI();
-            var jsresponse = await mycallAPI.cdcallClubMembersPOST(updatemyAccount);
+                System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
+                cdCallAPI mycallAPI = new cdCallAPI();
+                var jsresponse = await mycallAPI.cdcallClubMembersPOST(updatemyAccount);
 
-            System.Diagnostics.Debug.WriteLine(" After calling Post API ");
-            if (jsresponse.ToString().Contains("ValidationException"))
-            {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
-                myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                await DisplayAlert("Update Failed", "Update Failed. " + myerror.message,"OK");
+                System.Diagnostics.Debug.WriteLine(" After calling Post API ");
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                    myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    await DisplayAlert("Update Failed", "Update Failed. " + myerror.message,"OK");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                    await DisplayAlert("Update Successful", "Update Successful","OK");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                await DisplayAlert("Update Successful", "Update Successful","OK");
+                System.Diagnostics.Debug.WriteLine(" Unable to update "+ex);
             }
         }
 
@@ -272,33 +279,43 @@ namespace myClubDriveMaster
             qryAcct.ColValue = EmailAddress.Text;
             counter = 0;
 
-            getClubMembers myAccountsArray = new getClubMembers();
+            try 
+            { 
 
-            var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
-            myAccountsArray = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
-            ApplicantName.Text = "Applicant Name: " + myAccountsArray.ClubMember[counter].MemberName;
+                getClubMembers myAccountsArray = new getClubMembers();
 
-            if (myAccountsArray.ClubMember[counter].MemberRole.Contains("D"))
-            {
-                myrole = myrole + " Driver ";
-            }
-            if (myAccountsArray.ClubMember[counter].MemberRole.Contains("P"))
-            {
-                myrole = myrole + " Parent ";
-            }
-            if (myAccountsArray.ClubMember[counter].MemberRole.Contains("A"))
-            {
-                myrole = myrole + " Admin ";
-            }
-            if (unClubMembers[counter].MemberRole.Contains("R"))
-            {
-                myrole = myrole + " Rider ";
-            }
+                var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
+                myAccountsArray = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
+                ApplicantName.Text = "Applicant Name: " + myAccountsArray.ClubMember[counter].MemberName;
 
-            ApplicantType.Text = "Applicant Role: " + myrole;
+                if (myAccountsArray.ClubMember[counter].MemberRole.Contains("D"))
+                {
+                    myrole = myrole + " Driver ";
+                }
+                if (myAccountsArray.ClubMember[counter].MemberRole.Contains("P"))
+                {
+                    myrole = myrole + " Parent ";
+                }
+                if (myAccountsArray.ClubMember[counter].MemberRole.Contains("A"))
+                {
+                    myrole = myrole + " Admin ";
+                }
+                if (unClubMembers[counter].MemberRole.Contains("R"))
+                {
+                    myrole = myrole + " Rider ";
+                }
 
+                ApplicantType.Text = "Applicant Role: " + myrole;
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Unable to fetch data " + ex);
+                await DisplayAlert("Unable to fetch data", "Unable to fetch data", "OK");
+            }
             PreviousButton.IsEnabled = false;
             NextButton.IsEnabled = false;
+
 
         }
 

@@ -49,8 +49,26 @@
     <None Remove="cdRiderDrive.xaml.cs~" />
     <None Remove="cdRiderDrive.xaml~" />
     <None Remove="MainPage.xaml~" />
+    <None Remove="App.xaml.cs~" />
+    <None Remove="cdAccounts2.xaml.cs~" />
+    <None Remove="cdAdminDrive.xaml.cs~" />
+    <None Remove="cdAssignEventMembers.xaml.cs~" />
+    <None Remove="cdCallAPI.cs~" />
+    <None Remove="cdClubs.xaml.cs~" />
+    <None Remove="cdCreateClub.xaml.cs~" />
+    <None Remove="cdCreateEvents.xaml.cs~" />
+    <None Remove="cdDriverDrive.xaml~" />
+    <None Remove="cdMyAccount.xaml.cs~" />
+    <None Remove="cdMyRiders.xaml.cs~" />
+    <None Remove="cdTrackDriver.xaml.cs~" />
+    <None Remove="cdTrackDriver.xaml~" />
+    <None Remove="cdTrackRiders.xaml~" />
+    <None Remove="cdTrackRiders.xaml.cs~" />
+    <None Remove="MainPage.xaml.cs~" />
+    <None Remove="cdRiderAccount.xaml.cs~" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="cdChoose.xaml" />
+    <EmbeddedResource Remove="MyPage.xaml" />
   </ItemGroup>
 </Project>

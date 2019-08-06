@@ -73,6 +73,10 @@ namespace myClubDriveMaster
                     {
                         App.cdGetLoginHelp = prec.EndPoint;
                     }
+                    if (prec.ParameterName == "cdGlobalHelpline")
+                    {
+                        App.cdHelpline = prec.EndPoint;
+                    }
                     if (prec.ParameterName == "cdSocialLogin")
                     {
                         App.cdSocial = prec.EndPoint;

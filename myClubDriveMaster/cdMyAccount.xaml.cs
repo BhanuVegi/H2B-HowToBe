@@ -86,7 +86,7 @@ namespace myClubDriveMaster
 
             System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
             cdCallAPI mycallAPI = new cdCallAPI();
-
+            try { 
             if ( firstUpdate == 1)
             { 
                 var jsresponse = await mycallAPI.cdcallAccountsPOST(updateAccount);
@@ -121,6 +121,12 @@ namespace myClubDriveMaster
                     System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
                     updateStatus.Text = "Update Successful";
                 }
+            }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(" In Exception "+ex);
+                await DisplayAlert("Action", "Unable to update data", "OK");
             }
 
         }

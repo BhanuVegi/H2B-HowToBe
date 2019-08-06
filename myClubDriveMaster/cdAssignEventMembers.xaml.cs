@@ -118,37 +118,46 @@ namespace myClubDriveMaster
             var getresp = await cdMapStdDrv(iEveSign.EventID);
         }
 
-        void cdSubmit(object sender, System.EventArgs e)
+        async void cdSubmit(object sender, System.EventArgs e)
         {
-        
-            if (cdSignupRider.IsChecked == true) 
-            { 
-                cdEventSignups insertEventMembers = new cdEventSignups();
-                insertEventMembers.EventID = pEventID;
-                insertEventMembers.EventName = pEventName;
-                insertEventMembers.ClubName = pClubName;
-                insertEventMembers.ClubID = pClubID;
-                insertEventMembers.PickupLocation = pEventAddress;
-                insertEventMembers.AllocationStatus = "UNALLOCATED";
-                insertEventMembers.DriverCar = "NA";
-                insertEventMembers.RiderCount = "0";
-                insertEventMembers.Attr1 = "None";
-                insertEventMembers.Attr2 = "None";
-                insertEventMembers.Attr3 = "None";
-                insertEventMembers.Attr4 = "None";
-                insertEventMembers.Attr5 = "None";
-                insertEventMembers.Attr6 = "None";
-                insertEventMembers.Attr7 = "None";
-                insertEventMembers.Attr8 = "None";
-                insertEventMembers.Attr9 = "None";
-                insertEventMembers.Attr10 = "None";
-                insertEventMembers.EventMemberID = myStudentArray.Account[counter].UserName+ pClubName.Substring(0, 3)+ pEventName.Substring(0,3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                insertEventMembers.MemberName = myStudentArray.Account[counter].FirstName + " " + myStudentArray.Account[counter].LastName;
-                insertEventMembers.MemberAccountID = myStudentArray.Account[counter].UserName;
-                insertEventMembers.MemberRole = "R";
-                ieventmem(insertEventMembers);
-            }
             
+            try
+            { 
+                if (cdSignupRider.IsChecked == true) 
+                { 
+                    cdEventSignups insertEventMembers = new cdEventSignups();
+                    insertEventMembers.EventID = pEventID;
+                    insertEventMembers.EventName = pEventName;
+                    insertEventMembers.ClubName = pClubName;
+                    insertEventMembers.ClubID = pClubID;
+                    insertEventMembers.PickupLocation = pEventAddress;
+                    insertEventMembers.AllocationStatus = "UNALLOCATED";
+                    insertEventMembers.DriverCar = "NA";
+                    insertEventMembers.RiderCount = "0";
+                    insertEventMembers.Attr1 = "None";
+                    insertEventMembers.Attr2 = "None";
+                    insertEventMembers.Attr3 = "None";
+                    insertEventMembers.Attr4 = "None";
+                    insertEventMembers.Attr5 = "None";
+                    insertEventMembers.Attr6 = "None";
+                    insertEventMembers.Attr7 = "None";
+                    insertEventMembers.Attr8 = "None";
+                    insertEventMembers.Attr9 = "None";
+                    insertEventMembers.Attr10 = "None";
+                    insertEventMembers.EventMemberID = myStudentArray.Account[counter].UserName+ pClubName.Substring(0, 3)+ pEventName.Substring(0,3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                    insertEventMembers.MemberName = myStudentArray.Account[counter].FirstName + " " + myStudentArray.Account[counter].LastName;
+                    insertEventMembers.MemberAccountID = myStudentArray.Account[counter].UserName;
+                    insertEventMembers.MemberRole = "R";
+                    ieventmem(insertEventMembers);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Action", "Unable to insert event members. Try later. ", "Ok");
+                System.Diagnostics.Debug.WriteLine("Unable to insert event members " + ex);
+            }
+
+
         }
 
         async void getStudentInfo(Account logAccount)
@@ -161,11 +170,11 @@ namespace myClubDriveMaster
 
             cdCallAPI mycallAPI = new cdCallAPI();
 
-            var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
-            myStudentArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
-
             try
             {
+                var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
+                myStudentArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
+
                 foreach (var stacc in myStudentArray.Account)
                 {
                     maxarray = maxarray + 1;
@@ -215,13 +224,14 @@ namespace myClubDriveMaster
             int drvarray = -1;
             int stdarray = -1;
 
+        try
+        {
             var response = await mycallAPI.cdcallEventMembersGET(qryAcct);
             curreventsignups = JsonConvert.DeserializeObject<cdAllEventSignups>((string)response);
 
             System.Diagnostics.Debug.WriteLine(" Event Signup payload is " + response);
 
-            try
-            {
+
                 foreach (var divsignup in curreventsignups.EventSignup)
                 {
                     esmaxarray = esmaxarray + 1;

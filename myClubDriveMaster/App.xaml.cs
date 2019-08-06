@@ -41,6 +41,7 @@ namespace myClubDriveMaster
         public static String cdValidateToken = "";
         public static String cdGobalToken = "";
         public static String cdGobalUserID = "";
+        public static String cdHelpline = "";
         public static loginResponse mylresp = new loginResponse();
 
         public App()

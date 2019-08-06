@@ -103,64 +103,68 @@ namespace myClubDriveMaster
         {
             cdReadError myerror = new cdReadError();
             cdCallAPI mycallAPI = new cdCallAPI();
+            try
+            { 
+                cdUpdateAccount updateAddress = new cdUpdateAccount();
+                updateAddress.AccountID = mystudAccounts.Account[counter].AccountID;
+                updateAddress.ColumnName = "FirstName";
+                updateAddress.ColumnValue = cdFirstName.Text;
+                updateAddress.ColumnName1 = "LastName";
+                updateAddress.ColumnValue1 = cdLastName.Text;
+                updateAddress.ColumnName2 = "MiddleName";
+                updateAddress.ColumnValue2 = cdMiddleName.Text;
+                updateAddress.ColumnName3 = "cdPhone";
+                updateAddress.ColumnValue3 = cdPhone.Text;
+                updateAddress.ColumnName4 = "EmailAddress";
+                updateAddress.ColumnValue4 = cdEmail.Text;
 
-            cdUpdateAccount updateAddress = new cdUpdateAccount();
-            updateAddress.AccountID = mystudAccounts.Account[counter].AccountID;
-            updateAddress.ColumnName = "FirstName";
-            updateAddress.ColumnValue = cdFirstName.Text;
-            updateAddress.ColumnName1 = "LastName";
-            updateAddress.ColumnValue1 = cdLastName.Text;
-            updateAddress.ColumnName2 = "MiddleName";
-            updateAddress.ColumnValue2 = cdMiddleName.Text;
-            updateAddress.ColumnName3 = "cdPhone";
-            updateAddress.ColumnValue3 = cdPhone.Text;
-            updateAddress.ColumnName4 = "EmailAddress";
-            updateAddress.ColumnValue4 = cdEmail.Text;
+                var jsresponse = await mycallAPI.cdcallAccountsPOST(updateAddress);
 
-            var jsresponse = await mycallAPI.cdcallAccountsPOST(updateAddress);
+                System.Diagnostics.Debug.WriteLine(" After calling Post API 1 ");
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                    myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    updateStatus.Text = "Update Failed. " + myerror.message;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                    updateStatus.Text = "Update Successful";
+                }
 
-            System.Diagnostics.Debug.WriteLine(" After calling Post API 1 ");
-            if (jsresponse.ToString().Contains("ValidationException"))
-            {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
-                myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                updateStatus.Text = "Update Failed. " + myerror.message;
+                updateAddress.ColumnName = "AddressLine1";
+                updateAddress.ColumnValue = cdAddress1.Text;
+                updateAddress.ColumnName1 = "AddressLine2";
+                updateAddress.ColumnValue1 = cdAddress2.Text;
+                updateAddress.ColumnName2 = "City";
+                updateAddress.ColumnValue2 = cdCity.Text;
+                updateAddress.ColumnName3 = "cdState";
+                updateAddress.ColumnValue3 = cdState.Text;
+                updateAddress.ColumnName4 = "PostalCode";
+                updateAddress.ColumnValue4 = cdPostalCode.Text;
+
+                System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
+
+                jsresponse = await mycallAPI.cdcallAccountsPOST(updateAddress);
+
+                System.Diagnostics.Debug.WriteLine(" After calling Post API 2 ");
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                    myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    updateStatus.Text = "Update Failed. " + myerror.message;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                    updateStatus.Text = "Update Successful";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                updateStatus.Text = "Update Successful";
+                System.Diagnostics.Debug.WriteLine("End of Clubs Loop " + ex);
             }
-
-            updateAddress.ColumnName = "AddressLine1";
-            updateAddress.ColumnValue = cdAddress1.Text;
-            updateAddress.ColumnName1 = "AddressLine2";
-            updateAddress.ColumnValue1 = cdAddress2.Text;
-            updateAddress.ColumnName2 = "City";
-            updateAddress.ColumnValue2 = cdCity.Text;
-            updateAddress.ColumnName3 = "cdState";
-            updateAddress.ColumnValue3 = cdState.Text;
-            updateAddress.ColumnName4 = "PostalCode";
-            updateAddress.ColumnValue4 = cdPostalCode.Text;
-
-            System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
-
-            jsresponse = await mycallAPI.cdcallAccountsPOST(updateAddress);
-
-            System.Diagnostics.Debug.WriteLine(" After calling Post API 2 ");
-            if (jsresponse.ToString().Contains("ValidationException"))
-            {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
-                myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                updateStatus.Text = "Update Failed. " + myerror.message;
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                updateStatus.Text = "Update Successful";
-            }
-
-            // System.Diagnostics.Debug.WriteLine(" Update Response is "+jsresponse);
 
         }
 

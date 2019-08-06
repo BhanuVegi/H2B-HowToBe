@@ -77,10 +77,11 @@ namespace myClubDriveMaster
                         map.MoveToRegion(MapSpan.FromCenterAndRadius(mypos, Distance.FromMiles(1)));
 
                     }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine(" In exception " + ex);
-                    }
+              catch (Exception ex)
+              {
+                  System.Diagnostics.Debug.WriteLine(" In exception " + ex);
+                  await DisplayAlert("Failed to get data. Please try later.", "Failed to get data. Please try later.", "OK");
+                }
                 await Task.Delay(5000);
             }
         }

@@ -23,59 +23,77 @@ namespace myClubDriveMaster
         }
         async void cdAssign(object sender, System.EventArgs e)
         {
-            if (myAccount.Role.Contains("R") & myAccount.ParentID != "None")
-            {
-                Account paccount = new Account();
-                cdCallAPI mycallAPI = new cdCallAPI();
-                cdQueryAttr qryAcct = new cdQueryAttr();
-                qryAcct.ColIndex = "IndexName";
-                qryAcct.IndexName = "UserNameindex";
-                qryAcct.ColName = "UserName";
-                qryAcct.ColValue = myAccount.ParentID;
+            try 
+            { 
+                if (myAccount.Role.Contains("R") & myAccount.ParentID != "None")
+                {
+                    Account paccount = new Account();
+                    cdCallAPI mycallAPI = new cdCallAPI();
+                    cdQueryAttr qryAcct = new cdQueryAttr();
+                    qryAcct.ColIndex = "IndexName";
+                    qryAcct.IndexName = "UserNameindex";
+                    qryAcct.ColName = "UserName";
+                    qryAcct.ColValue = myAccount.ParentID;
 
-                getAccounts myAccountsArray = new getAccounts();
+                    getAccounts myAccountsArray = new getAccounts();
 
-                var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
-                myAccountsArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
-                paccount = myAccountsArray.Account[0]; 
-                var tpage = new cdAssignClubs(paccount,myAccount);
-                await Navigation.PushModalAsync(tpage);
+                    var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
+                    myAccountsArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
+                    paccount = myAccountsArray.Account[0]; 
+                    var tpage = new cdAssignClubs(paccount,myAccount);
+                    await Navigation.PushModalAsync(tpage);
+                }
+                else
+                {
+                    var tpage = new cdAssignClubs(myAccount, myAccount);
+                    await Navigation.PushModalAsync(tpage);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var tpage = new cdAssignClubs(myAccount, myAccount);
-                await Navigation.PushModalAsync(tpage);
+                System.Diagnostics.Debug.WriteLine("End of Array " + ex);
+                await DisplayAlert("Action", "Unable to fetch data. Please try later.","OK");
+
             }
         }
         async void cdSubmit(object sender, System.EventArgs e)
         {
-            cdReadError myerror = new cdReadError();
-            cdUpdateClub updateAddress = new cdUpdateClub();
-            updateAddress.ClubID = assignedClubs[counter].ClubID;
-            updateAddress.ColumnName = "AddressLine1";
-            updateAddress.ColumnValue = CubAddress.Text;
-            updateAddress.ColumnName2 = "City";
-            updateAddress.ColumnValue2 = City.Text;
-            updateAddress.ColumnName3 = "cdState";
-            updateAddress.ColumnValue3 = myState.Text;
-            updateAddress.ColumnName4 = "PostalCode";
-            updateAddress.ColumnValue4 = PostalCode.Text;
-
-            System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
-            cdCallAPI mycallAPI = new cdCallAPI();
-            var jsresponse = await mycallAPI.cdcallClubsPOST(updateAddress);
-
-            System.Diagnostics.Debug.WriteLine(" After calling Post API ");
-            if (jsresponse.ToString().Contains("ValidationException"))
+            try
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
-                myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                updateStatus.Text = "Update Failed. " + myerror.message;
+                cdReadError myerror = new cdReadError();
+                cdUpdateClub updateAddress = new cdUpdateClub();
+                updateAddress.ClubID = assignedClubs[counter].ClubID;
+                updateAddress.ColumnName = "AddressLine1";
+                updateAddress.ColumnValue = CubAddress.Text;
+                updateAddress.ColumnName2 = "City";
+                updateAddress.ColumnValue2 = City.Text;
+                updateAddress.ColumnName3 = "cdState";
+                updateAddress.ColumnValue3 = myState.Text;
+                updateAddress.ColumnName4 = "PostalCode";
+                updateAddress.ColumnValue4 = PostalCode.Text;
+
+                System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
+                cdCallAPI mycallAPI = new cdCallAPI();
+                var jsresponse = await mycallAPI.cdcallClubsPOST(updateAddress);
+
+                System.Diagnostics.Debug.WriteLine(" After calling Post API ");
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                    myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    updateStatus.Text = "Update Failed. " + myerror.message;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                    updateStatus.Text = "Update Successful";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                updateStatus.Text = "Update Successful";
+                System.Diagnostics.Debug.WriteLine("End of Array " + ex);
+                await DisplayAlert("Action", "Unable to update data. Please try later.", "OK");
+
             }
 
         }
@@ -202,11 +220,7 @@ namespace myClubDriveMaster
                     System.Diagnostics.Debug.WriteLine(" Added to assigned clubs ");
 
                 }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("End of Array " + ex);
-            }
+
             if (clubRetrived.Contains("ClubName"))
             { 
                 ClubName.Text = "Club Name: " + assignedClubs[0].ClubName;
@@ -225,6 +239,13 @@ namespace myClubDriveMaster
 
             System.Diagnostics.Debug.WriteLine(" Max Array is " + maxarray);
 
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("End of Array " + ex);
+                await DisplayAlert("Action", "Unable to fetch data. Please try later.","OK");
+
+            }
             if (counter == maxarray)
             {
                 PreviousButton.IsEnabled = false;

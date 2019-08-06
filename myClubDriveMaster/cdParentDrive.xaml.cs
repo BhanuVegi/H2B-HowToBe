@@ -93,38 +93,45 @@ namespace myClubDriveMaster
 
         async void cdSubmit(object sender, System.EventArgs e)
         {
-            cdReadError myerror = new cdReadError();
-            cdUpdateAccount updateAddress = new cdUpdateAccount();
-            updateAddress.AccountID = mystudAccounts.Account[counter].AccountID;
-            updateAddress.ColumnName = "AddressLine1";
-            updateAddress.ColumnValue = DestinationAddress1.Text;
-            updateAddress.ColumnName1 = "AddressLine2" ;
-            updateAddress.ColumnValue1 = DestinationAddress2.Text;
-            updateAddress.ColumnName2 = "City";
-            updateAddress.ColumnValue2 = City.Text;
-            updateAddress.ColumnName3 = "cdState";
-            updateAddress.ColumnValue3 = State.Text;
-            updateAddress.ColumnName4 = "PostalCode";
-            updateAddress.ColumnValue4 = PostalCode.Text;
+            try 
+            { 
+                cdReadError myerror = new cdReadError();
+                cdUpdateAccount updateAddress = new cdUpdateAccount();
+                updateAddress.AccountID = mystudAccounts.Account[counter].AccountID;
+                updateAddress.ColumnName = "AddressLine1";
+                updateAddress.ColumnValue = DestinationAddress1.Text;
+                updateAddress.ColumnName1 = "AddressLine2" ;
+                updateAddress.ColumnValue1 = DestinationAddress2.Text;
+                updateAddress.ColumnName2 = "City";
+                updateAddress.ColumnValue2 = City.Text;
+                updateAddress.ColumnName3 = "cdState";
+                updateAddress.ColumnValue3 = State.Text;
+                updateAddress.ColumnName4 = "PostalCode";
+                updateAddress.ColumnValue4 = PostalCode.Text;
 
-            System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
-            cdCallAPI mycallAPI = new cdCallAPI();
-            var jsresponse = await mycallAPI.cdcallAccountsPOST(updateAddress);
+                System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
+                cdCallAPI mycallAPI = new cdCallAPI();
+                var jsresponse = await mycallAPI.cdcallAccountsPOST(updateAddress);
 
-            System.Diagnostics.Debug.WriteLine(" After calling Post API ");
-            if (jsresponse.ToString().Contains("ValidationException"))
-            {
-                System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
-                myerror= JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                updateStatus.Text = "Update Failed. "+myerror.message;
+                System.Diagnostics.Debug.WriteLine(" After calling Post API ");
+                if (jsresponse.ToString().Contains("ValidationException"))
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
+                    myerror= JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                    updateStatus.Text = "Update Failed. "+myerror.message;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
+                    updateStatus.Text = "Update Successful";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                updateStatus.Text = "Update Successful";
+                System.Diagnostics.Debug.WriteLine("End of Clubs Loop " + ex);
+                await DisplayAlert("Action", "Update Status Failed", "OK");
             }
 
-           // System.Diagnostics.Debug.WriteLine(" Update Response is "+jsresponse);
 
         }
 
@@ -132,31 +139,32 @@ namespace myClubDriveMaster
         {
             try
             { 
-            System.Diagnostics.Debug.WriteLine(" Clicked Track Button");
-            cdQueryAttr qryAcct = new cdQueryAttr();
-            qryAcct.ColIndex = "IndexName";
-            qryAcct.IndexName = "StudentIDindex";
-            qryAcct.ColName = "StudentID";
-            qryAcct.ColValue = mystudAccounts.Account[counter].UserName;
+                System.Diagnostics.Debug.WriteLine(" Clicked Track Button");
+                cdQueryAttr qryAcct = new cdQueryAttr();
+                qryAcct.ColIndex = "IndexName";
+                qryAcct.IndexName = "StudentIDindex";
+                qryAcct.ColName = "StudentID";
+                qryAcct.ColValue = mystudAccounts.Account[counter].UserName;
 
-            getDriver myDriverArray = new getDriver();
-            DriverAllocation pubDriverInfo = new DriverAllocation();
-            cdCallAPI mycallAPI = new cdCallAPI();
+                getDriver myDriverArray = new getDriver();
+                DriverAllocation pubDriverInfo = new DriverAllocation();
+                cdCallAPI mycallAPI = new cdCallAPI();
 
-            var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
-            myDriverArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
+                var jsreponse = await mycallAPI.cdcallDriverAllocGET(qryAcct);
+                myDriverArray = JsonConvert.DeserializeObject<getDriver>((string)jsreponse);
 
-            pubDriverInfo = myDriverArray.DriverAllocation[0];
+                pubDriverInfo = myDriverArray.DriverAllocation[0];
 
-            String trackkey = pubDriverInfo.DriverID+ DateTime.Now.ToShortDateString();
-            System.Diagnostics.Debug.WriteLine(" Tracking "+ mystudAccounts.Account[counter].UserName + "with the key "+ trackkey);
+                String trackkey = pubDriverInfo.DriverID+ DateTime.Now.ToShortDateString();
+                System.Diagnostics.Debug.WriteLine(" Tracking "+ mystudAccounts.Account[counter].UserName + "with the key "+ trackkey);
 
-            var tpage = new cdTrackRiders(trackkey,loginAccount);
-            await Navigation.PushModalAsync(tpage);
+                var tpage = new cdTrackRiders(trackkey,loginAccount);
+                await Navigation.PushModalAsync(tpage);
             }
             catch (Exception ex)
             {
                 await DisplayAlert("No Tracking", "No Tracking information available for this student","OK");
+                System.Diagnostics.Debug.WriteLine("Exception is " + ex);
             }
 
         }
@@ -179,12 +187,12 @@ namespace myClubDriveMaster
             getAccounts myStudentArray = new getAccounts();
             cdCallAPI mycallAPI = new cdCallAPI();
 
-            var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
-            myStudentArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
-            mystudAccounts = myStudentArray;
-
             try
             {
+                var jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
+                myStudentArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
+                mystudAccounts = myStudentArray;
+
                 foreach (var stacc in myStudentArray.Account)
                 {
                     maxarray = maxarray + 1;

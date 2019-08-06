@@ -26,72 +26,82 @@ namespace myClubDriveMaster
             }
             else
             {
-                Club thisClub = new Club();
-                cdCallAPI mycallAPI = new cdCallAPI();
-
-                thisClub.ClubName = ClubName.Text;
-                thisClub.AddressLine1 = CubAddress.Text;
-                thisClub.City = City.Text;
-                thisClub.cdState = myState.Text;
-                thisClub.PostalCode = PostalCode.Text;
-                thisClub.ClubID = ClubName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                myclubCreated = thisClub.ClubID;
-                if (thisClub.AddressLine2 == null )
+                try 
                 {
-                    thisClub.AddressLine2 = "None";
-                }
-                thisClub.ClubReg = "NA";
-                thisClub.AddressLine3 = "NA";
-                thisClub.Attr1 = "NA";
-                thisClub.Attr2 = "NA";
-                thisClub.Attr3 = "NA";
-                thisClub.Attr4 = "NA";
-                thisClub.Attr5 = "NA";
-                thisClub.Attr6 = "NA";
-                thisClub.Attr7 = "NA";
-                thisClub.Attr8 = "NA";
-                thisClub.Attr9 = "NA";
-                thisClub.Attr10 = "NA";
 
-                var jsresponse = await mycallAPI.cdcallClubsPUT(thisClub);
+                    Club thisClub = new Club();
+                    cdCallAPI mycallAPI = new cdCallAPI();
 
-                if (jsresponse.ToString().Contains("ValidationException"))
-                {
-                    System.Diagnostics.Debug.WriteLine(" Club creation call failed " + jsresponse);
-                    var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                    createStatus.Text = "Club Creation Failed. " + myerror.message;
-                }
-                else
-                {
-                    ClubMembers myclubmembership = new ClubMembers();
-                    myclubmembership.ClubMemberID = myAccount.UserName + ClubName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
-                    myclubmembership.ClubID = myclubCreated;
-                    myclubmembership.MemberAccountID = myAccount.UserName;
-                    myclubmembership.ClubName = ClubName.Text;
-                    myclubmembership.MemberName = myAccount.FirstName + " " + myAccount.LastName;
-                    myclubmembership.MemberRole = "A"+myAccount.Role;
-                    myclubmembership.Attr1 = "NA";
-                    myclubmembership.Attr2 = myAccount.EmailAddress;
-                    myclubmembership.Attr3 = "NA";
-                    myclubmembership.Attr4 = "NA";
-                    myclubmembership.Attr5 = "NA";
-                    myclubmembership.Attr6 = "NA";
-                    myclubmembership.Attr7 = "NA";
-                    myclubmembership.Attr8 = "NA";
-                    myclubmembership.Attr9 = "Approved";
-                    myclubmembership.Attr10 = "NA";
+                    thisClub.ClubName = ClubName.Text;
+                    thisClub.AddressLine1 = CubAddress.Text;
+                    thisClub.City = City.Text;
+                    thisClub.cdState = myState.Text;
+                    thisClub.PostalCode = PostalCode.Text;
+                    thisClub.ClubID = ClubName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                    myclubCreated = thisClub.ClubID;
+                    if (thisClub.AddressLine2 == null )
+                    {
+                        thisClub.AddressLine2 = "None";
+                    }
+                    thisClub.ClubReg = "NA";
+                    thisClub.AddressLine3 = "NA";
+                    thisClub.Attr1 = "NA";
+                    thisClub.Attr2 = "NA";
+                    thisClub.Attr3 = "NA";
+                    thisClub.Attr4 = "NA";
+                    thisClub.Attr5 = "NA";
+                    thisClub.Attr6 = "NA";
+                    thisClub.Attr7 = "NA";
+                    thisClub.Attr8 = "NA";
+                    thisClub.Attr9 = "NA";
+                    thisClub.Attr10 = "NA";
 
-                    jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);
+                    var jsresponse = await mycallAPI.cdcallClubsPUT(thisClub);
+
                     if (jsresponse.ToString().Contains("ValidationException"))
                     {
-                        System.Diagnostics.Debug.WriteLine(" Club Membership creation call failed " + jsresponse);
+                        System.Diagnostics.Debug.WriteLine(" Club creation call failed " + jsresponse);
                         var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                        createStatus.Text = "Club Member Creation Failed. " + myerror.message;
+                        createStatus.Text = "Club Creation Failed. " + myerror.message;
                     }
                     else
                     {
-                        createStatus.Text = "Registration Successful ";
+                        ClubMembers myclubmembership = new ClubMembers();
+                        myclubmembership.ClubMemberID = myAccount.UserName + ClubName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
+                        myclubmembership.ClubID = myclubCreated;
+                        myclubmembership.MemberAccountID = myAccount.UserName;
+                        myclubmembership.ClubName = ClubName.Text;
+                        myclubmembership.MemberName = myAccount.FirstName + " " + myAccount.LastName;
+                        myclubmembership.MemberRole = "A"+myAccount.Role;
+                        myclubmembership.Attr1 = "NA";
+                        myclubmembership.Attr2 = myAccount.EmailAddress;
+                        myclubmembership.Attr3 = "NA";
+                        myclubmembership.Attr4 = "NA";
+                        myclubmembership.Attr5 = "NA";
+                        myclubmembership.Attr6 = "NA";
+                        myclubmembership.Attr7 = "NA";
+                        myclubmembership.Attr8 = "NA";
+                        myclubmembership.Attr9 = "Approved";
+                        myclubmembership.Attr10 = "NA";
+
+                        jsresponse = await mycallAPI.cdcallClubMemberPUT(myclubmembership);
+                        if (jsresponse.ToString().Contains("ValidationException"))
+                        {
+                            System.Diagnostics.Debug.WriteLine(" Club Membership creation call failed " + jsresponse);
+                            var myerror = JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
+                            createStatus.Text = "Club Member Creation Failed. " + myerror.message;
+                        }
+                        else
+                        {
+                            createStatus.Text = "Registration Successful ";
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("End of Array " + ex);
+                    await DisplayAlert("Action", "Unable to fetch data. Please try later.", "OK");
+
                 }
             }
 
