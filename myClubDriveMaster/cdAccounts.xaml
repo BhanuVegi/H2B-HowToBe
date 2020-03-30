@@ -12,22 +12,13 @@
             <Entry Grid.Row="1" x:Name="cdUserName" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="10" />
             <Entry Grid.Row="2" x:Name="cdPassword" Placeholder="Password" PlaceholderColor="#ebaf4c" FontSize="10" IsPassword="true" />
             <Entry Grid.Row="3" x:Name="cdConfPass" Placeholder="Confirm Password" PlaceholderColor="#ebaf4c" FontSize="10" IsPassword="true"/>
-            <Entry Grid.Row="4" x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="5" x:Name="cdFirstName" Placeholder="First Name" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="6" x:Name="cdMiddleName" Placeholder="Middle Name" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="7" x:Name="cdLastName" Placeholder="Last Name" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="8" x:Name="cdAddress1" Placeholder="Home Address Line 1" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="9" x:Name="cdAddress2" Placeholder="Home Address Line 2" PlaceholderColor="#ebaf4c" FontSize="10"/>   
-            <Entry Grid.Row="10" x:Name="cdCity" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="11" x:Name="cdState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="12" x:Name="cdPostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="10"/>
-            <Entry Grid.Row="13" x:Name="cdPhone" Placeholder="Phone Number" PlaceholderColor="#ebaf4c" FontSize="10"/>
+            <Entry Grid.Row="4" x:Name="cdEmail" Placeholder="Email" PlaceholderColor="#ebaf4c" FontSize="10" IsPassword="false"/>
            </StackLayout>
          </Grid>      
          <Grid Grid.Row="1">       
            <StackLayout> 
-             <Button Grid.Row="14" Text="Club N Role" Clicked="cdSecond" BackgroundColor="#ebaf4c" TextColor="Black" FontSize="8" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />          
-             <Button Grid.Row="15" Text="Login Screen" Clicked="cdMainPage" BackgroundColor="#ebaf4c" TextColor="Black" FontSize="8" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>         
+             <Button Grid.Row="5" Text="Friends" Clicked="cdSecond" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />          
+             <Button Grid.Row="6" Text="Login Screen" Clicked="cdMainPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"/>
            </StackLayout>  
          </Grid>          
     </Grid>        

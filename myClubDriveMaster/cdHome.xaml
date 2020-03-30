@@ -3,50 +3,76 @@
     <ContentPage.Content>    
        <Grid BackgroundColor="Transparent">
        <Grid.RowDefinitions>
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="9*" />
-            <RowDefinition Height="7*" />
-            <RowDefinition Height="6*" />
-            <RowDefinition Height="3*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="60" />
        </Grid.RowDefinitions> 
           <Grid Grid.Row="0">    
               <StackLayout Orientation="Vertical" HorizontalOptions="Center" Margin="0,30,0,0" Grid.Row="0">
-                   <Label TextColor="#ebaf4c" Text="       " Font="10" />
-                   <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
+                   <Label TextColor="#ebaf4c" Text="H2B: How to Be" Font="20" />
               </StackLayout>   
           </Grid>      
         <Grid Grid.Row="1"> 
             <StackLayout Orientation="Vertical">  
-                <Label TextColor="#ebaf4c" Text="Roles" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />               
-                <Button Clicked="cdParentPage" Text="Parent Page" x:Name="ParentPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start"  Grid.Row="2"/>
-                <Button Clicked="cdDriverPage" Text="Driver Page" x:Name="DriverPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="3"/>
-                <Button Clicked="cdAdminPage" Text="Admin Page" x:Name="AdminPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="4"/>
-                <Button Clicked="cdMerchPage" Text="Club Merchandise" x:Name="MerchPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="5"/>
-                <Button Clicked="cdRiderPage" Text="Rider Page" x:Name="RiderPage" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="4"/>    
-             </StackLayout>
+                <Label TextColor="#ebaf4c" Text="#1: BhanuVegi - 160 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />               
+            </StackLayout>
         </Grid>        
         <Grid Grid.Row="2">          
             <StackLayout Orientation="Vertical">   
-                <Label TextColor="#ebaf4c" Text="   " Font="12" />               
-                <Label TextColor="#ebaf4c" x:Name="cdMyData" Text="My Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/> 
-                <Button Clicked="cdmyClubs" Text="My Clubs N Signup" x:Name="MyClubs" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="6"/>
-                <Button Clicked="cdmyAccount" Text="My Account" x:Name="MyAccount" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="7"/>
-                <Button Clicked="cdmyRiders" Text="My Riders" x:Name="MyRiders" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>
-                <Button Clicked="cdmyEvents" Text="My Events N Signup" x:Name="MyEvents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="8"/>            
-             </StackLayout>
+               <Label TextColor="#ebaf4c" Text="#2: DeviKarri - 150 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />
+            </StackLayout>
         </Grid>         
         <Grid Grid.Row="3">               
             <StackLayout Orientation="Vertical">   
-                 <Label TextColor="#ebaf4c" Text="       " Font="12" />           
-                 <Label TextColor="#ebaf4c" x:Name="cdCreateData" Text="Create Data" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,0,10,0"/>            
-                 <Button Clicked="cdCreateclub" Text="Create New Club" x:Name="CreateClub" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="9"/>
-                 <Button Clicked="cdCreateStudents" Text="Register Students" x:Name="RegisterStudents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="10"/>
-                 <Button Clicked="cdCreateEvents" Text="Create Events" x:Name="CreateEvents" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="25" VerticalOptions="Start" Grid.Row="11"/>
-                 </StackLayout>
+                 <Label TextColor="#ebaf4c" Text="#3: Lakeah - 140pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />    
+             </StackLayout>
         </Grid>
-        <Grid Grid.Row="4">     
-            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                <Button Text="Logout" Clicked="cdLogout" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
+        <Grid Grid.Row="4"> 
+            <StackLayout Orientation="Vertical">  
+                <Label TextColor="#ebaf4c" Text="#4: GiriAda - 130 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />               
+            </StackLayout>
+        </Grid>        
+        <Grid Grid.Row="5">          
+            <StackLayout Orientation="Vertical">   
+               <Label TextColor="#ebaf4c" Text="#5: SrideviK - 120 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />
+            </StackLayout>
+        </Grid>         
+        <Grid Grid.Row="6">               
+            <StackLayout Orientation="Vertical">   
+                 <Label TextColor="#ebaf4c" Text="#6: AbithaV - 110pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />    
+             </StackLayout>
+        </Grid>
+           <Grid Grid.Row="7"> 
+            <StackLayout Orientation="Vertical">  
+                <Label TextColor="#ebaf4c" Text="#7: Nannamma - 100 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />               
+            </StackLayout>
+        </Grid>        
+        <Grid Grid.Row="8">          
+            <StackLayout Orientation="Vertical">   
+               <Label TextColor="#ebaf4c" Text="#8: Kamala - 90 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />
+            </StackLayout>
+        </Grid>         
+        <Grid Grid.Row="9">               
+            <StackLayout Orientation="Vertical">   
+                 <Label TextColor="#ebaf4c" Text="#9: Tata - 80pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />    
+             </StackLayout>
+        </Grid>
+           <Grid Grid.Row="10"> 
+            <StackLayout Orientation="Vertical">  
+                <Label TextColor="#ebaf4c" Text="#10: BujiV - 70 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />               
+            </StackLayout>
+        </Grid>       
+        <Grid Grid.Row="11">     
+            <StackLayout Orientation = "Vertical">
+                <Label TextColor="#ebaf4c" Text="#420 You - 69 pts" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" FontSize="16" />
             </StackLayout>
         </Grid>        
     </Grid>

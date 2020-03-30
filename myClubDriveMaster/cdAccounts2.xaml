@@ -15,21 +15,15 @@
            </Grid>     
            <Grid Grid.Row="1">
               <StackLayout Orientation="Vertical">
-                <input:CheckBox TextColor="#ebaf4c" x:Name="cdNewClub" Text="New Club" Type="Check"/>
-                <Entry x:Name="cdClubName" Placeholder="Club Name" PlaceholderColor="#ebaf4c" FontSize="8"/>
-                <Entry x:Name="cdcAddress1" Placeholder="Address Line 1" PlaceholderColor="#ebaf4c" FontSize="8"/>
-                <Entry x:Name="cdcAddress2" Placeholder="Address Line 2" PlaceholderColor="#ebaf4c" FontSize="8"/>   
-                <Entry x:Name="cdcCity" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="8"/>
-                <Entry x:Name="cdcState" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="8"/>
-                <Entry x:Name="cdcPostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="8"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdNewClub" Text="New Group" Type="Check"/>
+                <Entry x:Name="cdClubName" Placeholder="Group Name" PlaceholderColor="#ebaf4c" FontSize="8"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckRider" Text="Participant" Type="Check"/>
+                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckAdmin" Text="Admin" Type="Check"/>
               </StackLayout>      
             </Grid>
             <Grid Grid.Row="2">
               <StackLayout Orientation="Vertical"> 
-                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckRider" Text="Rider" Type="Check"/>
-                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckParent" Text="Parent" Type="Check"/>
-                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckDriver" Text="Driver" Type="Check"/>
-                <input:CheckBox TextColor="#ebaf4c" x:Name="cdCheckAdmin" Text="Admin" Type="Check"/>
+                
               </StackLayout>
             </Grid>
             <Grid Grid.Row="3">

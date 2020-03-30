@@ -26,12 +26,12 @@
           <StackLayout Orientation="Vertical">  
             <Button Clicked="cdLogin" Text="Log In" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" FontSize="10" VerticalOptions="Start"/>
              <Label Text=" " HorizontalOptions="Center" TextColor="#ebaf4c" FontSize="8"/>    
-            <Button Clicked="cdloginHelp" BackgroundColor="Transparent" Text="Login Trouble? Get Help" HeightRequest="30" FontSize="10" VerticalOptions="Start" TextColor="#ebaf4c" />
+            <Button Clicked="cdloginHelp" BackgroundColor="Transparent" Text="Login Trouble? Get Help" HeightRequest="30" FontSize="10" VerticalOptions="Start" TextColor="#000000" />
           </StackLayout>      
         </Grid> 
          <Grid Grid.Row="3">
             <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-               <Button Clicked="cdHelp" x:Name="myhelp" Text="Club Hives Learning" BackgroundColor="#ebaf4c" FontSize="10" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+               <Button Clicked="cdLeaderboard" x:Name="myhelp" Text="Leaderboards" BackgroundColor="#ebaf4c" FontSize="10" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
             </StackLayout>
           </Grid>
           <Grid Grid.Row="4">

@@ -129,55 +129,55 @@ namespace myClubDriveMaster
             if (logAccount.Role.Contains("D"))
             {
                 System.Diagnostics.Debug.WriteLine("Enable Driver..");
-                DriverPage.IsEnabled = true;
-                MerchPage.IsEnabled = true;
+               // DriverPage.IsEnabled = true;
+              //  MerchPage.IsEnabled = true;
             }
             else
             {
-                DriverPage.IsEnabled = false;
+                //DriverPage.IsEnabled = false;
             }
             if (logAccount.Role.Contains("A"))
             {
                 System.Diagnostics.Debug.WriteLine("Enable Admin..");
-                AdminPage.IsEnabled = true;
-                CreateEvents.IsEnabled = true;
-                CreateClub.IsEnabled = true;
-                MerchPage.IsEnabled = true;
+                //AdminPage.IsEnabled = true;
+                //CreateEvents.IsEnabled = true;
+                //CreateClub.IsEnabled = true;
+                //MerchPage.IsEnabled = true;
             }
             else
             {
-                AdminPage.IsEnabled = false;
-                CreateEvents.IsEnabled = false;
-                CreateClub.IsEnabled = false;
+                //AdminPage.IsEnabled = false;
+                //CreateEvents.IsEnabled = false;
+                //CreateClub.IsEnabled = false;
             }
             if (logAccount.Role.Contains("P"))
             {
                 System.Diagnostics.Debug.WriteLine("Enable Parent..");
-                ParentPage.IsEnabled = true;
-                RegisterStudents.IsEnabled = true;
-                MerchPage.IsEnabled = true;
+                //ParentPage.IsEnabled = true;
+                //RegisterStudents.IsEnabled = true;
+                //MerchPage.IsEnabled = true;
             }
             else
             {
-                ParentPage.IsEnabled = false;
-                RegisterStudents.IsEnabled = false;
+                //ParentPage.IsEnabled = false;
+                //RegisterStudents.IsEnabled = false;
             }
             if (logAccount.Role.Contains("R"))
             {
                 System.Diagnostics.Debug.WriteLine("Enable Rider..");
-                RiderPage.IsEnabled = true;
-                RegisterStudents.IsEnabled = false;
-                CreateClub.IsEnabled = false;
-                CreateEvents.IsEnabled = false;
-                ParentPage.IsEnabled = false;
-                DriverPage.IsEnabled = false;
-                AdminPage.IsEnabled = false;
-                MerchPage.IsEnabled = false;
-                MyRiders.IsEnabled = false;
+                //RiderPage.IsEnabled = true;
+                //RegisterStudents.IsEnabled = false;
+                //CreateClub.IsEnabled = false;
+                //CreateEvents.IsEnabled = false;
+                //ParentPage.IsEnabled = false;
+                //DriverPage.IsEnabled = false;
+                //AdminPage.IsEnabled = false;
+                //MerchPage.IsEnabled = false;
+                //MyRiders.IsEnabled = false;
             }
             else
             {
-                RiderPage.IsEnabled = false;
+                //RiderPage.IsEnabled = false;
 
             }
 

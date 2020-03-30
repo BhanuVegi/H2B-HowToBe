@@ -3,47 +3,29 @@
     <ContentPage.Content>  
     <Grid BackgroundColor="Transparent">
        <Grid.RowDefinitions>
-             <RowDefinition Height="9*" />
-             <RowDefinition Height="3*" />
-             <RowDefinition Height="9*" />
-             <RowDefinition Height="3*" />   
+             <RowDefinition Height="70" />
+             <RowDefinition Height="70" />
+             <RowDefinition Height="70" />
+             <RowDefinition Height="70" />   
         </Grid.RowDefinitions>    
          <Grid Grid.Row="0">      
-            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-                <Label TextColor="#ebaf4c"  Text=" " BackgroundColor="Transparent" FontSize="10" />
-                <Entry x:Name="EmailAddress" Placeholder="User Name" PlaceholderColor="#ebaf4c" FontSize="10" /> 
-                <Button x:Name="FindButton" Text="Find" Clicked="cdFind" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
-                <Label TextColor="#ebaf4c" x:Name="ApplicantName" Text="Applicant Name:" BackgroundColor="Transparent" FontSize="10" />
-                <Label TextColor="#ebaf4c" x:Name="ApplicantType" Text="Applicant Type:" BackgroundColor="Transparent" FontSize="10" />
-                <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="  " BackgroundColor="Transparent" FontSize="10" />
-            </StackLayout> 
-        </Grid>    
+                <Button x:Name="ExerciseButton" Text="Exercise" Clicked="cdEx" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start" />
+        </Grid>
         <Grid Grid.Row="1">
-           <StackLayout Orientation="Vertical">     
-               <Label TextColor="#ebaf4c" x:Name="ApprovalStatus" Text="Approval Status:" BackgroundColor="Transparent" FontSize="10" Grid.Row="3" /> 
-               <Picker x:Name="picker" Title="Approval Status" TextColor="#ebaf4c"> 
-                     <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                          <x:String>Approved</x:String>
-                          <x:String>Rejected</x:String>
-                        </x:Array>
-                     </Picker.ItemsSource>
-                </Picker>
-            </StackLayout>
+                <Button x:Name="MeditateButton" Text="Meditation" Clicked="cdMed" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start"/>
+        </Grid>
+        <Grid Grid.Row="2">
+                <Button x:Name="FoodButton" Text="Food Choices" Clicked="cdFood" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start"/>
+        </Grid>
+        <Grid Grid.Row="3">
+                <Button x:Name="SocialButton" Text="Social Distancing" Clicked="cdSoc" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start"/>
+        </Grid>
+        <Grid Grid.Row="4">
+                <Button x:Name="RangeButton" Text="Close or Nope?" Clicked="cdRan" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="50" VerticalOptions="Start"/>
          </Grid>
-         <Grid Grid.Row="2"> 
-             <StackLayout Orientation="Vertical">     
-                <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />            
-                <Button Clicked="cdPrevious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
-                <Button Clicked="cdSubmit" Text="Submit" x:Name="SubmitButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
-             </StackLayout>
-         </Grid>
-         <Grid Grid.Row="3">    
-            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" />
-            </StackLayout>
-         </Grid>       
+        <Grid Grid.Row="5">
+                <Button x:Name="FamilyButton" Text="Family Board" Clicked="cdFam" BackgroundColor="#bec2cb" TextColor="Black" HeightRequest="50" VerticalOptions="Start"/>
+        </Grid>
     </Grid>
  </ContentPage.Content>  
 </ContentPage>

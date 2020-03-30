@@ -7,17 +7,65 @@ namespace myClubDriveMaster
 {
     public partial class cdAdminDrive : ContentPage
     {
+        async void cdEx(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Parent Page Button");
+            var tpage = new cdParentDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+
+        async void cdMed(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Parent Page Button");
+            var tpage = new cdDriverDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+
+        async void cdFood(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Parent Page Button");
+            var tpage = new cdRiderDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+
+        async void cdSoc(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Parent Page Button");
+            var tpage = new cdClubs(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+
+        async void cdRan(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Parent Page Button");
+            var tpage = new cdMyRiders(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+
+        async void cdFam(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Parent Page Button");
+            var tpage = new cdHome(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
+
         Account loginAccount = new Account();
         List<ClubMembers> unClubMembers = new List<ClubMembers>();
         int maxarray = -1;
         int counter = 0;
+        async void cdAdminPage(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(" Clicked Admin Page Button");
+            var tpage = new cdAdminDrive(loginAccount);
+            await Navigation.PushModalAsync(tpage);
+        }
 
         void cdNext(object sender, System.EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
             String myrole = " ";
             counter = counter + 1;
-            ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
+            //ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
 
             if (unClubMembers[counter].MemberRole.Contains("D"))
             {
@@ -36,30 +84,30 @@ namespace myClubDriveMaster
                 myrole = myrole + " Rider ";
             }
 
-            ApplicantType.Text = "Applicant Role: " + myrole;
+           // ApplicantType.Text = "Applicant Role: " + myrole;
 
             if (counter >= maxarray)
             {
-                NextButton.IsEnabled = false;
+                //NextButton.IsEnabled = false;
                 if (counter != 0)
                 {
-                    PreviousButton.IsEnabled = true;
+                    //PreviousButton.IsEnabled = true;
                 }
                 else
                 {
-                    PreviousButton.IsEnabled = false;
+                    //PreviousButton.IsEnabled = false;
                 }
             }
             else
             {
-                NextButton.IsEnabled = true;
+                //NextButton.IsEnabled = true;
                 if (counter != 0)
                 {
-                    PreviousButton.IsEnabled = true;
+                    //PreviousButton.IsEnabled = true;
                 }
                 else
                 {
-                    PreviousButton.IsEnabled = false;
+                    //PreviousButton.IsEnabled = false;
                 }
             }
 
@@ -70,7 +118,7 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Track Button");
             counter = counter - 1;
             String myrole = " ";
-            ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
+           // ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
 
             if (unClubMembers[counter].MemberRole.Contains("D"))
             {
@@ -89,30 +137,30 @@ namespace myClubDriveMaster
                 myrole = myrole + " Rider ";
             }
 
-            ApplicantType.Text = "Applicant Role: " + myrole;
+           // ApplicantType.Text = "Applicant Role: " + myrole;
 
             if (counter == 0)
             {
-                PreviousButton.IsEnabled = false;
+                //PreviousButton.IsEnabled = false;
                 if (counter < maxarray)
                 {
-                    NextButton.IsEnabled = true;
+                    //NextButton.IsEnabled = true;
                 }
                 else
                 {
-                    NextButton.IsEnabled = false;
+                    //NextButton.IsEnabled = false;
                 }
             }
             else
             {
-                PreviousButton.IsEnabled = true;
+                //PreviousButton.IsEnabled = true;
                 if (counter < maxarray)
                 {
-                    NextButton.IsEnabled = true;
+                    //NextButton.IsEnabled = true;
                 }
                 else
                 {
-                    NextButton.IsEnabled = false;
+                    //NextButton.IsEnabled = false;
                 }
             }
         }
@@ -126,7 +174,7 @@ namespace myClubDriveMaster
                 cdUpdateClubMembers updatemyAccount = new cdUpdateClubMembers();
                 updatemyAccount.ClubMemberID = unClubMembers[counter].ClubMemberID;
                 updatemyAccount.ColumnName = "Attr9";
-                updatemyAccount.ColumnValue = picker.SelectedItem.ToString();
+                //updatemyAccount.ColumnValue = picker.SelectedItem.ToString();
                 updatemyAccount.ColumnName1 = "Attr6";
                 updatemyAccount.ColumnValue1 = unClubMembers[counter].Attr6;
                 updatemyAccount.ColumnName2 = "Attr7";
@@ -226,7 +274,7 @@ namespace myClubDriveMaster
 
             if ( clubUACM >0 )
             {
-                ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
+              //  ApplicantName.Text = "Applicant Name: " + unClubMembers[counter].MemberName;
 
                 if (unClubMembers[counter].MemberRole.Contains("D"))
                 {
@@ -244,24 +292,24 @@ namespace myClubDriveMaster
                 {
                     myrole = myrole + " Rider ";
                 }
-                ApplicantType.Text = "Applicant Role: " + myrole;
+               // ApplicantType.Text = "Applicant Role: " + myrole;
             }
 
 
             if (counter == maxarray)
             {
-                PreviousButton.IsEnabled = false;
-                NextButton.IsEnabled = false;
+                //PreviousButton.IsEnabled = false;
+                //NextButton.IsEnabled = false;
             }
             else if (counter < maxarray)
             {
-                PreviousButton.IsEnabled = false;
-                NextButton.IsEnabled = true;
+                //PreviousButton.IsEnabled = false;
+                //NextButton.IsEnabled = true;
             }
             else
             {
-                PreviousButton.IsEnabled = false;
-                NextButton.IsEnabled = false;
+                //PreviousButton.IsEnabled = false;
+                //NextButton.IsEnabled = false;
             }
 
         }
@@ -276,7 +324,7 @@ namespace myClubDriveMaster
             qryAcct.ColIndex = "IndexName";
             qryAcct.IndexName = "MemberAccountIDIndex";
             qryAcct.ColName = "MemberAccountID";
-            qryAcct.ColValue = EmailAddress.Text;
+           // qryAcct.ColValue = EmailAddress.Text;
             counter = 0;
 
             try 
@@ -286,7 +334,7 @@ namespace myClubDriveMaster
 
                 var jsreponse = await mycallAPI.cdcallClubMembersGET(qryAcct);
                 myAccountsArray = JsonConvert.DeserializeObject<getClubMembers>((string)jsreponse);
-                ApplicantName.Text = "Applicant Name: " + myAccountsArray.ClubMember[counter].MemberName;
+             //   ApplicantName.Text = "Applicant Name: " + myAccountsArray.ClubMember[counter].MemberName;
 
                 if (myAccountsArray.ClubMember[counter].MemberRole.Contains("D"))
                 {
@@ -305,7 +353,7 @@ namespace myClubDriveMaster
                     myrole = myrole + " Rider ";
                 }
 
-                ApplicantType.Text = "Applicant Role: " + myrole;
+              //  ApplicantType.Text = "Applicant Role: " + myrole;
 
             }
             catch (Exception ex)
@@ -313,8 +361,8 @@ namespace myClubDriveMaster
                 System.Diagnostics.Debug.WriteLine("Unable to fetch data " + ex);
                 await DisplayAlert("Unable to fetch data", "Unable to fetch data", "OK");
             }
-            PreviousButton.IsEnabled = false;
-            NextButton.IsEnabled = false;
+            //PreviousButton.IsEnabled = false;
+            //NextButton.IsEnabled = false;
 
 
         }

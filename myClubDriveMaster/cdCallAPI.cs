@@ -15,24 +15,6 @@ namespace myClubDriveMaster
 
     public class cdCallAPI
     {
-        /* 
-                    
-            public String sdAccountAPIURL = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AccountID}";
-            public String sdAccountAPIURLPOST = "https://ctf6eu57xh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-            public String sdDriverAllocURL = "https://fjziwkczek.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/{AllocationID}";
-            public String sdAuthAPIURL = "https://olx0fy0k5k.execute-api.us-west-2.amazonaws.com/Stage/apigateway";
-            public String sdTrackLoc = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-            public String sdTrackLocGet = "https://lroogiv976.execute-api.us-west-2.amazonaws.com/Stage//schooldrive/TripID";
-            public String cdClubAPIGet = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-            public String cdClubAPI = "https://y853e270y4.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-            public String cdClubMemberAPIGet = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-            public String cdClubMemberAPI = "https://54cbzscuoa.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-            public String cdEventAPIGet = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-            public String cdEventAPI = "https://rzlha39558.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-            public String cdEventRegAPIGet = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive/ClubID";
-            public String cdEventRegAPI = "https://wfxztflznh.execute-api.us-west-2.amazonaws.com/Stage/schooldrive";
-
-        */
    
         // Function to set global parameters
         public async Task<JToken> cdSetParameters(String currInstance)

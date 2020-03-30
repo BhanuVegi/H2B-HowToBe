@@ -19,35 +19,30 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Next Button");
             counter = counter + 1;
 
-            StudentName.Text = "Student Name: " + mystudAccounts.Account[counter].FirstName + " " + mystudAccounts.Account[counter].LastName;
-            DestinationAddress1.Text = mystudAccounts.Account[counter].AddressLine1;
-            DestinationAddress2.Text = mystudAccounts.Account[counter].AddressLine2;
-            City.Text = mystudAccounts.Account[counter].City;
-            State.Text = mystudAccounts.Account[counter].cdState;
-            PostalCode.Text = mystudAccounts.Account[counter].PostalCode;
+            
 
             if (counter >= maxarray)
             {
-                NextButton.IsEnabled = false;
+                //NextButton.IsEnabled = false;
                 if (counter != 0)
                 {
-                    PreviousButton.IsEnabled = true;
+                    //PreviousButton.IsEnabled = true;
                 }
                 else
                 {
-                    PreviousButton.IsEnabled = false;
+                    //PreviousButton.IsEnabled = false;
                 }
             }
             else
             {
-                NextButton.IsEnabled = true;
+                //NextButton.IsEnabled = true;
                 if (counter != 0)
                 {
-                    PreviousButton.IsEnabled = true;
+                    //PreviousButton.IsEnabled = true;
                 }
                 else
                 {
-                    PreviousButton.IsEnabled = false;
+                    //PreviousButton.IsEnabled = false;
                 }
             }
         }
@@ -57,35 +52,35 @@ namespace myClubDriveMaster
             System.Diagnostics.Debug.WriteLine(" Clicked Previous Button");
             counter = counter - 1;
 
-            StudentName.Text = "Student Name: " + mystudAccounts.Account[counter].FirstName + " " + mystudAccounts.Account[counter].LastName;
-            DestinationAddress1.Text = mystudAccounts.Account[counter].AddressLine1;
-            DestinationAddress2.Text = mystudAccounts.Account[counter].AddressLine2;
-            City.Text = mystudAccounts.Account[counter].City;
-            State.Text = mystudAccounts.Account[counter].cdState;
-            PostalCode.Text = mystudAccounts.Account[counter].PostalCode;
+            //StudentName.Text = "Student Name: " + mystudAccounts.Account[counter].FirstName + " " + mystudAccounts.Account[counter].LastName;
+            //DestinationAddress1.Text = mystudAccounts.Account[counter].AddressLine1;
+            //DestinationAddress2.Text = mystudAccounts.Account[counter].AddressLine2;
+            //City.Text = mystudAccounts.Account[counter].City;
+            //State.Text = mystudAccounts.Account[counter].cdState;
+            //PostalCode.Text = mystudAccounts.Account[counter].PostalCode;
 
             if (counter == 0)
             {
-                PreviousButton.IsEnabled = false;
+                //PreviousButton.IsEnabled = false;
                 if (counter < maxarray)
                 {
-                    NextButton.IsEnabled = true;
+                    //NextButton.IsEnabled = true;
                 }
                 else
                 {
-                    NextButton.IsEnabled = false;
+                    //NextButton.IsEnabled = false;
                 }
             }
             else
             {
-                PreviousButton.IsEnabled = true;
+                //PreviousButton.IsEnabled = true;
                 if (counter < maxarray)
                 {
-                    NextButton.IsEnabled = true;
+                    //NextButton.IsEnabled = true;
                 }
                 else
                 {
-                    NextButton.IsEnabled = false;
+                    //NextButton.IsEnabled = false;
                 }
             }
 
@@ -97,17 +92,17 @@ namespace myClubDriveMaster
             { 
                 cdReadError myerror = new cdReadError();
                 cdUpdateAccount updateAddress = new cdUpdateAccount();
-                updateAddress.AccountID = mystudAccounts.Account[counter].AccountID;
-                updateAddress.ColumnName = "AddressLine1";
-                updateAddress.ColumnValue = DestinationAddress1.Text;
-                updateAddress.ColumnName1 = "AddressLine2" ;
-                updateAddress.ColumnValue1 = DestinationAddress2.Text;
-                updateAddress.ColumnName2 = "City";
-                updateAddress.ColumnValue2 = City.Text;
-                updateAddress.ColumnName3 = "cdState";
-                updateAddress.ColumnValue3 = State.Text;
-                updateAddress.ColumnName4 = "PostalCode";
-                updateAddress.ColumnValue4 = PostalCode.Text;
+                //updateAddress.AccountID = mystudAccounts.Account[counter].AccountID;
+                //updateAddress.ColumnName = "AddressLine1";
+                //updateAddress.ColumnValue = DestinationAddress1.Text;
+                //updateAddress.ColumnName1 = "AddressLine2" ;
+                //updateAddress.ColumnValue1 = DestinationAddress2.Text;
+                //updateAddress.ColumnName2 = "City";
+                //updateAddress.ColumnValue2 = City.Text;
+                //updateAddress.ColumnName3 = "cdState";
+                //updateAddress.ColumnValue3 = State.Text;
+                //updateAddress.ColumnName4 = "PostalCode";
+                //updateAddress.ColumnValue4 = PostalCode.Text;
 
                 System.Diagnostics.Debug.WriteLine(" Before calling Post API ");
                 cdCallAPI mycallAPI = new cdCallAPI();
@@ -118,12 +113,12 @@ namespace myClubDriveMaster
                 {
                     System.Diagnostics.Debug.WriteLine(" Post API Call failed " + jsresponse);
                     myerror= JsonConvert.DeserializeObject<cdReadError>(jsresponse.ToString());
-                    updateStatus.Text = "Update Failed. "+myerror.message;
+                    //updateStatus.Text = "Update Failed. "+myerror.message;
                 }
                 else
                 {
                     System.Diagnostics.Debug.WriteLine(" Post API Call Successful");
-                    updateStatus.Text = "Update Successful";
+                    //updateStatus.Text = "Update Successful";
                 }
             }
             catch (Exception ex)
@@ -203,24 +198,24 @@ namespace myClubDriveMaster
                 System.Diagnostics.Debug.WriteLine("End of Array " + ex);
             }
 
-            StudentName.Text = "Student Name: "+mystudAccounts.Account[0].FirstName + " " + mystudAccounts.Account[0].LastName;
-            DestinationAddress1.Text = mystudAccounts.Account[0].AddressLine1;
-            DestinationAddress2.Text = mystudAccounts.Account[0].AddressLine2;
-            City.Text = mystudAccounts.Account[0].City;
-            State.Text = mystudAccounts.Account[0].cdState;
-            PostalCode.Text = mystudAccounts.Account[0].PostalCode;
+            //StudentName.Text = "Student Name: "+mystudAccounts.Account[0].FirstName + " " + mystudAccounts.Account[0].LastName;
+            //DestinationAddress1.Text = mystudAccounts.Account[0].AddressLine1;
+            //DestinationAddress2.Text = mystudAccounts.Account[0].AddressLine2;
+            //City.Text = mystudAccounts.Account[0].City;
+            //State.Text = mystudAccounts.Account[0].cdState;
+            //PostalCode.Text = mystudAccounts.Account[0].PostalCode;
 
             System.Diagnostics.Debug.WriteLine(" Max Array is "+maxarray);
 
             if (counter == maxarray)
             {
-                PreviousButton.IsEnabled = false;
-                NextButton.IsEnabled = false;
+                //PreviousButton.IsEnabled = false;
+                //NextButton.IsEnabled = false;
             }
             else
             {
-                PreviousButton.IsEnabled = false;
-                NextButton.IsEnabled = true;
+                //PreviousButton.IsEnabled = false;
+                //NextButton.IsEnabled = true;
             }
 
         }

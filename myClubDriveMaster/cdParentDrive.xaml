@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="myClubDriveMaster.cdParentDrive" BackgroundImage="ClubDrive.png" >
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" x:Class="myClubDriveMaster.cdParentDrive" BackgroundImage="ClubDrive.png" >
     <ContentPage.Content>  
     <Grid BackgroundColor="Transparent">
       <Grid.RowDefinitions>
-             <RowDefinition Height="9*" />
-             <RowDefinition Height="7*" />
-             <RowDefinition Height="3*" />     
+             <RowDefinition Height="*" />
+             <RowDefinition Height="*" />
+             <RowDefinition Height="*" />
+             <RowDefinition Height="*" /> 
         </Grid.RowDefinitions>    
          <Grid Grid.Row="0">              
-          <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
-                <Label TextColor="#ebaf4c" Text="       " Font="10" />
-                <Image Source="ClubDriveLogoFinal.png" VerticalOptions="Start" />
-                <Label TextColor="#ebaf4c" Text="       " Font="10" />
-                <Label TextColor="#ebaf4c" x:Name="StudentName" Text="Student Name:" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="14" />
-                <Entry x:Name="DestinationAddress1" Placeholder="Destination Address 1" PlaceholderColor="#ebaf4c" FontSize="10" /> 
-                <Entry x:Name="DestinationAddress2" Placeholder="Destination Address 2" PlaceholderColor="#ebaf4c" FontSize="10" /> 
-                <Entry x:Name="City" Placeholder="City" PlaceholderColor="#ebaf4c" FontSize="12" />  
-                <Entry x:Name="State" Placeholder="State" PlaceholderColor="#ebaf4c" FontSize="12" />  
-                <Entry x:Name="PostalCode" Placeholder="Postal Code" PlaceholderColor="#ebaf4c" FontSize="12" /> 
-                <Label TextColor="#ebaf4c" x:Name="updateStatus" Text="       " BackgroundColor="Transparent" FontAttributes="Bold" FontSize="10" />
+          <StackLayout Orientation="Vertical" >
+                <Label TextColor="#ebaf4c" Text="       " Font="32" />
+                <Label TextColor="#ebaf4c" Text="How long did you exercise for today?" Font="20" />
+                <Entry x:Name="Time" Placeholder="Enter in minutes" PlaceholderColor="#ebaf4c" FontSize="10" /> 
             </StackLayout> 
          </Grid>        
          <Grid Grid.Row="1"> 
              <StackLayout Orientation="Vertical"> 
-                <Button Clicked="cdPervious" Text="Previous" x:Name="PreviousButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start"/>
-                <Button Clicked="cdNext" Text="Next" x:Name="NextButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
-                <Button Clicked="cdSubmit" Text="Submit" x:Name="DriveButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
-                <Button Clicked="cdTrack" Text="Track" x:Name="TrackButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start"/>            
+              <Label TextColor="#ebaf4c" Text="       " Font="32" />
+                <Label TextColor="#ebaf4c" Text="How many calories did you burn?" Font="20" />
+                <Entry x:Name="Cal" Placeholder="Enter here" PlaceholderColor="#ebaf4c" FontSize="10" /> 
               </StackLayout>
          </Grid>
          <Grid Grid.Row="2">    
-            <StackLayout BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                <Button Text="Home" Clicked="cdHome" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+            <StackLayout Orientation="Vertical">
+                 <input:CheckBox TextColor="Black" x:Name="cdAddAll"  Text="Challenge workout?" Type="Check" />
             </StackLayout>
-          </Grid>               
+          </Grid>
+        <Grid Grid.Row="3">    
+            <StackLayout Orientation="Vertical">
+                 <Button Clicked="cdSubmit" Text="Submit" x:Name="SubmitButton" BackgroundColor="#ebaf4c" TextColor="Black" HeightRequest="30" VerticalOptions="Start" />
+            </StackLayout>
+          </Grid> 
     </Grid>
     </ContentPage.Content>   
 </ContentPage>

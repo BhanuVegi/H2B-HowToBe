@@ -22,11 +22,6 @@ namespace myClubDriveMaster
         {
             System.Diagnostics.Debug.WriteLine(" Account Reg button clicked");
             regClub.ClubName = cdClubName.Text;
-            regClub.AddressLine1 = cdcAddress1.Text;
-            regClub.AddressLine2 = cdcAddress2.Text;
-            regClub.City = cdcCity.Text;
-            regClub.cdState = cdcState.Text;
-            regClub.PostalCode = cdcPostalCode.Text;
             var cpage = new cdAccounts(regAccount,regClub,regPassword);
             await Navigation.PushModalAsync(cpage);
         }
@@ -51,62 +46,6 @@ namespace myClubDriveMaster
                 performSubmit = 1;
                 regAccount.AccountID = regAccount.UserName;
                 regAccount.AccountStatus = "Approved";
-                if (regAccount.AddressLine1 is null)
-                {
-                    regAccount.AddressLine1 = "None";
-                }
-                if (regAccount.AddressLine2 is null)
-                {
-                    regAccount.AddressLine2 = "None";
-                }
-                if (regAccount.AddressLine1 is null)
-                {
-                    regAccount.AddressLine2 = "None";
-                }
-                if (regAccount.City is null)
-                {
-                    regAccount.City = "None";
-                }
-                if (regAccount.cdState is null)
-                {
-                    regAccount.cdState = "None";
-                }
-                if (regAccount.PostalCode is null)
-                {
-                    regAccount.PostalCode = "None";
-                }
-                if (regAccount.MiddleName is null || regAccount.MiddleName == " " || regAccount.MiddleName == "")
-                {
-                    System.Diagnostics.Debug.WriteLine(" Setting middle name to none ");
-                    regAccount.MiddleName = "None";
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine(" middle name is populated ");
-                }
-                regAccount.AddressLine3 = "None";
-                regAccount.County = "None";
-                regAccount.Destination = "None";
-                if (regAccount.ParentID is null)
-                {
-                    regAccount.ParentID = "None";
-                }
-                if (regAccount.Phone is null)
-                {
-                    regAccount.Phone = "None";
-                }
-                if (regAccount.School == null)
-                {
-                    regAccount.School = "None";
-                }
-                if (regAccount.SchoolID is null)
-                {
-                    regAccount.SchoolID = "None";
-                }
-                if (regAccount.Teacher is null)
-                {
-                    regAccount.Teacher = "None";
-                }
                 if(cdNewClub.IsChecked == true || cdCheckAdmin.IsChecked == true)
                 {
                     regAccount.Role = "A";
@@ -114,15 +53,6 @@ namespace myClubDriveMaster
                 if (cdCheckRider.IsChecked == true)
                 {
                     regAccount.Role = regAccount.Role + "R";
-
-                }
-                if (cdCheckDriver.IsChecked == true)
-                {
-                    regAccount.Role = regAccount.Role + "D";
-                }
-                if (cdCheckParent.IsChecked == true)
-                {
-                    regAccount.Role = regAccount.Role + "P";
 
                 }
                 regAccount.Attr1 = "None";
@@ -171,22 +101,8 @@ namespace myClubDriveMaster
                         if (cdNewClub.IsChecked == true)
                         {
                             regClub.ClubName = cdClubName.Text;
-                            regClub.AddressLine1 = cdcAddress1.Text;
-                            if (cdcAddress2.Text == null)
-                            {
-                                regClub.AddressLine2 = "None";
-                                System.Diagnostics.Debug.WriteLine(" AL2 is null ");
-                            }
-                            else
-                            {
-                                regClub.AddressLine2 = cdcAddress2.Text;
-                            }
-                            regClub.City = cdcCity.Text;
-                            regClub.cdState = cdcState.Text;
-                            regClub.PostalCode = cdcPostalCode.Text;
                             regClub.ClubID = cdClubName.Text.Substring(0, 3) + (Math.Abs(DateTime.Now.ToBinary()).ToString());
                             regClub.ClubReg = "NA";
-                            regClub.AddressLine3 = "NA";
                             regClub.Attr1 = "NA";
                             regClub.Attr2 = "NA";
                             regClub.Attr3 = "NA";
@@ -256,11 +172,6 @@ namespace myClubDriveMaster
             regClub = pClub ;
             regPassword = pPassword;
             cdClubName.Text = pClub.ClubName;
-            cdcAddress1.Text = pClub.AddressLine1;
-            cdcAddress2.Text = pClub.AddressLine2;
-            cdcCity.Text = pClub.City;
-            cdcState.Text = pClub.cdState;
-            cdcPostalCode.Text = pClub.PostalCode;
         }
     }
 }

@@ -19,10 +19,64 @@ namespace myClubDriveMaster
                 System.Diagnostics.Debug.WriteLine(" Clicked on cancel button ");
             }
         }
-        void cdHelp(object sender, System.EventArgs e)
+        async void cdLeaderboard(object sender, System.EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(" Clicked on Helpline");
-            Device.OpenUri(new Uri(App.cdHelpline));
+            String myusername = eusername.Text;
+            String mypassword = epassword.Text;
+            cdCallAPI mycallAPI = new cdCallAPI();
+            loginResponse lresp = new loginResponse();
+
+            //Authenticating user
+            System.Diagnostics.Debug.WriteLine(" Authenticating user");
+            System.Diagnostics.Debug.WriteLine(" Long string " + Math.Abs(DateTime.Now.ToBinary()).ToString());
+            System.Diagnostics.Debug.WriteLine(" Hash Code " + Math.Abs(DateTime.Now.GetHashCode()));
+
+            var jsreponse = await mycallAPI.cdLoginAccount(myusername, mypassword);
+            lresp = JsonConvert.DeserializeObject<loginResponse>((string)jsreponse);
+            App.mylresp = lresp;
+
+            if (lresp.status == "success")
+            {
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine(" Authentication Successful ");
+                    loginMessage.Text = "Login is Successful";
+                    //Getting Account information
+                    //Set Query Object
+                    Account myaccount = new Account();
+                    cdQueryAttr qryAcct = new cdQueryAttr();
+                    qryAcct.ColIndex = "IndexName";
+                    qryAcct.IndexName = "UserNameindex";
+                    qryAcct.ColName = "UserName";
+                    qryAcct.ColValue = myusername;
+
+                    getAccounts myAccountsArray = new getAccounts();
+
+                    jsreponse = await mycallAPI.cdcallAccountsGET(qryAcct);
+                    myAccountsArray = JsonConvert.DeserializeObject<getAccounts>((string)jsreponse);
+
+                    System.Diagnostics.Debug.WriteLine(" Before Account array " + jsreponse);
+
+                    myaccount = myAccountsArray.Account[0];
+
+                    System.Diagnostics.Debug.WriteLine(" After Account array ");
+
+                    System.Diagnostics.Debug.WriteLine("Role for " + myaccount.FirstName + " " + myaccount.LastName + " is " + myaccount.Role);
+
+                    var tpage = new cdHome(myaccount);
+                    await Navigation.PushModalAsync(tpage);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(" Invalid login " + ex);
+                    await DisplayAlert("Unable to Login", "Unable to Login", "OK");
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine(" Authentication Failed ");
+                await DisplayAlert("Invalid Username or Password", "Invalid Username or Password", "OK");
+            }
         }
         async void cdRegistration(object sender, System.EventArgs e)
         {
@@ -79,7 +133,7 @@ namespace myClubDriveMaster
 
                     System.Diagnostics.Debug.WriteLine("Role for " + myaccount.FirstName + " " + myaccount.LastName + " is " + myaccount.Role);
 
-                    var tpage = new cdHome(myaccount);
+                    var tpage = new cdAdminDrive(myaccount);
                     await Navigation.PushModalAsync(tpage);
                 }
                 catch (Exception ex)
